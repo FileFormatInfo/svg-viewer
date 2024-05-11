@@ -10,7 +10,7 @@ import { t } from "utils";
 
 import { Page, PageHeader } from "shared/Layout";
 import { ErrorPageStrategy } from "shared/Result";
-import { useSearchParams } from "shared/Router";
+import { useNavigate, useSearchParams } from "shared/Router";
 
 import { DesktopToolbar } from "./DesktopToolbar";
 
@@ -18,6 +18,7 @@ import { withRequireImage } from "modules/image/application";
 
 const PreviewPage = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const url = searchParams.get('url') || undefined;
 
   return (

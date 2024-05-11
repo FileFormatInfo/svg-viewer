@@ -12,8 +12,10 @@ import { t } from "utils";
 
 
 import { TextInput } from "shared/Form";
-import { Navigate } from "shared/Router";
+import { Navigate, useNavigate } from "shared/Router";
 import { NavigateProps } from "shared/Router";
+
+
 
 import { useImageStore } from "../application";
 import { useOpenNotifications } from "./useOpenNotifications";
@@ -27,6 +29,7 @@ export const OpenUrlForm = ({ initialUrl }: IProps) => {
   const secondaryColor = useSecondaryTextColor();
 
   const [url, setUrl] = useState(initialUrl);
+  const navigate = useNavigate();
 
   const [notifySuccess, notifyFailure] = useOpenNotifications();
   const load = useImageStore((store) => store.load);
@@ -60,9 +63,10 @@ export const OpenUrlForm = ({ initialUrl }: IProps) => {
             load(url)
               .then(() => { 
                 notifySuccess();
-                Navigate({ to: `/image?url=${encodeURIComponent(url || '')}`});
+                navigate(`/image?url=${encodeURIComponent(url || '')}`);
               })
-              .catch(() => notifyFailure());
+              // eslint-disable-next-line no-console
+              .catch((err) => { console.log(err); notifyFailure() });
           }}
         >
           <TextInput

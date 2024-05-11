@@ -27,6 +27,34 @@ function removeQueryParam(key) {
   history.push(`?${queryParams.toString()}`);
 }
 
+        <IconButton aria-label='Zoom out' icon={<Icon boxSize="1.75em" as={PiMagnifyingGlassMinusBold} />} onClick={ () => zoom("out") }/>
+        <IconButton aria-label='Original size' icon={<Icon boxSize="1.75em" as={PiArrowsInCardinalBold} />} onClick={ () => zoom("reset") }/>
+        <IconButton aria-label='Zoom In' icon={<Icon boxSize="1.75em" as={PiMagnifyingGlassPlusBold} />} onClick={ () => zoom("in") }/>
+        <IconButton aria-label='Max zoom' icon={<Icon boxSize="1.75em" as={PiArrowsOutCardinalBold} />} onClick={ () => zoom("max") }/>
+
+  function zoom(action:string) {
+    /*
+    let qs = "";
+
+    let currentZoom = parseInt(getQueryStringParam("zoom", "1"));
+    if (currentZoom < 0.1) {
+      currentZoom = 1;
+    }
+
+
+    if (action === "in") {
+      qs = setQueryStringParam("zoom", String(1.25 * currentZoom));
+    } else if (action === "out") {
+      qs = setQueryStringParam("zoom", String(0.75 * currentZoom));
+    } else if (action === "reset") {
+      qs = setQueryStringParam("zoom", "1");
+    } else if (action === "max") {
+      qs = setQueryStringParam("zoom", String(2));  //LATER: calculate
+    }
+    history.replaceState(null, "", `/preview?${qs}`);
+    */
+  }
+
 # What is SPA Vite Template
 
 This project provides a basic dev setup intended for `Single Page Application` (SPA) development. It contains already configured tools and libraries providing a quick and seamless start, making the Developer Experience (DX) and scalability of your project easily manageable. It also shows a practical application of selected tools and practices in a form of a demo app.

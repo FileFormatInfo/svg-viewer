@@ -10,4 +10,4 @@ export {
   Outlet,
   Navigate,
 } from "react-router-dom";
-export type { LoaderFunctionArgs, NavigateProps } from "react-router-dom";
+export type { LoaderFunctionArgs, NavigateFunction, NavigateProps } from "react-router-dom";
