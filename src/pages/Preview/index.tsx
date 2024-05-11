@@ -1,8 +1,18 @@
+import {
+  Box,
+  VStack,
+  StackProps,
+  Container,
+  ContainerProps,
+  Flex,
+} from "@chakra-ui/react";
 import { t } from "utils";
 
 import { Page, PageHeader } from "shared/Layout";
 import { ErrorPageStrategy } from "shared/Result";
 import { useSearchParams } from "shared/Router";
+
+import { DesktopToolbar } from "./DesktopToolbar";
 
 import { withRequireImage } from "modules/image/application";
 
@@ -11,16 +21,16 @@ const PreviewPage = () => {
   const url = searchParams.get('url') || undefined;
 
   return (
-    <Page>
-      <PageHeader
-        title={t("List of selected products")}
-        description={t(
-          "a description"
-        )}
-      >
-      </PageHeader>
+    <VStack
+      w="100%"
+      h="100vh"
+      spacing="0"
+    >
+      <DesktopToolbar />
+      <Flex w="100%" h="100%" bg="white" alignItems="center" justifyContent="center">
       <img src={url} />
-    </Page>
+      </Flex>
+    </VStack>
   );
 };
 

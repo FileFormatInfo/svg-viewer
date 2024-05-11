@@ -15,7 +15,7 @@ import {
 import { Link, useNavigate } from "shared/Router";
 import { useNotImplementedYetToast } from "shared/Toast";
 
-import { ToggleModeButton } from "../ToggleModeButton";
+import { ToggleModeButton } from "../../Components/ToggleModeButton";
 import { DesktopNav } from "./DesktopNav";
 import { LoaderBar } from "./LoaderBar";
 import { MobileNav } from "./MobileNav";

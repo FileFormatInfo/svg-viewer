@@ -17,8 +17,8 @@ import { Link, useLocation } from "shared/Router";
 
 import { INavItem } from "./INavItem";
 import { useNavItems } from "./useNavItems";
-import { ToggleModeButton } from "../ToggleModeButton";
-import { LogoIcon } from "./LogoIcon";
+import { ToggleModeButton } from "../../Components/ToggleModeButton";
+import { LogoIcon } from "../../Components/LogoIcon";
 
 export const DesktopNav = () => {
   const { pathname } = useLocation();
