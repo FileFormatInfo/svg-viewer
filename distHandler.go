@@ -1,4 +1,4 @@
-package dist
+package svgpreview
 
 import (
 	"embed"
@@ -9,12 +9,24 @@ import (
 //go:embed dist
 var embeddedFiles embed.FS
 
-func DistHandler() (http.Handler, error) {
+func StaticHandler() (http.Handler, error) {
 
-	fsys, err := fs.Sub(embeddedFiles, "static")
+	fsys, err := fs.Sub(embeddedFiles, "dist")
 	if err != nil {
 		return nil, err
 	}
 
 	return http.FileServer(http.FS(fsys)), nil
+}
+
+func IndexHandler() (http.HandlerFunc, error) {
+
+	contents, err := embeddedFiles.ReadFile("dist/index.html")
+	if err != nil {
+		return nil, err
+	}
+	return func (w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/html")
+		w.Write(contents)
+	}, nil
 }

@@ -1,0 +1,12 @@
+Dockerfile
+.dockerignore
+*.env
+.git
+.github
+.husky
+*.md
+node_modules
+*.sh
+tmp
+*.tmp
+.vscode
