@@ -26,11 +26,11 @@ RUN go build \
     -a \
     -installsuffix cgo \
     -ldflags "-s -w -X main.COMMIT=$COMMIT -X main.LASTMOD=$LASTMOD -extldflags '-static'" \
-    -o svg-view cmd/svg-view/*.go \
-    && upx svg-view
+    -o svgview cmd/svgview/*.go \
+    && upx svgview
 
 FROM scratch
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=builder /build/svg-view /bin/svg-view
+COPY --from=builder /build/svgview /bin/svgview
 ENV PORT 4000
-ENTRYPOINT ["/bin/svg-view"]
+ENTRYPOINT ["/bin/svgview"]

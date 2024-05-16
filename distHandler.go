@@ -1,4 +1,4 @@
-package svg-view
+package svgview
 
 import (
 	"embed"

@@ -8,7 +8,7 @@ docker build \
 	--build-arg COMMIT=$(git rev-parse --short HEAD) \
 	--build-arg LASTMOD=$(date -u +%Y-%m-%dT%H:%M:%SZ) \
 	--progress=plain \
-	--tag svg-view \
+	--tag svgview \
 	.
 
 #	--no-cache \
@@ -18,5 +18,5 @@ docker run \
 	--env PORT='4000' \
 	--expose 4000 \
 	--publish 4000:4000 \
-	svg-view
+	svgview
 

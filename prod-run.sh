@@ -18,7 +18,7 @@ if [ ! -d "dist" ]; then
 fi
 
 echo "INFO: building backend"
-go build -o tmp/svg-view cmd/svg-view/*.go
+go build -o tmp/svgview cmd/svgview/*.go
 
 echo "INFO: running backend"
-./tmp/svg-view
+./tmp/svgview

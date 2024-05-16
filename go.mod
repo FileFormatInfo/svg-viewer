@@ -1,3 +1,3 @@
-module github.com/VectorLogoZone/svg-view
+module github.com/VectorLogoZone/svgview
 
 go 1.22.1
