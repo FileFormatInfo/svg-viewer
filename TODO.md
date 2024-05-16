@@ -1,7 +1,11 @@
 
+- [ ] rename to svgview
+- [ ] github action to publish to CloudRun
 
 ## General 
+
 - [ ] /open.html - pick an svg, random
+- [ ] 404 handler
 - [ ] /info.html - info about the current SVG (PiInfoBold)
 	- url
 	- dimensions
@@ -17,6 +21,7 @@
 - [ ] privacy policy, terms of service, etc
 - [ ] convert to PNG
 - [ ] convert to PDF
+- [ ] new tile on svg.zone
 
 ## Preview
 - [ ] border size: none, dashed, thin, thick (PiSelectionSlashThin, PiSelectionBold, PiSquareLight, PiSquareBold )

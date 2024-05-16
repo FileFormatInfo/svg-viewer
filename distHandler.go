@@ -1,4 +1,4 @@
-package svgpreview
+package svg-view
 
 import (
 	"embed"

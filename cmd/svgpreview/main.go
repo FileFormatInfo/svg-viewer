@@ -5,7 +5,7 @@ import (
 	"os"
 	"strconv"
 
-	dist "github.com/VectorLogoZone/svgpreview"
+	dist "github.com/VectorLogoZone/svg-view"
 )
 
 func main() {
