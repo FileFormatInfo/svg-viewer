@@ -63,7 +63,7 @@ export const OpenUrlForm = ({ initialUrl }: IProps) => {
             load(url)
               .then(() => { 
                 notifySuccess();
-                navigate(`/image?url=${encodeURIComponent(url || '')}`);
+                navigate(`/image.html?url=${encodeURIComponent(url || '')}`);
               })
               // eslint-disable-next-line no-console
               .catch((err) => { console.log(err); notifyFailure() });

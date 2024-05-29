@@ -1,7 +1,4 @@
 
-- [ ] rename to svgview
-- [ ] github action to publish to CloudRun
-
 ## General 
 
 - [ ] /open.html - pick an svg, random

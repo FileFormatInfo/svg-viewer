@@ -41,7 +41,7 @@ const HeroSection = ({ productNumber }: IProps) => {
           alignSelf="center"
           position="relative"
         >
-          <Button as={Link} colorScheme="green" variant="solid" size="lg" px={6} to="/open">
+          <Button as={Link} colorScheme="green" variant="solid" size="lg" px={6} to="/open.html">
             {t("Open URL")}
           </Button>
         </VStack>

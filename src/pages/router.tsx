@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
     children: [
       {
         lazy: () => import("./Preview"),
-        path: "/image",
+        path: "/image.html",
       },
     ],
   },
@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
         lazy: () => import("./Home"),
       },
       {
-        path: "/open",
+        path: "/open.html",
         lazy: () => import("./Open"),
       },
       {

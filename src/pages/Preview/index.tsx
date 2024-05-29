@@ -35,6 +35,6 @@ const PreviewPage = () => {
   );
 };
 
-export const Component = PreviewPage; //withRequireImage(PreviewPage, { to: "/open" });
+export const Component = PreviewPage; //withRequireImage(PreviewPage, { to: "/open.html" });
 
 export const ErrorBoundary = ErrorPageStrategy;
