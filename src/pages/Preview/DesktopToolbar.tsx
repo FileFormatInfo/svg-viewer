@@ -1,4 +1,18 @@
-import { PiArrowSquareOutBold, PiCheckerboardFill, PiSquareBold, PiSquareFill, PiMagnifyingGlassMinusBold, PiMagnifyingGlassPlusBold, PiArrowsOutCardinalBold, PiArrowsInCardinalBold } from "react-icons/pi";
+import {
+  PiArrowSquareOutBold,
+  PiCheckerboardFill,
+  PiSelectionSlashLight,
+  PiSelectionLight,
+  PiSquare,
+  PiSquareBold,
+  PiSquareFill,
+  PiSquareLight,
+  PiScribbleBold,
+  PiMagnifyingGlassMinusBold,
+  PiMagnifyingGlassPlusBold,
+  PiArrowsOutCardinalBold,
+  PiArrowsInCardinalBold,
+} from "react-icons/pi";
 
 
 
@@ -43,7 +57,7 @@ export const DesktopToolbar = () => {
       <Flex onClick={ () => navigate('/open.html')}>
         <LogoIcon boxSize={10} />
         <Text fontSize="xl" fontWeight="bold" ps={3} pt={1}>
-          SVG Preview
+          SVG View
         </Text>
       </Flex>
       <Spacer />
@@ -71,9 +85,35 @@ export const DesktopToolbar = () => {
       </ButtonGroup>
       <Spacer />
       <ButtonGroup isAttached >
-        <IconButton aria-label='Checkboard background' icon={<Icon boxSize="1.75em" as={PiCheckerboardFill} />} />
-        <IconButton aria-label='Light background' icon={<Icon boxSize="1.75em" as={PiSquareBold} />} />
-        <IconButton aria-label='Dark background' icon={<Icon boxSize="1.75em" as={PiSquareFill} />} />
+        <IconButton aria-label="No border" icon={<Icon boxSize="1.75em" as={PiSelectionSlashLight} onClick={
+          () => navigate(`/image.html?${setQueryStringParam('border', 'none')}`)
+        }/>} />
+        <IconButton aria-label="Dash border" icon={<Icon boxSize="1.75em" as={PiSelectionLight} onClick={
+          () => navigate(`/image.html?${setQueryStringParam('border', 'dash')}`)
+        }/>} />
+        <IconButton aria-label="Thin border" icon={<Icon boxSize="1.75em" as={PiSquareLight} onClick={
+          () => navigate(`/image.html?${setQueryStringParam('border', 'thin')}`)
+        }/>} />
+        <IconButton aria-label='Thick border' icon={<Icon boxSize="1.75em" as={PiSquareBold} onClick={
+          () => navigate(`/image.html?${setQueryStringParam('border', 'thick')}`)
+        }/>} />
+      </ButtonGroup>
+      <Spacer />
+      <ButtonGroup isAttached >
+        <IconButton aria-label="Squiggles background" icon={<Icon boxSize="1.75em" as={PiScribbleBold} onClick={
+          () => navigate(`/image.html?${setQueryStringParam('bg', 'memphis-mini')}`)
+        }/>} />
+        <IconButton aria-label='Checkboard background' icon={<Icon boxSize="1.75em" as={PiCheckerboardFill} onClick={
+          () => navigate(`/image.html?${setQueryStringParam('bg', 'checkerboard')}`)
+        
+        }/>} />
+        <IconButton aria-label='Light background' icon={<Icon boxSize="1.75em" as={PiSquare} onClick={
+          () => navigate(`/image.html?${setQueryStringParam('bg', '#eeeeee')}`)
+        }/>} />
+        <IconButton aria-label='Dark background' icon={<Icon boxSize="1.75em" as={PiSquareFill} onClick={
+          () => navigate(`/image.html?${setQueryStringParam('bg', '#111111')}`)
+        
+        } />} />
       </ButtonGroup>
       <Spacer />
       <IconButton aria-label='Exit' icon={<Icon boxSize="1.75em" as={PiArrowSquareOutBold} />} onClick={

@@ -1,9 +1,14 @@
+# To Do
+
+
+- [ ] back url
+- [ ] back text
 
 ## General 
 
 - [ ] /open.html - pick an svg, random
 - [ ] 404 handler
-- [ ] /info.html - info about the current SVG (PiInfoBold)
+- [ ] /info.html - info about the current SVG 
 	- url
 	- dimensions
 	- colors
@@ -13,21 +18,22 @@
 - [ ] /about.html - version, link to source, link to FAQ
 - [ ] /faq.html - in header: link to source and about
 - [ ] /contact.html (or just on /about?)
-- [ ] save settings changes to LocalStorage
-- [ ] load settings from LocalStorage if not set in url
+- [ ] ?maybe? save settings changes to LocalStorage
+- [ ] ?maybe? load settings from LocalStorage if not set in url
 - [ ] privacy policy, terms of service, etc
 - [ ] convert to PNG
 - [ ] convert to PDF
 - [ ] new tile on svg.zone
 
 ## Preview
-- [ ] border size: none, dashed, thin, thick (PiSelectionSlashThin, PiSelectionBold, PiSquareLight, PiSquareBold )
-- [ ] transparent background to use squiggles from lucky
+- [ ] background color picker
+- [ ] image info (PiInfoBold, PiRuler)
 - [ ] edit (but which editor?  configurable?) (PiPencil)
 - [ ] share (PiShareNetworkFill)
 - [ ] download (PiDownloadBold)
 - [ ] source (PiCodeBold or PiFileCode)
-- [ ] background color picker
+- [ ] double-click: zoom in, shift: zoom out
+- [ ] drag rectangle: zoom
 
 
-More icons: https://react-icons.github.io/react-icons/search/#q=pishare
+[Phosphor icons](https://react-icons.github.io/react-icons/icons/pi/)
