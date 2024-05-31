@@ -3,6 +3,9 @@
 
 - [ ] back url
 - [ ] back text
+- [ ] toolbar buttons should show which is selected
+- [ ] default to dash border & squiggle background
+- [ ] problems on home page
 
 ## General 
 

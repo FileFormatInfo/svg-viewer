@@ -1,18 +1,4 @@
-import {
-  PiArrowSquareOutBold,
-  PiCheckerboardFill,
-  PiSelectionSlashLight,
-  PiSelectionLight,
-  PiSquare,
-  PiSquareBold,
-  PiSquareFill,
-  PiSquareLight,
-  PiScribbleBold,
-  PiMagnifyingGlassMinusBold,
-  PiMagnifyingGlassPlusBold,
-  PiArrowsOutCardinalBold,
-  PiArrowsInCardinalBold,
-} from "react-icons/pi";
+import { PiArrowSquareOutBold, PiCheckerboardFill, PiSelectionSlashLight, PiSelectionLight, PiSquare, PiSquareBold, PiSquareFill, PiSquareLight, PiScribbleBold, PiMagnifyingGlassMinusBold, PiMagnifyingGlassPlusBold, PiArrowsOutCardinalBold, PiArrowsInCardinalBold } from "react-icons/pi";
 
 
 
@@ -28,18 +14,20 @@ import { safeParseFloat } from "utils/safeParseFloat";
 
 import { LogoIcon } from "shared/Components";
 import { ToggleModeButton } from "shared/Components";
-import { Link, useLocation, useNavigate } from "shared/Router";
+import { Link, useNavigate, useSearchParams } from "shared/Router";
 
 
 export const DesktopToolbar = () => {
-  const { pathname } = useLocation();
-    const navigate = useNavigate();
-
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const linkColor = useColorModeValue("gray.600", "gray.200");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
   const brandColor = useBrandColor();
   const bg = useColorModeValue("gray.50", "gray.900");
+
+  const backUrl = searchParams.get('backUrl') || '/';
+  const backText = searchParams.get('backText') || 'Exit';
 
   return (
       <Flex
@@ -116,10 +104,10 @@ export const DesktopToolbar = () => {
         } />} />
       </ButtonGroup>
       <Spacer />
-      <IconButton aria-label='Exit' icon={<Icon boxSize="1.75em" as={PiArrowSquareOutBold} />} onClick={
-        () => navigate('/')
+      <IconButton aria-label={backText} icon={<Icon boxSize="1.75em" as={PiArrowSquareOutBold} />} onClick={
+        () => navigate(backUrl)
       }/>
-      <ToggleModeButton />
+      <ToggleModeButton ms={2} />
     </Flex>
   );
 };
