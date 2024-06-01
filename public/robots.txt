@@ -1,0 +1,8 @@
+#
+# robots.txt for view.svg.zone  
+#
+#
+
+User-agent: *
+Disallow: /view.html
+Disallow: /honeypot.txt

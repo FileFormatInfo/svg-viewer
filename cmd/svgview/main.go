@@ -28,11 +28,12 @@ func main() {
 		os.Exit(2)
 	}
 
-	http.HandleFunc("/status.json", statusHandler)
 	http.HandleFunc("/assets/", staticHandler.ServeHTTP)
-	http.HandleFunc("/images/", staticHandler.ServeHTTP)
 	http.HandleFunc("/favicon.ico", staticHandler.ServeHTTP)
 	http.HandleFunc("/favicon.svg", staticHandler.ServeHTTP)
+	http.HandleFunc("/images/", staticHandler.ServeHTTP)
+	http.HandleFunc("/robots.txt", staticHandler.ServeHTTP)
+	http.HandleFunc("/status.json", statusHandler)
 	http.HandleFunc("/", indexHandler)
 
 	logger.Info("starting server", "address", listenAddress, "port", listenPort)
