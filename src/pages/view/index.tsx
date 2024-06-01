@@ -34,18 +34,10 @@ const PreviewPage = () => {
 
   const url = searchParams.get('url') || undefined;
   const zoom = searchParams.get('zoom') || '1'
-  if (zoom === 'max' && imageRef.current != null && containerRef.current != null) {
-    console.log(`container height=${containerRef.current.clientHeight}`);
-
-    // -4 so there is room for the border to be visible
-    const maxZoom = Math.min(
-      (window.innerWidth - 4) / imageRef.current.naturalWidth,
-      (containerRef.current.clientHeight - 4) / imageRef.current.naturalHeight
-    );
-    navigate(`/view.html?${setQueryStringParam('zoom', String(maxZoom))}`)
-    return;
+  let zoomVal = safeParseFloat(zoom, 1);
+  if (zoom === 'max') {
+    zoomVal = calcMaxZoom(imageRef, containerRef);
   };
-  const zoomVal = safeParseFloat(zoom, 1);
   const zoomCss:Record<string, string> = {};
   if (imageRef.current != null) {
     zoomCss["width"] = `${zoomVal * imageRef.current.naturalWidth}px`;
@@ -91,6 +83,9 @@ const PreviewPage = () => {
             () => {
               // eslint-disable-next-line no-console
               console.log(`onload: ${zoom}, ${imageRef.current?.naturalWidth}, ${imageRef.current?.naturalHeight}`)
+              if (zoom === 'max') {
+                zoomVal = calcMaxZoom(imageRef, containerRef);
+              }
               if (imageRef.current) {
                 imageRef.current.style.width =
                   `${zoomVal * imageRef.current.naturalWidth}px`;
@@ -104,6 +99,19 @@ const PreviewPage = () => {
     </VStack>
   );
 };
+
+function calcMaxZoom(imageRef: React.RefObject<HTMLImageElement>, containerRef: React.RefObject<HTMLDivElement>) {
+  if (imageRef.current != null && containerRef.current != null) {
+
+    // -4 so there is room for the border to be visible
+    const maxZoom = Math.min(
+      (window.innerWidth - 4) / imageRef.current.naturalWidth,
+      (containerRef.current.clientHeight - 4) / imageRef.current.naturalHeight
+    );
+    return maxZoom;
+  }
+  return 1;
+}
 
 export const Component = PreviewPage; //withRequireImage(PreviewPage, { to: "/open.html" });
 

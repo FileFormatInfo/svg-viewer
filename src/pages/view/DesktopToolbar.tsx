@@ -227,7 +227,7 @@ export const DesktopToolbar = () => {
               boxSize="1.75em"
               as={PiSquareFill}
               onClick={() =>
-                navigate(`/view.html?${searchParams.set("bg", "#111111")}`)
+                navigate(`/view.html?${setQueryStringParam("bg", "#111111")}`)
               }
             />
           }
@@ -237,7 +237,13 @@ export const DesktopToolbar = () => {
       <IconButton
         aria-label={backText}
         icon={<Icon boxSize="1.75em" as={PiArrowSquareOutBold} />}
-        onClick={() => navigate(backUrl)}
+        onClick={() => {
+          if (backUrl.startsWith("http://") || backUrl.startsWith("https://")) {
+            window.location.href = backUrl;
+          } else {
+            navigate(backUrl)
+          }
+        }}
       />
       <ToggleModeButton ms={2} />
     </Flex>
