@@ -9,7 +9,7 @@ import { Layout, BareLayout } from "shared/Layout";
 
 import { cartPageLoader } from "./Cart/loader";
 import { homePageLoader } from "./Home/loader";
-import { previewPageLoader } from "./Preview/loader";
+import { previewPageLoader } from "./View/loader";
 import { productPageLoader } from "./Product/loader";
 import { productsPageLoader } from "./Products/loader";
 
@@ -23,8 +23,8 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        lazy: () => import("./Preview"),
-        path: "/image.html",
+        lazy: () => import("./View"),
+        path: "/view.html",
       },
     ],
   },

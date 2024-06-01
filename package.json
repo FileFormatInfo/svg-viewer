@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port=4000 --strictPort=true",
+    "dev": "vite --port=5000 --strictPort=true",
     "build": "tsc && vite build",
     "test": "vitest",
     "test:ci": "vitest run --reporter verbose --reporter=junit --outputFile=./unit-report.xml",

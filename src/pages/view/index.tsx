@@ -42,7 +42,7 @@ const PreviewPage = () => {
       (window.innerWidth - 4) / imageRef.current.naturalWidth,
       (containerRef.current.clientHeight - 4) / imageRef.current.naturalHeight
     );
-    navigate(`/image.html?${setQueryStringParam('zoom', String(maxZoom))}`)
+    navigate(`/view.html?${setQueryStringParam('zoom', String(maxZoom))}`)
     return;
   };
   const zoomVal = safeParseFloat(zoom, 1);
@@ -52,16 +52,18 @@ const PreviewPage = () => {
     zoomCss["height"] = `${zoomVal * imageRef.current.naturalHeight}px`;
   }
 
-  const bg = searchParams.get('bg') || '#eeeeee';
-  const background:Record<string, string> = {};
-  if (bg.startsWith('#')) {
-    background['backgroundColor'] = bg;
+  const bg = searchParams.get('bg') || 'memphis-mini';
+  const background: Record<string, string> = {};
+  if (/^#[0-9A-Fa-f]{6}$/.test(bg)) {
+    background["backgroundColor"] = bg;
+  } else if (/^[-a-z]+$/.test(bg)) {
+    background["backgroundImage"] = `url(/images/backgrounds/${bg}.png)`;
   } else {
-    background['backgroundImage'] = `url(/images/backgrounds/${bg}.png)`;
+    background["backgroundColor"] = '#eeeeee';
   }
 
-  const border = searchParams.get('border') || 'none';
-  const borderCss:Record<string, string> = {};
+  const border = searchParams.get('border') || 'dash';
+  const borderCss: Record<string, string> = {};
   const borderColor = bg === '#111111' ? '#ffffff' : '#000000';   // LATER: more robust color selection algorithm
   if (border === "dash") {
     borderCss["outline"] = `1px dashed ${borderColor}`;

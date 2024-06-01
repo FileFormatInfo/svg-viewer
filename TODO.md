@@ -23,6 +23,7 @@
 - [ ] /contact.html (or just on /about?)
 - [ ] ?maybe? save settings changes to LocalStorage
 - [ ] ?maybe? load settings from LocalStorage if not set in url
+- [ ] sitemap.xml
 - [ ] privacy policy, terms of service, etc
 - [ ] convert to PNG
 - [ ] convert to PDF

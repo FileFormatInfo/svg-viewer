@@ -79,7 +79,7 @@ export const DesktopToolbar = () => {
               newZoom = 0.01;
             }
             navigate(
-              `/image.html?${setQueryStringParam("zoom", String(newZoom))}`
+              `/view.html?${setQueryStringParam("zoom", String(newZoom))}`
             );
           }}
         />
@@ -88,7 +88,7 @@ export const DesktopToolbar = () => {
           title="Original size"
           icon={<Icon boxSize="1.75em" as={PiArrowsInCardinalBold} />}
           onClick={() =>
-            navigate(`/image.html?${setQueryStringParam("zoom", "1")}`)
+            navigate(`/view.html?${setQueryStringParam("zoom", "1")}`)
           }
         />
         <IconButton
@@ -101,7 +101,7 @@ export const DesktopToolbar = () => {
               1
             );
             navigate(
-              `/image.html?${setQueryStringParam(
+              `/view.html?${setQueryStringParam(
                 "zoom",
                 String(currentZoom + 1)
               )}`
@@ -113,7 +113,7 @@ export const DesktopToolbar = () => {
           title="Max zoom"
           icon={<Icon boxSize="1.75em" as={PiArrowsOutCardinalBold} />}
           onClick={() =>
-            navigate(`/image.html?${setQueryStringParam("zoom", "max")}`)
+            navigate(`/view.html?${setQueryStringParam("zoom", "max")}`)
           }
         />
       </ButtonGroup>
@@ -127,7 +127,7 @@ export const DesktopToolbar = () => {
               boxSize="1.75em"
               as={PiSelectionSlashLight}
               onClick={() =>
-                navigate(`/image.html?${setQueryStringParam("border", "none")}`)
+                navigate(`/view.html?${setQueryStringParam("border", "none")}`)
               }
             />
           }
@@ -140,7 +140,7 @@ export const DesktopToolbar = () => {
               boxSize="1.75em"
               as={PiSelectionLight}
               onClick={() =>
-                navigate(`/image.html?${setQueryStringParam("border", "dash")}`)
+                navigate(`/view.html?${setQueryStringParam("border", "dash")}`)
               }
             />
           }
@@ -153,7 +153,7 @@ export const DesktopToolbar = () => {
               boxSize="1.75em"
               as={PiSquareLight}
               onClick={() =>
-                navigate(`/image.html?${setQueryStringParam("border", "thin")}`)
+                navigate(`/view.html?${setQueryStringParam("border", "thin")}`)
               }
             />
           }
@@ -167,7 +167,7 @@ export const DesktopToolbar = () => {
               as={PiSquareBold}
               onClick={() =>
                 navigate(
-                  `/image.html?${setQueryStringParam("border", "thick")}`
+                  `/view.html?${setQueryStringParam("border", "thick")}`
                 )
               }
             />
@@ -185,7 +185,7 @@ export const DesktopToolbar = () => {
               as={PiScribbleBold}
               onClick={() =>
                 navigate(
-                  `/image.html?${setQueryStringParam("bg", "memphis-mini")}`
+                  `/view.html?${setQueryStringParam("bg", "memphis-mini")}`
                 )
               }
             />
@@ -200,7 +200,7 @@ export const DesktopToolbar = () => {
               as={PiCheckerboardFill}
               onClick={() =>
                 navigate(
-                  `/image.html?${setQueryStringParam("bg", "checkerboard")}`
+                  `/view.html?${setQueryStringParam("bg", "checkerboard")}`
                 )
               }
             />
@@ -214,7 +214,7 @@ export const DesktopToolbar = () => {
               boxSize="1.75em"
               as={PiSquare}
               onClick={() =>
-                navigate(`/image.html?${setQueryStringParam("bg", "#eeeeee")}`)
+                navigate(`/view.html?${setQueryStringParam("bg", "#eeeeee")}`)
               }
             />
           }
@@ -227,7 +227,7 @@ export const DesktopToolbar = () => {
               boxSize="1.75em"
               as={PiSquareFill}
               onClick={() =>
-                navigate(`/image.html?${searchParams.set("bg", "#111111")}`)
+                navigate(`/view.html?${searchParams.set("bg", "#111111")}`)
               }
             />
           }
