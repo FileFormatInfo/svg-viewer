@@ -3,7 +3,15 @@ import { useRef } from 'react';
 
 
 
-import { Box, VStack, StackProps, Container, ContainerProps, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  VStack,
+  StackProps,
+  Container,
+  ContainerProps,
+  Flex,
+  useBreakpoint,
+} from "@chakra-ui/react";
 
 
 
@@ -24,6 +32,7 @@ import { withRequireImage } from "modules/image/application";
 
 
 import { DesktopToolbar } from "./DesktopToolbar";
+import { MobileToolbar } from './MobileToolbar';
 
 
 const PreviewPage = () => {
@@ -67,8 +76,8 @@ const PreviewPage = () => {
     borderCss["outline"] = "none";
   }
 
-
-
+  const isSmall = window.innerWidth < 768;
+  console.log(`isSmall: ${isSmall} ${window.innerWidth}`)
 
   return (
     <VStack
@@ -77,9 +86,9 @@ const PreviewPage = () => {
       spacing="0"
       style={{ overflow: 'clip'}}
     >
-      <DesktopToolbar />
+      { isSmall ? <MobileToolbar /> : <DesktopToolbar /> }
       <Flex ref={containerRef} w="100%" h="100%" bg="white" alignItems="center" justifyContent="center" style={{ overflow: 'clip', ...background }}>
-          <img ref={imageRef} src={url} style={{ ...zoomCss, ...borderCss }} onLoad={
+          <img ref={imageRef} src={url} style={{ "overflow":"auto auto", ...zoomCss, ...borderCss }} onLoad={
             () => {
               // eslint-disable-next-line no-console
               console.log(`onload: ${zoom}, ${imageRef.current?.naturalWidth}, ${imageRef.current?.naturalHeight}`)

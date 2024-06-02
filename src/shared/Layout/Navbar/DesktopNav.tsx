@@ -33,7 +33,7 @@ export const DesktopNav = () => {
       <Flex>
         <LogoIcon boxSize={10} />
         <Text fontSize="xl" fontWeight="bold" ps={3} pt={1}>
-          SVG Preview
+          SVG View
         </Text>
       </Flex>
       {navItems.map((navItem) => (
