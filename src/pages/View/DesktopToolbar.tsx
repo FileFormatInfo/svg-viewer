@@ -122,6 +122,7 @@ export const DesktopToolbar = () => {
         <IconButton
           aria-label="No border"
           title="No border"
+          isActive={ getQueryStringParam("border", "dash") === "none" }
           icon={
             <Icon
               boxSize="1.75em"
@@ -135,6 +136,7 @@ export const DesktopToolbar = () => {
         <IconButton
           aria-label="Dash border"
           title="Dash border"
+          isActive={ getQueryStringParam("border", "dash") === "dash" }
           icon={
             <Icon
               boxSize="1.75em"
@@ -148,6 +150,7 @@ export const DesktopToolbar = () => {
         <IconButton
           aria-label="Thin border"
           title="Thin border"
+          isActive={ getQueryStringParam("border", "dash") === "thin" }
           icon={
             <Icon
               boxSize="1.75em"
@@ -161,6 +164,7 @@ export const DesktopToolbar = () => {
         <IconButton
           aria-label="Thick border"
           title="Thick border"
+          isActive={ getQueryStringParam("border", "dash") === "thick" }
           icon={
             <Icon
               boxSize="1.75em"
@@ -179,6 +183,7 @@ export const DesktopToolbar = () => {
         <IconButton
           aria-label="Squiggles background"
           title="Squiggles background"
+          isActive={ getQueryStringParam("bg", "memphis-mini") === "memphis-mini" }
           icon={
             <Icon
               boxSize="1.75em"
@@ -194,6 +199,7 @@ export const DesktopToolbar = () => {
         <IconButton
           aria-label="Checkboard background"
           title="Checkboard background"
+          isActive={ getQueryStringParam("bg", "memphis-mini") === "checkerboard" }
           icon={
             <Icon
               boxSize="1.75em"
@@ -209,6 +215,7 @@ export const DesktopToolbar = () => {
         <IconButton
           aria-label="Light background"
           title="Light background"
+          isActive={ getQueryStringParam("bg", "memphis-mini") === "#eeeeee" }
           icon={
             <Icon
               boxSize="1.75em"
@@ -222,6 +229,7 @@ export const DesktopToolbar = () => {
         <IconButton
           aria-label="Dark background"
           title="Dark background"
+          isActive={ getQueryStringParam("bg", "memphis-mini") === "#111111" }
           icon={
             <Icon
               boxSize="1.75em"
