@@ -19,23 +19,13 @@ import { t } from "utils";
 import { setQueryStringParam } from 'utils/querystring';
 import { safeParseFloat } from "utils/safeParseFloat";
 
-
-
-import { Page, PageHeader } from "shared/Layout";
 import { ErrorPageStrategy } from "shared/Result";
 import { useNavigate, useSearchParams } from "shared/Router";
-
-
-
-import { withRequireImage } from "modules/image/application";
-
-
 
 import { DesktopToolbar } from "./DesktopToolbar";
 import { MobileToolbar } from './MobileToolbar';
 
-
-const PreviewPage = () => {
+const ViewPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const imageRef = useRef<HTMLImageElement>(null); 
@@ -122,6 +112,6 @@ function calcMaxZoom(imageRef: React.RefObject<HTMLImageElement>, containerRef: 
   return 1;
 }
 
-export const Component = PreviewPage; //withRequireImage(PreviewPage, { to: "/open.html" });
+export const Component = ViewPage; //withRequireImage(PreviewPage, { to: "/open.html" });
 
 export const ErrorBoundary = ErrorPageStrategy;

@@ -2,6 +2,8 @@
 import { createBrowserRouter, ScrollRestoration } from "react-router-dom";
 
 import { Layout, BareLayout } from "shared/Layout";
+import { Component as HomePage } from "./Home";
+import { Component as OpenPage } from "./Open";
 
 export const router = createBrowserRouter([
   {
@@ -27,11 +29,12 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        lazy: () => import("./Home"),
+        element: <HomePage />,
+        //lazy: () => import("./Home"),
       },
       {
         path: "/open.html",
-        lazy: () => import("./Open"),
+        element: <OpenPage />,
       },
     ],
   },

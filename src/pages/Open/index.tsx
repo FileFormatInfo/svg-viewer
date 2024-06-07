@@ -2,7 +2,7 @@ import { Center } from "@chakra-ui/react";
 
 import { ErrorPageStrategy } from "shared/Result";
 
-import { OpenUrlForm } from "modules/image/presentation";
+import { OpenUrlForm } from "./OpenUrlForm";
 
 export const OpenPage = () => {
   return (

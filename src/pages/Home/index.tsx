@@ -4,17 +4,16 @@ import { useRouteError } from "shared/Router";
 
 
 
-import { Flex } from "@chakra-ui/react";
+import { Flex, Link } from "@chakra-ui/react";
 
 
 const HomePage = () => {
 
   return (
-    <Page maxW="container.xl" spacing={{ base: 8, lg: 20 }}>
-      <Flex w="100%" h="100%" direction="column" align="center" justify="center">
+      <Flex w="100%" h="100%" direction="column" align="center" justify="center" bg={"pink"} >
         This is some content
+        <Link href="/open.html">Open</Link>
       </Flex>
-    </Page>
   );
 };
 

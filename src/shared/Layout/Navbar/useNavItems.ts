@@ -1,4 +1,3 @@
-import { useAuthStore } from "modules/auth/application";
 
 import { INavItem } from "./INavItem";
 
