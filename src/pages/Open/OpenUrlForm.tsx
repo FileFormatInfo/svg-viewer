@@ -17,7 +17,6 @@ import { NavigateProps } from "shared/Router";
 
 
 
-import { useImageStore } from "../application";
 import { useOpenNotifications } from "./useOpenNotifications";
 
 
@@ -32,7 +31,6 @@ export const OpenUrlForm = ({ initialUrl }: IProps) => {
   const navigate = useNavigate();
 
   const [notifySuccess, notifyFailure] = useOpenNotifications();
-  const load = useImageStore((store) => store.load);
 
   return (
     <VStack align="stretch" spacing={8} w="100%" maxW="lg">
@@ -60,13 +58,8 @@ export const OpenUrlForm = ({ initialUrl }: IProps) => {
               return;
             }
 
-            load(url)
-              .then(() => { 
-                notifySuccess();
-                navigate(`/view.html?url=${encodeURIComponent(url || '')}`);
-              })
-              // eslint-disable-next-line no-console
-              .catch((err) => { console.log(err); notifyFailure() });
+            notifySuccess();
+            navigate(`/view.html?url=${encodeURIComponent(url || '')}`);
           }}
         >
           <TextInput

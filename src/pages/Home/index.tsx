@@ -12,7 +12,8 @@ const HomePage = () => {
   return (
     <Page maxW="container.xl" spacing={{ base: 8, lg: 20 }}>
       <Flex w="100%" h="100%" direction="column" align="center" justify="center">
-        </Flex>
+        This is some content
+      </Flex>
     </Page>
   );
 };

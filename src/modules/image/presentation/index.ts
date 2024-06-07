@@ -1,1 +1,1 @@
-export { OpenUrlForm } from "./OpenUrlForm";
+export { OpenUrlForm } from "../../../pages/Open/OpenUrlForm";

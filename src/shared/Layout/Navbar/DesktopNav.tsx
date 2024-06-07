@@ -36,55 +36,6 @@ export const DesktopNav = () => {
           SVG View
         </Text>
       </Flex>
-      {navItems.map((navItem) => (
-        <Box key={navItem.label}>
-          <Popover trigger="hover" placement="bottom-start">
-            <PopoverTrigger>
-              {navItem.href ? (
-                <ChLink
-                  as={Link}
-                  p={2}
-                  to={navItem.href}
-                  color={pathname === navItem.href ? brandColor : linkColor}
-                  _hover={{
-                    color: brandColor,
-                  }}
-                >
-                  {navItem.label}
-                </ChLink>
-              ) : (
-                <ChLink
-                  p={2}
-                  href={navItem.href}
-                  color={pathname === navItem.href ? brandColor : linkColor}
-                  _hover={{
-                    color: brandColor,
-                  }}
-                >
-                  {navItem.label}
-                </ChLink>
-              )}
-            </PopoverTrigger>
-            {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={"xl"}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={"xl"}
-                minW={"sm"}
-              >
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )}
-          </Popover>
-        </Box>
-      ))}
-      <ToggleModeButton />
     </Stack>
   );
 };

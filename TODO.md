@@ -1,14 +1,15 @@
 # To Do
 
 
-- [ ] back url
-- [ ] back text
-- [ ] toolbar buttons should show which is selected
-- [ ] default to dash border & squiggle background
 - [ ] problems on home page
+- [ ] debug: toggle button (if debug != null in url)
+- [ ] debug: content area size and breakpoint
+- [ ] debug: image size (actual/displayed)
+- [ ] debug: and screen size
 
 ## General 
 
+- [ ] footer: source, contact
 - [ ] /open.html - pick an svg, random
 - [ ] 404 handler
 - [ ] /info.html - info about the current SVG 
@@ -28,6 +29,16 @@
 - [ ] convert to PNG
 - [ ] convert to PDF
 - [ ] new tile on svg.zone
+- [ ] support for multiple images with next/prev buttons, thumbnail view (see [qimgv](https://github.com/easymodo/qimgv))
+- [ ] keyboard control (see [qimgv](https://github.com/easymodo/qimgv))
+- [ ] mouse control
+- [ ] mobile pinch to zoom in/out
+- [ ] copy to clipboard
+- [ ] rotate
+- [ ] flip
+- [ ] post endpoint (loads into temporary server url then redirects)
+- [ ] shell script for post endpoint
+- [ ] more links beside back (specifically: source and website/collection, for use by logosearch)
 
 ## Preview
 - [ ] background color picker

@@ -7,9 +7,9 @@ import { Navbar } from "./Navbar";
 
 export const Layout = () => {
   return (
-    <chakra.main minH="100vh">
+    <chakra.main bg={"yellow"} minH="100vh">
       <Navbar />
-      <chakra.div flex={1} pt={{ base: 20, md: 24 }} pb={{ base: 4, md: 6 }}>
+      <chakra.div flex={"auto"} pt={{ base: 20, md: 24 }} pb={{ base: 4, md: 6 }} bg={"green"}>
         <Outlet />
       </chakra.div>
       <Footer />

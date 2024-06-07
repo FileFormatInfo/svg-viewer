@@ -1,16 +1,7 @@
 // eslint-disable-next-line no-restricted-imports
 import { createBrowserRouter, ScrollRestoration } from "react-router-dom";
 
-
-
 import { Layout, BareLayout } from "shared/Layout";
-
-
-
-import { cartPageLoader } from "./Cart/loader";
-import { productPageLoader } from "./Product/loader";
-import { productsPageLoader } from "./Products/loader";
-
 
 export const router = createBrowserRouter([
   {
@@ -41,21 +32,6 @@ export const router = createBrowserRouter([
       {
         path: "/open.html",
         lazy: () => import("./Open"),
-      },
-      {
-        path: "/products",
-        loader: productsPageLoader,
-        lazy: () => import("./Products"),
-      },
-      {
-        path: "/products/:productId",
-        loader: productPageLoader,
-        lazy: () => import("./Product"),
-      },
-      {
-        path: "/cart/:cartId",
-        loader: cartPageLoader,
-        lazy: () => import("./Cart"),
       },
     ],
   },
