@@ -3,15 +3,7 @@ import { useRef } from 'react';
 
 
 
-import {
-  Box,
-  VStack,
-  StackProps,
-  Container,
-  ContainerProps,
-  Flex,
-  useBreakpoint,
-} from "@chakra-ui/react";
+import { Box, VStack, StackProps, Container, ContainerProps, Flex, Text, useBreakpoint } from "@chakra-ui/react";
 
 
 
@@ -19,11 +11,16 @@ import { t } from "utils";
 import { setQueryStringParam } from 'utils/querystring';
 import { safeParseFloat } from "utils/safeParseFloat";
 
+
+
 import { ErrorPageStrategy } from "shared/Result";
 import { useNavigate, useSearchParams } from "shared/Router";
 
+
+
 import { DesktopToolbar } from "./DesktopToolbar";
 import { MobileToolbar } from './MobileToolbar';
+
 
 const ViewPage = () => {
   const [searchParams] = useSearchParams();
@@ -65,6 +62,7 @@ const ViewPage = () => {
   } else {
     borderCss["outline"] = "none";
   }
+  const isDebug = (searchParams.get("debug") || "0") === "1";
 
   const isSmall = window.innerWidth < 768;
   console.log(`isSmall: ${isSmall} ${window.innerWidth}`)
@@ -77,7 +75,7 @@ const ViewPage = () => {
       style={{ overflow: 'clip'}}
     >
       { isSmall ? <MobileToolbar /> : <DesktopToolbar /> }
-      <Flex ref={containerRef} w="100%" h="100%" bg="white" alignItems="center" justifyContent="center" style={{ overflow: 'clip', ...background }}>
+      <Flex position={"relative"} ref={containerRef} w="100%" h="100%" bg="white" alignItems="center" justifyContent="center" style={{ overflow: 'clip', ...background }}>
           <img ref={imageRef} src={url} style={{ "overflow":"auto auto", ...zoomCss, ...borderCss }} onLoad={
             () => {
               // eslint-disable-next-line no-console
@@ -94,6 +92,10 @@ const ViewPage = () => {
               }
             }
           }/>
+          {isDebug && <Text position={"absolute"} top={0} left={2}>Image zoomed size: {imageRef.current?.style.width} x {imageRef.current?.style.height} </Text>}
+          {isDebug && <Text position={"absolute"} bottom={0} left={2}>Image actual size: {imageRef.current?.naturalWidth}x{imageRef.current?.naturalHeight} </Text>}
+          {isDebug && <Text position={"absolute"} top={0} right={2}>Container size: {containerRef.current?.clientWidth}x{containerRef.current?.clientHeight} </Text>}
+          {isDebug && <Text position={"absolute"} bottom={0} right={2}>Window size: {window.innerWidth}x{window.innerHeight} </Text>}
       </Flex>
     </VStack>
   );

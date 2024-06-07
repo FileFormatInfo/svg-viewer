@@ -12,6 +12,7 @@ import {
   PiMagnifyingGlassPlusBold,
   PiArrowsOutCardinalBold,
   PiArrowsInCardinalBold,
+  PiBug,
 } from "react-icons/pi";
 
 import {
@@ -44,6 +45,8 @@ export const DesktopToolbar = () => {
 
   const backUrl = searchParams.get("backUrl") || "/";
   const backText = searchParams.get("backText") || "Exit";
+
+  const isDebug = getQueryStringParam("debug", "0") === "1";
 
   return (
     <Flex
@@ -243,8 +246,16 @@ export const DesktopToolbar = () => {
       </ButtonGroup>
       <Spacer />
       <IconButton
+        aria-label={"Show debug info"}
+        icon={<Icon boxSize="1.75em" as={PiBug} />}
+        isActive={isDebug}
+        onClick={ () => navigate(`/view.html?${setQueryStringParam("debug", isDebug ? "0" : "1")}`)}
+        title={"Show debug info"}
+      />
+      <IconButton
         aria-label={backText}
         icon={<Icon boxSize="1.75em" as={PiArrowSquareOutBold} />}
+        ms={2}
         onClick={() => {
           if (backUrl.startsWith("http://") || backUrl.startsWith("https://")) {
             window.location.href = backUrl;
@@ -252,6 +263,7 @@ export const DesktopToolbar = () => {
             navigate(backUrl)
           }
         }}
+        title={backText}
       />
       <ToggleModeButton ms={2} />
     </Flex>
