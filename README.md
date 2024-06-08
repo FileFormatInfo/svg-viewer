@@ -2,6 +2,17 @@
 
 [![deploy](https://github.com/VectorLogoZone/svgview/actions/workflows/gcr-deploy.yaml/badge.svg)](https://github.com/VectorLogoZone/svgview/actions/workflows/gcr-deploy.yaml)
 
+## Integration
+
+You can use this as a viewer from any website by passing the correct query string values.  Be sure the [encode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) them!
+
+* `backText` - tooltip text for the Exit button
+* `backUrl` - destination for the Exit button
+* `border` - border: one of "none", "dash", "thin" or "thick"
+* `bg` - background: a hex color (like "#abc123", but note that the "#" has to be escaped to "%23") or one of the [standard images](public/images/backgrounds/) (without the ".png" extension)
+* `url` - URL of the SVG file
+* `zoom` - zoom level: a number or "max"
+
 ## License
 
 [MIT](LICENSE.txt)
@@ -24,59 +35,4 @@
 * [Phosphor Icons](https://phosphoricons.com/)
 * [React Router](https://reactrouter.com/)
 * [bartstc/vite-ts-react-template](https://github.com/bartstc/vite-ts-react-template)
-
-
-
-
-import { useLocation } from 'react-router-dom';
-
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
-
-const query = useQuery();
-const value = query.get('paramName');
-
-import { useHistory } from 'react-router-dom';
-
-function setQueryParam(key, value) {
-  const history = useHistory();
-  const queryParams = new URLSearchParams(window.location.search);
-  queryParams.set(key, value);
-  history.push(`?${queryParams.toString()}`);
-}
-
-function removeQueryParam(key) {
-  const history = useHistory();
-  const queryParams = new URLSearchParams(window.location.search);
-  queryParams.delete(key);
-  history.push(`?${queryParams.toString()}`);
-}
-
-        <IconButton aria-label='Zoom out' icon={<Icon boxSize="1.75em" as={PiMagnifyingGlassMinusBold} />} onClick={ () => zoom("out") }/>
-        <IconButton aria-label='Original size' icon={<Icon boxSize="1.75em" as={PiArrowsInCardinalBold} />} onClick={ () => zoom("reset") }/>
-        <IconButton aria-label='Zoom In' icon={<Icon boxSize="1.75em" as={PiMagnifyingGlassPlusBold} />} onClick={ () => zoom("in") }/>
-        <IconButton aria-label='Max zoom' icon={<Icon boxSize="1.75em" as={PiArrowsOutCardinalBold} />} onClick={ () => zoom("max") }/>
-
-  function zoom(action:string) {
-    /*
-    let qs = "";
-
-    let currentZoom = parseInt(getQueryStringParam("zoom", "1"));
-    if (currentZoom < 0.1) {
-      currentZoom = 1;
-    }
-
-
-    if (action === "in") {
-      qs = setQueryStringParam("zoom", String(1.25 * currentZoom));
-    } else if (action === "out") {
-      qs = setQueryStringParam("zoom", String(0.75 * currentZoom));
-    } else if (action === "reset") {
-      qs = setQueryStringParam("zoom", "1");
-    } else if (action === "max") {
-      qs = setQueryStringParam("zoom", String(2));  //LATER: calculate
-    }
-    history.replaceState(null, "", `/preview?${qs}`);
-    */
-  }
+* [jaredLunde/react-hook](https://github.com/jaredLunde/react-hook)

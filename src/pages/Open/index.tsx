@@ -6,8 +6,8 @@ import { OpenUrlForm } from "./OpenUrlForm";
 
 export const OpenPage = () => {
   return (
-      <Center py={{ base: 10, md: 12 }}>
-        <OpenUrlForm initialUrl="https://www.vectorlogo.zone/favicon.svg" />
+      <Center flex={1} py={{ base: 10, md: 12 }}>
+        <OpenUrlForm initialUrl="https://view.svg.zone/favicon.svg" />
       </Center>
   );
 };

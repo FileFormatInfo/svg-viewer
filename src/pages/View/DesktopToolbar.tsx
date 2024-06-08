@@ -1,19 +1,7 @@
-import {
-  PiArrowSquareOutBold,
-  PiCheckerboardFill,
-  PiSelectionSlashLight,
-  PiSelectionLight,
-  PiSquare,
-  PiSquareBold,
-  PiSquareFill,
-  PiSquareLight,
-  PiScribbleBold,
-  PiMagnifyingGlassMinusBold,
-  PiMagnifyingGlassPlusBold,
-  PiArrowsOutCardinalBold,
-  PiArrowsInCardinalBold,
-  PiBug,
-} from "react-icons/pi";
+import React from "react";
+import { PiArrowSquareOutBold, PiCheckerboardFill, PiSelectionSlashLight, PiSelectionLight, PiSquare, PiSquareBold, PiSquareFill, PiSquareLight, PiScribbleBold, PiMagnifyingGlassMinusBold, PiMagnifyingGlassPlusBold, PiArrowsOutCardinalBold, PiArrowsInCardinalBold, PiBug } from "react-icons/pi";
+
+
 
 import {
   ButtonGroup,
@@ -27,12 +15,21 @@ import {
 } from "@chakra-ui/react";
 import { useBrandColor } from "theme";
 
+
+
 import { getQueryStringParam, setQueryStringParam } from "utils/querystring";
 import { safeParseFloat } from "utils/safeParseFloat";
+
+
 
 import { LogoIcon } from "shared/Components";
 import { ToggleModeButton } from "shared/Components";
 import { Link, useNavigate, useSearchParams } from "shared/Router";
+
+import { BackgroundButtons } from "./BackgroundButtons";
+import { BorderButtons } from "./BorderButtons";
+import { ZoomButtons } from "./ZoomButtons";
+
 
 export const DesktopToolbar = () => {
   const navigate = useNavigate();
@@ -67,183 +64,11 @@ export const DesktopToolbar = () => {
         </Text>
       </Flex>
       <Spacer />
-      <ButtonGroup isAttached>
-        <IconButton
-          aria-label="Zoom out"
-          title="Zoom out"
-          icon={<Icon boxSize="1.75em" as={PiMagnifyingGlassMinusBold} />}
-          onClick={() => {
-            const currentZoom = safeParseFloat(
-              getQueryStringParam("zoom", "1"),
-              1
-            );
-            let newZoom = currentZoom > 1 ? currentZoom - 1 : currentZoom * 0.5;
-            if (newZoom < 0.01) {
-              newZoom = 0.01;
-            }
-            navigate(
-              `/view.html?${setQueryStringParam("zoom", String(newZoom))}`
-            );
-          }}
-        />
-        <IconButton
-          aria-label="Original size"
-          title="Original size"
-          icon={<Icon boxSize="1.75em" as={PiArrowsInCardinalBold} />}
-          onClick={() =>
-            navigate(`/view.html?${setQueryStringParam("zoom", "1")}`)
-          }
-        />
-        <IconButton
-          aria-label="Zoom In"
-          title="Zoom In"
-          icon={<Icon boxSize="1.75em" as={PiMagnifyingGlassPlusBold} />}
-          onClick={() => {
-            const currentZoom = safeParseFloat(
-              getQueryStringParam("zoom", "1"),
-              1
-            );
-            navigate(
-              `/view.html?${setQueryStringParam(
-                "zoom",
-                String(currentZoom + 1)
-              )}`
-            );
-          }}
-        />
-        <IconButton
-          aria-label="Max zoom"
-          title="Max zoom"
-          icon={<Icon boxSize="1.75em" as={PiArrowsOutCardinalBold} />}
-          onClick={() =>
-            navigate(`/view.html?${setQueryStringParam("zoom", "max")}`)
-          }
-        />
-      </ButtonGroup>
+      <ZoomButtons boxSize="1.75em" size="md" />
       <Spacer />
-      <ButtonGroup isAttached>
-        <IconButton
-          aria-label="No border"
-          title="No border"
-          isActive={ getQueryStringParam("border", "dash") === "none" }
-          icon={
-            <Icon
-              boxSize="1.75em"
-              as={PiSelectionSlashLight}
-              onClick={() =>
-                navigate(`/view.html?${setQueryStringParam("border", "none")}`)
-              }
-            />
-          }
-        />
-        <IconButton
-          aria-label="Dash border"
-          title="Dash border"
-          isActive={ getQueryStringParam("border", "dash") === "dash" }
-          icon={
-            <Icon
-              boxSize="1.75em"
-              as={PiSelectionLight}
-              onClick={() =>
-                navigate(`/view.html?${setQueryStringParam("border", "dash")}`)
-              }
-            />
-          }
-        />
-        <IconButton
-          aria-label="Thin border"
-          title="Thin border"
-          isActive={ getQueryStringParam("border", "dash") === "thin" }
-          icon={
-            <Icon
-              boxSize="1.75em"
-              as={PiSquareLight}
-              onClick={() =>
-                navigate(`/view.html?${setQueryStringParam("border", "thin")}`)
-              }
-            />
-          }
-        />
-        <IconButton
-          aria-label="Thick border"
-          title="Thick border"
-          isActive={ getQueryStringParam("border", "dash") === "thick" }
-          icon={
-            <Icon
-              boxSize="1.75em"
-              as={PiSquareBold}
-              onClick={() =>
-                navigate(
-                  `/view.html?${setQueryStringParam("border", "thick")}`
-                )
-              }
-            />
-          }
-        />
-      </ButtonGroup>
+      <BorderButtons boxSize="1.75em" size="md" />
       <Spacer />
-      <ButtonGroup isAttached>
-        <IconButton
-          aria-label="Squiggles background"
-          title="Squiggles background"
-          isActive={ getQueryStringParam("bg", "memphis-mini") === "memphis-mini" }
-          icon={
-            <Icon
-              boxSize="1.75em"
-              as={PiScribbleBold}
-              onClick={() =>
-                navigate(
-                  `/view.html?${setQueryStringParam("bg", "memphis-mini")}`
-                )
-              }
-            />
-          }
-        />
-        <IconButton
-          aria-label="Checkboard background"
-          title="Checkboard background"
-          isActive={ getQueryStringParam("bg", "memphis-mini") === "checkerboard" }
-          icon={
-            <Icon
-              boxSize="1.75em"
-              as={PiCheckerboardFill}
-              onClick={() =>
-                navigate(
-                  `/view.html?${setQueryStringParam("bg", "checkerboard")}`
-                )
-              }
-            />
-          }
-        />
-        <IconButton
-          aria-label="Light background"
-          title="Light background"
-          isActive={ getQueryStringParam("bg", "memphis-mini") === "#eeeeee" }
-          icon={
-            <Icon
-              boxSize="1.75em"
-              as={PiSquare}
-              onClick={() =>
-                navigate(`/view.html?${setQueryStringParam("bg", "#eeeeee")}`)
-              }
-            />
-          }
-        />
-        <IconButton
-          aria-label="Dark background"
-          title="Dark background"
-          isActive={ getQueryStringParam("bg", "memphis-mini") === "#111111" }
-          icon={
-            <Icon
-              boxSize="1.75em"
-              as={PiSquareFill}
-              onClick={() =>
-                navigate(`/view.html?${setQueryStringParam("bg", "#111111")}`)
-              }
-            />
-          }
-        />
-      </ButtonGroup>
+      <BackgroundButtons boxSize="1.75em" size="md" />
       <Spacer />
       <IconButton
         aria-label={"Show debug info"}
@@ -269,3 +94,4 @@ export const DesktopToolbar = () => {
     </Flex>
   );
 };
+

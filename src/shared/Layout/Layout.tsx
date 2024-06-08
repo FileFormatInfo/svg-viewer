@@ -1,4 +1,4 @@
-import { Spacer, chakra } from "@chakra-ui/react";
+import { Spacer, VStack, chakra } from "@chakra-ui/react";
 
 import { Outlet } from "shared/Router";
 
@@ -7,12 +7,12 @@ import { Navbar } from "./Navbar";
 
 export const Layout = () => {
   return (
-    <chakra.main bg={"yellow"} minH="100vh">
-      <Navbar />
-      <chakra.div flex={"auto"} pt={{ base: 20, md: 24 }} pb={{ base: 4, md: 6 }} bg={"green"}>
+    <chakra.main minH="100vh">
+      <VStack w="100%" minH="100vh" spacing="0" style={{ overflow: "clip" }}>
+        <Navbar />
         <Outlet />
-      </chakra.div>
-      <Footer />
+        <Footer />
+      </VStack>
     </chakra.main>
   );
 };

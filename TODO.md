@@ -1,17 +1,12 @@
 # To Do
 
-
-- [ ] problems on home page
-- [ ] debug: toggle button (if debug != null in url)
-- [ ] debug: content area size and breakpoint
-- [ ] debug: image size (actual/displayed)
-- [ ] debug: and screen size
-
 ## General 
 
-- [ ] footer: source, contact
+- [ ] footer: contact
 - [ ] /open.html - pick an svg, random
 - [ ] 404 handler
+- [ ] purge fonts
+- [ ] noscript: display hyperlinked image at max size
 - [ ] /info.html - info about the current SVG 
 	- url
 	- dimensions
@@ -19,11 +14,6 @@
 	- contains [ text | transforms | rasters | ... ]
 	- size (KB)
 	- metadata
-- [ ] /about.html - version, link to source, link to FAQ
-- [ ] /faq.html - in header: link to source and about
-- [ ] /contact.html (or just on /about?)
-- [ ] ?maybe? save settings changes to LocalStorage
-- [ ] ?maybe? load settings from LocalStorage if not set in url
 - [ ] sitemap.xml
 - [ ] privacy policy, terms of service, etc
 - [ ] convert to PNG
@@ -32,7 +22,7 @@
 - [ ] support for multiple images with next/prev buttons, thumbnail view (see [qimgv](https://github.com/easymodo/qimgv))
 - [ ] keyboard control (see [qimgv](https://github.com/easymodo/qimgv))
 - [ ] mouse control
-- [ ] mobile pinch to zoom in/out
+- [ ] mobile pinch to zoom in/out [library](https://www.npmjs.com/package/react-map-interaction)
 - [ ] copy to clipboard
 - [ ] rotate
 - [ ] flip

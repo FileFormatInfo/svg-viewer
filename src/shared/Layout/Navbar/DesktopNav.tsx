@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useBrandColor } from "theme";
 
-import { Link, useLocation } from "shared/Router";
+import { Link, useLocation, useNavigate } from "shared/Router";
 
 import { INavItem } from "./INavItem";
 import { useNavItems } from "./useNavItems";
@@ -22,6 +22,7 @@ import { LogoIcon } from "../../Components/LogoIcon";
 
 export const DesktopNav = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const navItems = useNavItems();
 
   const linkColor = useColorModeValue("gray.600", "gray.200");
@@ -30,7 +31,9 @@ export const DesktopNav = () => {
 
   return (
     <Stack direction="row" spacing={4}>
-      <Flex>
+      <Flex onClick={
+        () => navigate("/")
+      }>
         <LogoIcon boxSize={10} />
         <Text fontSize="xl" fontWeight="bold" ps={3} pt={1}>
           SVG View

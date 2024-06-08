@@ -1,9 +1,20 @@
 /* eslint-disable no-console */
 import { useRef } from 'react';
+import React from 'react';
 
 
 
-import { Box, VStack, StackProps, Container, ContainerProps, Flex, Text, useBreakpoint } from "@chakra-ui/react";
+import {
+  Box,
+  VStack,
+  StackProps,
+  Container,
+  ContainerProps,
+  Flex,
+  Text,
+  useBreakpointValue,
+} from "@chakra-ui/react";
+import useResizeObserver from "@react-hook/resize-observer";
 
 
 
@@ -27,6 +38,9 @@ const ViewPage = () => {
   const navigate = useNavigate();
   const imageRef = useRef<HTMLImageElement>(null); 
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const imageSize = useSize(imageRef);
+  const containerSize = useSize(containerRef);
 
   const url = searchParams.get('url') || undefined;
   const zoom = searchParams.get('zoom') || '1'
@@ -67,6 +81,8 @@ const ViewPage = () => {
   const isSmall = window.innerWidth < 768;
   console.log(`isSmall: ${isSmall} ${window.innerWidth}`)
 
+  const toolbar = useBreakpointValue({ base: <MobileToolbar />, lg: <DesktopToolbar /> }) || <DesktopToolbar />;
+
   return (
     <VStack
       w="100%"
@@ -74,7 +90,7 @@ const ViewPage = () => {
       spacing="0"
       style={{ overflow: 'clip'}}
     >
-      { isSmall ? <MobileToolbar /> : <DesktopToolbar /> }
+      { toolbar }
       <Flex position={"relative"} ref={containerRef} w="100%" h="100%" bg="white" alignItems="center" justifyContent="center" style={{ overflow: 'clip', ...background }}>
           <img ref={imageRef} src={url} style={{ "overflow":"auto auto", ...zoomCss, ...borderCss }} onLoad={
             () => {
@@ -92,9 +108,9 @@ const ViewPage = () => {
               }
             }
           }/>
-          {isDebug && <Text position={"absolute"} top={0} left={2}>Image zoomed size: {imageRef.current?.style.width} x {imageRef.current?.style.height} </Text>}
+          {isDebug && <Text position={"absolute"} top={0} left={2}>Image zoomed size: {imageSize.width} x {imageSize.height} </Text>}
           {isDebug && <Text position={"absolute"} bottom={0} left={2}>Image actual size: {imageRef.current?.naturalWidth}x{imageRef.current?.naturalHeight} </Text>}
-          {isDebug && <Text position={"absolute"} top={0} right={2}>Container size: {containerRef.current?.clientWidth}x{containerRef.current?.clientHeight} </Text>}
+          {isDebug && <Text position={"absolute"} top={0} right={2}>Container size: {containerSize.width}x{containerSize.height} </Text>}
           {isDebug && <Text position={"absolute"} bottom={0} right={2}>Window size: {window.innerWidth}x{window.innerHeight} </Text>}
       </Flex>
     </VStack>
@@ -113,6 +129,23 @@ function calcMaxZoom(imageRef: React.RefObject<HTMLImageElement>, containerRef: 
   }
   return 1;
 }
+
+
+const useSize = (target: React.RefObject<HTMLElement>) => {
+  const [size, setSize] = React.useState({width: 0, height: 0});
+
+  React.useLayoutEffect(() => {
+    if (target.current == null) {
+      return;
+    }
+    setSize(target.current.getBoundingClientRect());
+  }, [target]);
+
+  // Where the magic happens
+  useResizeObserver(target, (entry) => setSize(entry.contentRect));
+  return size;
+};
+
 
 export const Component = ViewPage; //withRequireImage(PreviewPage, { to: "/open.html" });
 
