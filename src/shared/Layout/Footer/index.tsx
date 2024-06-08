@@ -21,6 +21,11 @@ const links = [
     href: "https://github.com/VectorLogoZone/svgview#Integration",
     icon: "/images/emoji_u1f6e0.svg",
   },
+  {
+    label: "Contact",
+    href: "https://andrew.marcuse.info/contact.html",
+    icon: "https://mvi.marcuse.info/images/contact.svg",
+  },
 ];
 
 export const Footer = () => {
