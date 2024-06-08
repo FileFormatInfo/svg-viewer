@@ -18,7 +18,7 @@ const links = [
   },
   {
     label: "Integration",
-    href: "https://github.com/VectorLogoZone/svgview#Integration",
+    href: "https://github.com/VectorLogoZone/svgview#integration",
     icon: "/images/emoji_u1f6e0.svg",
   },
   {

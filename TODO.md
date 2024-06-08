@@ -2,10 +2,10 @@
 
 ## General 
 
-- [ ] footer: contact
-- [ ] /open.html - pick an svg, random
+- [ ] use system fonts
+- [ ] clean mobile layout for non-view pages
+- [ ] / - random logo/icon
 - [ ] 404 handler
-- [ ] purge fonts
 - [ ] noscript: display hyperlinked image at max size
 - [ ] /info.html - info about the current SVG 
 	- url
