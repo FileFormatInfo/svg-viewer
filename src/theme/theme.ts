@@ -7,8 +7,8 @@ const config = {
 export const theme = extendTheme({
   config,
   fonts: {
-    heading: `'Inter', sans-serif`,
-    body: `'Inter', sans-serif`,
+    heading: `sans-serif`,
+    body: `sans-serif`,
   },
 });
 
@@ -18,8 +18,8 @@ export const lightTheme = extendTheme({
     initialColorMode: "light",
   },
   fonts: {
-    heading: `'Inter', sans-serif`,
-    body: `'Inter', sans-serif`,
+    heading: `sans-serif`,
+    body: `sans-serif`,
   },
 });
 
@@ -29,7 +29,7 @@ export const darkTheme = extendTheme({
     initialColorMode: "dark",
   },
   fonts: {
-    heading: `'Inter', sans-serif`,
-    body: `'Inter', sans-serif`,
+    heading: `sans-serif`,
+    body: `sans-serif`,
   },
 });

@@ -14,16 +14,16 @@ const HomePage = () => {
   return (
       <Flex flex={1} w="100%" h="100%" direction="column" align="center" justify="center">
         <Button onClick={
-          () => navigate("/open.html") 
+          () => navigate("/open.html")
         }>Open</Button>
-        
-        <Button display="none" onClick={ //LATER: random logo & icon
-          () => navigate("/open.html") 
+
+        <Button mt={3} onClick={
+          () => navigate("/random.html")
         }>Random Logo</Button>
 
-        
+
         <Button display="none" onClick={ //LATER: upload
-          () => navigate("/open.html") 
+          () => navigate("/open.html")
         }>Upload</Button>
       </Flex>
   );

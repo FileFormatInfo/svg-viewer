@@ -1,13 +1,12 @@
 # To Do
 
-## General 
+## General
 
-- [ ] use system fonts
 - [ ] clean mobile layout for non-view pages
 - [ ] / - random logo/icon
 - [ ] 404 handler
 - [ ] noscript: display hyperlinked image at max size
-- [ ] /info.html - info about the current SVG 
+- [ ] /info.html - info about the current SVG
 	- url
 	- dimensions
 	- colors
