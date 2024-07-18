@@ -120,6 +120,7 @@ const ViewPage = () => {
 				<img
 					src={url}
 					style={{
+						objectFit: "cover",
 						overflow: "auto",
 						...imageCss,
 					}}
