@@ -23,6 +23,7 @@
 - [ ] more links beside back (specifically: source and website/collection, for use by logosearch)
 
 ## Preview
+- [ ] `icon` zoom mode (PiChartBarFill) that shows multiple fixes sizes (16, 32...)
 - [ ] support a second exit parameter (`src`?) that goes to the hosting webpage (PiCircuitryBold, PiCubeFocus, PiLinkBold, PiOrangeBold, PiSignPostBold)
 - [ ] `info` parameter (and toolbar button) with markdown (instead of `src` param?)
 - [ ] rotate

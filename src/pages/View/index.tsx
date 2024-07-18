@@ -4,7 +4,7 @@ import React from "react";
 
 
 
-import { Box, VStack, StackProps, Container, ContainerProps, Flex, Text, useBreakpointValue, useColorModeValue } from "@chakra-ui/react";
+import { Box, VStack, StackProps, Container, ContainerProps, Flex, Spinner, Text, useBreakpointValue, useColorModeValue } from "@chakra-ui/react";
 import useResizeObserver from "@react-hook/resize-observer";
 
 
@@ -27,28 +27,28 @@ import { calcMaxZoom } from './calcMaxZoom';
 
 const ViewPage = () => {
 	const [searchParams] = useSearchParams();
-	const navigate = useNavigate();
+	const url = searchParams.get("url") || undefined;
+
+	const [naturalWidth, setNaturalWidth] = React.useState(1);
+	const [naturalHeight, setNaturalHeight] = React.useState(1);
+	const [loading, setLoading] = React.useState(true);
+	const [loadErr, setLoadErr] = React.useState<Object | null>(null);
+
 	const imageRef = useRef<HTMLImageElement>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
 
-	const imageSize = useSize(imageRef);
-	const containerSize = useSize(containerRef);
-
-	const url = searchParams.get("url") || undefined;
-	const urlZoom = searchParams.get("zoom") || "1";
-	let initialZoom = safeParseFloat(urlZoom, 1);
-	if (urlZoom === "max") {
-		initialZoom = calcMaxZoom(imageRef, containerRef);
-	}
-	//const [currentZoom, setZoom] = React.useState(initialZoom);
-	let currentZoom = initialZoom;
-
+	//const imageSize = useSize(imageRef);
+	//const containerSize = useSize(containerRef);
 	const imageCss: Record<string, string> = {};
-	if (imageRef.current != null) {
-		imageCss["width"] = `${currentZoom * imageRef.current.naturalWidth}px`;
-		imageCss["height"] = `${currentZoom * imageRef.current.naturalHeight}px`;
+
+	const urlZoom = searchParams.get("zoom") || "1";
+	let currentZoom = safeParseFloat(urlZoom, 1);
+	if (urlZoom === "max") {
+		currentZoom = calcMaxZoom(naturalWidth, naturalHeight, containerRef);
 	}
-	console.log(`render currentZoom: ${currentZoom}, ${initialZoom}, ${urlZoom}, ${imageRef.current?.naturalWidth}, ${imageRef.current?.naturalHeight}`);
+
+	imageCss["width"] = `${currentZoom * naturalWidth}px`;
+	imageCss["height"] = `${currentZoom * naturalHeight}px`;
 
 	const bg = searchParams.get("bg") || "memphis-mini";
 	const background: Record<string, string> = {};
@@ -75,6 +75,7 @@ const ViewPage = () => {
 	} else {
 		imageCss["outline"] = "none";
 	}
+
 	const isDebug = (searchParams.get("debug") || "0") === "1";
 
 	const isSmall = window.innerWidth < 768;
@@ -96,69 +97,87 @@ const ViewPage = () => {
 				bg="white"
 				alignItems="center"
 				justifyContent="center"
-				style={{ overflow: "hidden", ...background }}
+				style={{
+					overflow: "hidden",
+					...background
+				}}
 			>
+				{loadErr != null ? (
+					<VStack>
+						<img
+							src="/images/error.svg"
+							style={{width: "5rem", height: "5rem"}}
+						/>
+						<Text>
+							{t("Error loading image")}
+						</Text>
+						<Text>
+							{url}
+						</Text>
+					</VStack>
+				) : ( <></> )}
+				{loading ? (<Spinner size="xl" />) : (
 				<img
-					ref={imageRef}
 					src={url}
 					style={{
-						//visibility: "hidden",
-						overflow: "auto auto",
+						overflow: "auto",
 						...imageCss,
 					}}
+				/>
+				)}
+				<img
+					onError={() => {
+						console.log(`onerror: ${url}`);
+						setLoadErr({});
+						setLoading(false);
+					}}
 					onLoad={() => {
-						// eslint-disable-next-line no-console
 						console.log(
 							`onload: ${currentZoom}, ${imageRef.current?.naturalWidth}, ${imageRef.current?.naturalHeight}`
 						);
-						if (urlZoom === "max") {
-							//setZoom(calcMaxZoom(imageRef, containerRef));
-							currentZoom = calcMaxZoom(imageRef, containerRef);
-						}
-						if (imageRef.current) {
-							imageRef.current.style.width = `${
-								currentZoom * imageRef.current.naturalWidth
-							}px`;
-							imageRef.current.style.height = `${
-								currentZoom * imageRef.current.naturalHeight
-							}px`;
-						}
+						setLoading(false);
+						setNaturalWidth(imageRef.current?.naturalWidth || 1);
+						setNaturalHeight(imageRef.current?.naturalHeight || 1);
+					}}
+					ref={imageRef}
+					src={url}
+					style={{
+						opacity: isDebug ? 1 : 0,
+						position: "absolute",
+						top: 0,
+						right: 0,
 					}}
 				/>
 				{isDebug && (
-					<Text position={"absolute"} top={0} left={2}>
-						Image zoomed size: {imageSize.width} x {imageSize.height}
+					<Text position={"absolute"} top={"0"} left={2}>
+						Window size: {window.innerWidth}x{window.innerHeight}
 					</Text>
 				)}
 				{isDebug && (
 					<Text position={"absolute"} top={"14pt"} left={2}>
-						Image actual size: {imageRef.current?.naturalWidth}x
+						Image natural size: {imageRef.current?.naturalWidth}x
 						{imageRef.current?.naturalHeight}
 					</Text>
 				)}
 				{isDebug && (
 					<Text position={"absolute"} top={"28pt"} left={2}>
-						Container size: {containerSize.width}x{containerSize.height}
+						Image display size: {imageCss["width"]}x
+						{imageCss["height"]}
 					</Text>
 				)}
 				{isDebug && (
 					<Text position={"absolute"} top={"42pt"} left={2}>
-						Container boundingClientRect: {containerRef.current?.getBoundingClientRect().width}x{containerRef.current?.getBoundingClientRect().height}
+						Zoom: cur={currentZoom}, url={urlZoom}, max={calcMaxZoom(naturalWidth, naturalHeight, containerRef)})
 					</Text>
 				)}
 				{isDebug && (
 					<Text position={"absolute"} top={"56pt"} left={2}>
-						Container client: {containerRef.current?.clientWidth}x{containerRef.current?.clientHeight}
+						Container boundingClientRect: {containerRef.current?.getBoundingClientRect().width}x{containerRef.current?.getBoundingClientRect().height}
 					</Text>
 				)}
 				{isDebug && (
 					<Text position={"absolute"} top={"70pt"} left={2}>
-						Window size: {window.innerWidth}x{window.innerHeight}
-					</Text>
-				)}
-				{isDebug && (
-					<Text position={"absolute"} top={"84pt"} left={2}>
-						Zoom: {urlZoom} (cur={currentZoom}, init={initialZoom}, max={calcMaxZoom(imageRef, containerRef)})
+						Container client: {containerRef.current?.clientWidth}x{containerRef.current?.clientHeight}
 					</Text>
 				)}
 			</Flex>
