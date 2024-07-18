@@ -4,17 +4,7 @@ import React from "react";
 
 
 
-import {
-	Box,
-	VStack,
-	StackProps,
-	Container,
-	ContainerProps,
-	Flex,
-	Text,
-	useBreakpointValue,
-	useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, VStack, StackProps, Container, ContainerProps, Flex, Text, useBreakpointValue, useColorModeValue } from "@chakra-ui/react";
 import useResizeObserver from "@react-hook/resize-observer";
 
 
@@ -53,35 +43,37 @@ const ViewPage = () => {
 	//const [currentZoom, setZoom] = React.useState(initialZoom);
 	let currentZoom = initialZoom;
 
-	const zoomCss: Record<string, string> = {};
+	const imageCss: Record<string, string> = {};
 	if (imageRef.current != null) {
-		zoomCss["width"] = `${currentZoom * imageRef.current.naturalWidth}px`;
-		zoomCss["height"] = `${currentZoom * imageRef.current.naturalHeight}px`;
+		imageCss["width"] = `${currentZoom * imageRef.current.naturalWidth}px`;
+		imageCss["height"] = `${currentZoom * imageRef.current.naturalHeight}px`;
 	}
 	console.log(`render currentZoom: ${currentZoom}, ${initialZoom}, ${urlZoom}, ${imageRef.current?.naturalWidth}, ${imageRef.current?.naturalHeight}`);
 
 	const bg = searchParams.get("bg") || "memphis-mini";
 	const background: Record<string, string> = {};
+	let borderColor:String;
 	if (/^#[0-9A-Fa-f]{6}$/.test(bg)) {
 		background["backgroundColor"] = bg;
+		borderColor = getContrastYIQ(bg.slice(1));
 	} else if (/^[-a-z]+$/.test(bg)) {
 		background["backgroundImage"] = `url(/images/backgrounds/${bg}.png)`;
 		background["backgroundColor"] = useColorModeValue("#fff", "#111");
+		borderColor = useColorModeValue("#000", "#fff");
 	} else {
 		background["backgroundColor"] = "#eeeeee";
+		borderColor = "#000";
 	}
 
 	const border = searchParams.get("border") || "dash";
-	const borderCss: Record<string, string> = {};
-	const borderColor = bg === "#111111" ? "#ffffff" : "#000000"; // LATER: more robust color selection algorithm
 	if (border === "dash") {
-		borderCss["outline"] = `1px dashed ${borderColor}`;
+		imageCss["outline"] = `1px dashed ${borderColor}`;
 	} else if (border === "thin") {
-		borderCss["outline"] = `1px solid ${borderColor}`;
+		imageCss["outline"] = `1px solid ${borderColor}`;
 	} else if (border === "thick") {
-		borderCss["outline"] = `4px solid ${borderColor}`;
+		imageCss["outline"] = `4px solid ${borderColor}`;
 	} else {
-		borderCss["outline"] = "none";
+		imageCss["outline"] = "none";
 	}
 	const isDebug = (searchParams.get("debug") || "0") === "1";
 
@@ -112,8 +104,7 @@ const ViewPage = () => {
 					style={{
 						//visibility: "hidden",
 						overflow: "auto auto",
-						...zoomCss,
-						...borderCss,
+						...imageCss,
 					}}
 					onLoad={() => {
 						// eslint-disable-next-line no-console
@@ -191,6 +182,15 @@ const useSize = (target: React.RefObject<HTMLElement>) => {
 	useResizeObserver(target, (entry) => setSize(entry.contentRect));
 	return size;
 };
+
+// from https://24ways.org/2010/calculating-color-contrast/
+function getContrastYIQ(hexcolor:String){
+	var r = parseInt(hexcolor.substr(0,2),16);
+	var g = parseInt(hexcolor.substr(2,2),16);
+	var b = parseInt(hexcolor.substr(4,2),16);
+	var yiq = ((r*299)+(g*587)+(b*114))/1000;
+	return (yiq >= 128) ? 'black' : 'white';
+}
 
 export const Component = ViewPage;
 
