@@ -1,20 +1,5 @@
 import React from "react";
-import {
-  PiArrowSquareOutBold,
-  PiArrowsCounterClockwiseBold, PiCheckerboardFill,
-  PiSelectionSlashLight,
-  PiSelectionLight,
-  PiSquare,
-  PiSquareBold,
-  PiSquareFill,
-  PiSquareLight,
-  PiScribbleBold,
-  PiMagnifyingGlassMinusBold,
-  PiMagnifyingGlassPlusBold,
-  PiArrowsOutCardinalBold,
-  PiArrowsInCardinalBold,
-  PiBug,
-} from "react-icons/pi";
+import { PiArrowSquareOutBold, PiArrowsCounterClockwiseBold, PiCheckerboardFill, PiSelectionSlashLight, PiSelectionLight, PiSquare, PiSquareBold, PiSquareFill, PiSquareLight, PiScribbleBold, PiMagnifyingGlassMinusBold, PiMagnifyingGlassPlusBold, PiArrowsOutCardinalBold, PiArrowsInCardinalBold, PiBug } from "react-icons/pi";
 
 
 
@@ -39,11 +24,13 @@ import { BorderButtons } from "./BorderButtons";
 
 
 interface IProps {
-  boxSize: string;
-  size: string;
+	currentZoom: number;
+	setZoom?: React.Dispatch<React.SetStateAction<number>>;
+	boxSize: string;
+	size: string;
 }
 
-export const ZoomButtons = ({ size, boxSize }: IProps) => {
+export const ZoomButtons = ({ currentZoom, size, boxSize }: IProps) => {
   const navigate = useNavigate();
 
   return (
@@ -54,10 +41,6 @@ export const ZoomButtons = ({ size, boxSize }: IProps) => {
         title="Zoom out"
         icon={<Icon boxSize={boxSize} as={PiMagnifyingGlassMinusBold} />}
         onClick={() => {
-          const currentZoom = safeParseFloat(
-            getQueryStringParam("zoom", "1"),
-            1
-          );
           let newZoom = currentZoom > 1 ? currentZoom - 1 : currentZoom * 0.5;
           if (newZoom < 0.01) {
             newZoom = 0.01;
@@ -82,10 +65,6 @@ export const ZoomButtons = ({ size, boxSize }: IProps) => {
         title="Zoom In"
         icon={<Icon boxSize={boxSize} as={PiMagnifyingGlassPlusBold} />}
         onClick={() => {
-          const currentZoom = safeParseFloat(
-            getQueryStringParam("zoom", "1"),
-            1
-          );
           navigate(
             `/view.html?${setQueryStringParam("zoom", String(currentZoom + 1))}`
           );

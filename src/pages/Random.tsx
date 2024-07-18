@@ -1,38 +1,59 @@
-import { useEffect } from 'react';
+/* eslint-disable no-console */
+import { useEffect, useState } from 'react';
 
 
 
-import { Center, Flex, Spinner } from '@chakra-ui/react';
+import { Center, Flex, Spinner, Text, VStack } from '@chakra-ui/react';
 
 
 
-import { useNavigate } from "shared/Router";
+import { t } from "utils";
+
+
+
+import { useNavigate, useSearchParams } from "shared/Router";
 
 
 export const RandomImage = () => {
 	const navigate = useNavigate();
+	const [searchParams] = useSearchParams();
+
+	let hostname = searchParams.get('src');
+	if (hostname == null || /^([a-z]+[.][a-z]+)+$/.exec(hostname) == null) {
+		hostname = "logosear.ch";
+	}
 	useEffect(() => {
+		const abortController = new AbortController();
 		(async () => {
 			try {
-				const resp = await fetch("https://logosear.ch/api/random.json?max=1");
+				console.log(`fetching random image`);
+				const resp = await fetch(`https://${hostname}/api/random.json?max=1`, {
+					signal: abortController.signal,
+				});
 				const data = await resp.json();
 
 				setTimeout(() => {
-					navigate(`/view.html?url=${encodeURIComponent(data.results[0].url)}&zoom=max`);
-				}, 1000);
-			} catch (e) {
-				console.error(e);
-				navigate("/open.html");
+					console.log(`randome image: ${data.results[0].url}`);
+					navigate(`/view.html?url=${encodeURIComponent(data.results[0].url)}&zoom=max`, { replace: true });
+				}, 2500);
+			} catch (err) {
+				console.error(err);
+				if (err instanceof Error && err.name !== "AbortError") {
+					navigate(`/open.html?error=${encodeURIComponent(err.name)}`);
+				}
 			}
 		})();
 
-		return () => {};
-	});
+		return () => abortController.abort();;
+	}, []);
 
 
 	return <Flex w="100vw" h="100vh">
 		<Center flex={1}>
+			<VStack>
 			<Spinner size="xl" />
+			<Text>{t("Loading...")}</Text>
+			</VStack>
 		</Center>
 	</Flex>;
 };

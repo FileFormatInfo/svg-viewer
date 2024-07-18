@@ -7,10 +7,10 @@ import { Navbar } from "./Navbar";
 
 export const Layout = () => {
   return (
-    <chakra.main minH="100vh">
+    <chakra.main minH="100vh" bg={'url(/images/backgrounds/memphis-mini.png)'} >
       <VStack w="100%" minH="100vh" spacing="0" style={{ overflow: "clip" }}>
         <Navbar />
-        <Outlet />
+        <Outlet/>
         <Footer />
       </VStack>
     </chakra.main>

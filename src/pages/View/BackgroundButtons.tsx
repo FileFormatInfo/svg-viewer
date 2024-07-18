@@ -72,7 +72,7 @@ export const BackgroundButtons = ({ size, boxSize }: IProps) => {
         icon={
           <Icon
             boxSize={boxSize}
-            as={PiSquare}
+            as={useColorModeValue(PiSquare, PiSquareFill)}
             onClick={() =>
               navigate(`/view.html?${setQueryStringParam("bg", "#eeeeee")}`)
             }
@@ -87,7 +87,7 @@ export const BackgroundButtons = ({ size, boxSize }: IProps) => {
         icon={
           <Icon
             boxSize={boxSize}
-            as={PiSquareFill}
+            as={useColorModeValue(PiSquareFill, PiSquare)}
             onClick={() =>
               navigate(`/view.html?${setQueryStringParam("bg", "#111111")}`)
             }
