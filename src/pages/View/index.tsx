@@ -16,7 +16,7 @@ import { safeParseFloat } from "utils/safeParseFloat";
 
 
 import { ErrorPageStrategy } from "shared/Result";
-import { useNavigate, useSearchParams } from "shared/Router";
+import { useSearchParams } from "shared/Router";
 
 
 

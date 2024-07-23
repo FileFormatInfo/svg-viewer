@@ -1,25 +1,22 @@
 /* eslint-disable no-console */
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-
-
-import { Center, Flex, Spinner, Text, VStack } from '@chakra-ui/react';
-
-
+import { Center, Flex, Spinner, Text, VStack } from "@chakra-ui/react";
 
 import { t } from "utils";
 
-
-
 import { useNavigate, useSearchParams } from "shared/Router";
-
 
 export const RandomImage = () => {
 	const navigate = useNavigate();
 	const [searchParams] = useSearchParams();
 
-	let hostname = searchParams.get('src');
-	if (hostname == null || /^([a-z]+[.][a-z]+)+$/.exec(hostname) == null) {
+	let hostname = searchParams.get("src");
+	if (
+		hostname == null ||
+		/^(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)+([a-z]{2,})$/.exec(hostname) ==
+			null
+	) {
 		hostname = "logosear.ch";
 	}
 	useEffect(() => {
@@ -33,8 +30,13 @@ export const RandomImage = () => {
 				const data = await resp.json();
 
 				setTimeout(() => {
-					console.log(`randome image: ${data.results[0].url}`);
-					navigate(`/view.html?url=${encodeURIComponent(data.results[0].url)}&zoom=max`, { replace: true });
+					console.log(`random image: ${data.results[0].url}`);
+					navigate(
+						`/view.html?url=${encodeURIComponent(
+							data.results[0].url
+						)}&zoom=max`,
+						{ replace: true }
+					);
 				}, 2500);
 			} catch (err) {
 				console.error(err);
@@ -44,18 +46,19 @@ export const RandomImage = () => {
 			}
 		})();
 
-		return () => abortController.abort();;
+		return () => abortController.abort();
 	}, []);
 
-
-	return <Flex w="100vw" h="100vh">
-		<Center flex={1}>
-			<VStack>
-			<Spinner size="xl" />
-			<Text>{t("Loading...")}</Text>
-			</VStack>
-		</Center>
-	</Flex>;
+	return (
+		<Flex w="100vw" h="100vh">
+			<Center flex={1}>
+				<VStack>
+					<Spinner size="xl" />
+					<Text>{t("Loading...")}</Text>
+				</VStack>
+			</Center>
+		</Flex>
+	);
 };
 
 export const Component = RandomImage;

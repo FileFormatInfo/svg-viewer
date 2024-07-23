@@ -1,27 +1,16 @@
 import React from "react";
-import { PiArrowSquareOutBold, PiArrowsCounterClockwiseBold, PiCheckerboardFill, PiSelectionSlashLight, PiSelectionLight, PiSquare, PiSquareBold, PiSquareFill, PiSquareLight, PiScribbleBold, PiMagnifyingGlassMinusBold, PiMagnifyingGlassPlusBold, PiArrowsOutCardinalBold, PiArrowsInCardinalBold, PiBug } from "react-icons/pi";
+import {
+	PiArrowsCounterClockwiseBold,
+	PiMagnifyingGlassMinusBold,
+	PiMagnifyingGlassPlusBold,
+	PiArrowsOutCardinalBold,
+} from "react-icons/pi";
 
-
-
-import { ButtonGroup, Button, Flex, Icon, IconButton, Spacer, Text, useColorModeValue } from "@chakra-ui/react";
-import { useBrandColor } from "theme";
-
-
+import { ButtonGroup } from "@chakra-ui/react";
 
 import { getQueryStringParam, setQueryStringParam } from "utils/querystring";
-import { safeParseFloat } from "utils/safeParseFloat";
 
-
-
-import { LogoIcon } from "shared/Components";
-import { ToggleModeButton } from "shared/Components";
-import { Link, useNavigate, useSearchParams } from "shared/Router";
-
-
-
-import { BackgroundButtons } from "./BackgroundButtons";
-import { BorderButtons } from "./BorderButtons";
-
+import { ToolbarButton } from "shared/Components";
 
 interface IProps {
 	currentZoom: number;
@@ -31,54 +20,47 @@ interface IProps {
 }
 
 export const ZoomButtons = ({ currentZoom, size, boxSize }: IProps) => {
-  const navigate = useNavigate();
-
-  return (
-    <ButtonGroup isAttached>
-      <IconButton
-        aria-label="Zoom out"
-        size={size}
-        title="Zoom out"
-        icon={<Icon boxSize={boxSize} as={PiMagnifyingGlassMinusBold} />}
-        onClick={() => {
-          let newZoom = currentZoom > 1 ? currentZoom - 1 : currentZoom * 0.5;
-          if (newZoom < 0.01) {
-            newZoom = 0.01;
-          }
-          navigate(
-            `/view.html?${setQueryStringParam("zoom", String(newZoom))}`
-          );
-        }}
-      />
-      <IconButton
-        aria-label="Original size"
-        size={size}
-        title="Original size"
-        icon={<Icon boxSize={boxSize} as={PiArrowsCounterClockwiseBold} />}
-        onClick={() =>
-          navigate(`/view.html?${setQueryStringParam("zoom", "1")}`)
-        }
-      />
-      <IconButton
-        aria-label="Zoom In"
-        size={size}
-        title="Zoom In"
-        icon={<Icon boxSize={boxSize} as={PiMagnifyingGlassPlusBold} />}
-        onClick={() => {
-          navigate(
-            `/view.html?${setQueryStringParam("zoom", String(currentZoom + 1))}`
-          );
-        }}
-      />
-      <IconButton
-        aria-label="Max zoom"
-        size={size}
-        title="Max zoom"
-        icon={<Icon boxSize={boxSize} as={PiArrowsOutCardinalBold} />}
-        onClick={() =>
-          navigate(`/view.html?${setQueryStringParam("zoom", "max")}`)
-        }
-      />
-    </ButtonGroup>
-  );
+	let zoomOut = currentZoom > 1 ? currentZoom - 1 : currentZoom * 0.5;
+	if (zoomOut < 0.01) {
+		zoomOut = 0.01;
+	}
+	return (
+		<ButtonGroup isAttached>
+			<ToolbarButton
+				ariaLabel="Zoom out"
+				boxSize={boxSize}
+				href={`/view.html?${setQueryStringParam("zoom", String(zoomOut))}`}
+				isActive={false}
+				size={size}
+				icon={PiMagnifyingGlassMinusBold}
+			/>
+			<ToolbarButton
+				ariaLabel="Original size"
+				size={size}
+				boxSize={boxSize}
+				href={`/view.html?${setQueryStringParam("zoom", "1")}`}
+				isActive={currentZoom === 1}
+				icon={PiArrowsCounterClockwiseBold}
+			/>
+			<ToolbarButton
+				ariaLabel="Zoom In"
+				boxSize={boxSize}
+				href={`/view.html?${setQueryStringParam(
+					"zoom",
+					String(currentZoom + 1)
+				)}`}
+				size={size}
+				icon={PiMagnifyingGlassPlusBold}
+				isActive={false}
+			/>
+			<ToolbarButton
+				ariaLabel="Max zoom"
+				boxSize={boxSize}
+				href={`/view.html?${setQueryStringParam("zoom", "max")}`}
+				isActive={getQueryStringParam("zoom") === "max"}
+				size={size}
+				icon={PiArrowsOutCardinalBold}
+			/>
+		</ButtonGroup>
+	);
 };

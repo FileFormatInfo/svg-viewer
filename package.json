@@ -5,6 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=5000 --strictPort=true",
+    "newbuild": "npm run build:client && npm run build:server",
+    "build:client": "vite build --ssrManifest --outDir dist/client",
+    "build:server": "vite build --ssr src/server-main.tsx --outDir dist/server",
     "build": "tsc && vite build",
     "test": "vitest",
     "test:ci": "vitest run --reporter verbose --reporter=junit --outputFile=./unit-report.xml",
@@ -19,6 +22,7 @@
     "@emotion/styled": "^11.10.5",
     "@react-hook/resize-observer": "^2.0.1",
     "@tanstack/react-query": "^4.24.6",
+    "express": "^4.19.2",
     "framer-motion": "^9.0.3",
     "intl-messageformat": "^10.3.0",
     "ky": "^0.33.2",
@@ -29,6 +33,7 @@
     "react-error-boundary": "^3.1.4",
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.9.0",
+    "sirv": "^2.0.4",
     "zustand": "^4.3.5"
   },
   "devDependencies": {

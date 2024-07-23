@@ -1,99 +1,64 @@
 import React from "react";
-import { PiArrowSquareOutBold, PiCheckerboardFill, PiSelectionSlashLight, PiSelectionLight, PiSquare, PiSquareBold, PiSquareFill, PiSquareLight, PiScribbleBold, PiMagnifyingGlassMinusBold, PiMagnifyingGlassPlusBold, PiArrowsOutCardinalBold, PiArrowsInCardinalBold, PiBug } from "react-icons/pi";
+import {
+	PiCheckerboardFill,
+	PiSquare,
+	PiSquareFill,
+	PiScribbleBold,
+} from "react-icons/pi";
 
+import {
+	ButtonGroup,
+	useColorModeValue,
+} from "@chakra-ui/react";
 
-
-import { ButtonGroup, Button, Flex, Icon, IconButton, Spacer, Text, useColorModeValue } from "@chakra-ui/react";
-import { useBrandColor } from "theme";
-
-
-
+import { t } from "utils";
 import { getQueryStringParam, setQueryStringParam } from "utils/querystring";
-import { safeParseFloat } from "utils/safeParseFloat";
 
-
-
-import { LogoIcon } from "shared/Components";
-import { ToggleModeButton } from "shared/Components";
-import { Link, useNavigate, useSearchParams } from "shared/Router";
-
+import { ToolbarButton } from "shared/Components";
 
 interface IProps {
-  boxSize: string;
-  size: string;
+	boxSize: string;
+	size: string;
 }
 
 export const BackgroundButtons = ({ size, boxSize }: IProps) => {
-  const navigate = useNavigate();
 
-  const currentBg = getQueryStringParam("bg", "memphis-mini")
+	const currentBg = getQueryStringParam("bg", "memphis-mini");
 
-  return (
-    <ButtonGroup isAttached>
-      <IconButton
-        aria-label="Squiggles background"
-        size={size}
-        title="Squiggles background"
-        isActive={currentBg === "memphis-mini"}
-        icon={
-          <Icon
-            boxSize={boxSize}
-            as={PiScribbleBold}
-            onClick={() =>
-              navigate(
-                `/view.html?${setQueryStringParam("bg", "memphis-mini")}`
-              )
-            }
-          />
-        }
-      />
-      <IconButton
-        aria-label="Checkboard background"
-        isActive={currentBg === "checkerboard"}
-        size={size}
-        title="Checkboard background"
-        icon={
-          <Icon
-            boxSize={boxSize}
-            as={PiCheckerboardFill}
-            onClick={() =>
-              navigate(
-                `/view.html?${setQueryStringParam("bg", "checkerboard")}`
-              )
-            }
-          />
-        }
-      />
-      <IconButton
-        aria-label="Light background"
-        isActive={currentBg === "#eeeeee"}
-        size={size}
-        title="Light background"
-        icon={
-          <Icon
-            boxSize={boxSize}
-            as={useColorModeValue(PiSquare, PiSquareFill)}
-            onClick={() =>
-              navigate(`/view.html?${setQueryStringParam("bg", "#eeeeee")}`)
-            }
-          />
-        }
-      />
-      <IconButton
-        aria-label="Dark background"
-        isActive={currentBg === "#111111"}
-        size={size}
-        title="Dark background"
-        icon={
-          <Icon
-            boxSize={boxSize}
-            as={useColorModeValue(PiSquareFill, PiSquare)}
-            onClick={() =>
-              navigate(`/view.html?${setQueryStringParam("bg", "#111111")}`)
-            }
-          />
-        }
-      />
-    </ButtonGroup>
-  );
+	return (
+		<ButtonGroup isAttached>
+			<ToolbarButton
+				ariaLabel={t("Squiggles background")}
+				size={size}
+				href={`/view.html?${setQueryStringParam("bg", "memphis-mini")}`}
+				isActive={currentBg === "memphis-mini"}
+				icon={PiScribbleBold}
+				boxSize={boxSize}
+			/>
+			<ToolbarButton
+				ariaLabel="Checkboard background"
+				boxSize={boxSize}
+				href={`/view.html?${setQueryStringParam("bg", "checkerboard")}`}
+				isActive={currentBg === "checkerboard"}
+				size={size}
+				icon={PiCheckerboardFill}
+			/>
+			<ToolbarButton
+				ariaLabel="Light background"
+				boxSize={boxSize}
+				href={`/view.html?${setQueryStringParam("bg", "#eeeeee")}`}
+				isActive={currentBg === "#eeeeee"}
+				size={size}
+				icon={useColorModeValue(PiSquare, PiSquareFill)}
+			/>
+			<ToolbarButton
+				ariaLabel="Dark background"
+				boxSize={boxSize}
+				href={`/view.html?${setQueryStringParam("bg", "#111111")}`}
+				isActive={currentBg === "#111111"}
+				size={size}
+				icon={useColorModeValue(PiSquareFill, PiSquare)}
+			/>
+		</ButtonGroup>
+	);
 };

@@ -1,4 +1,4 @@
-export const locale = navigator.language;
+export const locale = 'en'; //LATER: navigator?.language || 'en';
 
 const Locale = {
   en: {
