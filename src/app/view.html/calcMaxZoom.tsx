@@ -16,9 +16,10 @@ function calcMaxZoom(
 			(window.innerWidth - 4) / naturalWidth,
 			(height) / naturalHeight
 		);
-		console.log(`calcMaxZoom: ${maxZoom} (heights=${height}, ${naturalHeight})`);
+		console.log(`calcMaxZoom: ${maxZoom} (height=${height}, naturalHeight=${naturalHeight})`);
 		return maxZoom;
 	}
+	console.log('calcMaxZoom: 1');
 	return 1;
 }
 

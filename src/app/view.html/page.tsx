@@ -1,7 +1,6 @@
 "use client";
 /* eslint-disable no-console */
-import { useRef } from "react";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import {
   VStack,
@@ -16,13 +15,12 @@ import { useSearchParams } from "next/navigation";
 import { t } from "../utils/i18n";
 import { safeParseFloat } from "../utils/safeParseFloat";
 
-
 import { DesktopToolbar } from "./DesktopToolbar";
 import { MobileToolbar } from "./MobileToolbar";
 import { calcMaxZoom } from "./calcMaxZoom";
 
 export default function ViewPage() {
-	  const searchParams = useSearchParams();
+  const searchParams = useSearchParams();
   const url = searchParams.get("url") || undefined;
 
   const [naturalWidth, setNaturalWidth] = React.useState(1);
@@ -47,6 +45,8 @@ export default function ViewPage() {
   imageCss["height"] = `${currentZoom * naturalHeight}px`;
 
   const bg = searchParams.get("bg") || "memphis-mini";
+  const defaultBorderBackgroundColor = useColorModeValue("#fff", "#111");
+  const defaultBorderColor = useColorModeValue("#000", "#fff");
   const background: Record<string, string> = {};
   let borderColor: String;
   if (/^#[0-9A-Fa-f]{6}$/.test(bg)) {
@@ -54,8 +54,8 @@ export default function ViewPage() {
     borderColor = getContrastYIQ(bg.slice(1));
   } else if (/^[-a-z]+$/.test(bg)) {
     background["backgroundImage"] = `url(/images/backgrounds/${bg}.png)`;
-    background["backgroundColor"] = useColorModeValue("#fff", "#111");
-    borderColor = useColorModeValue("#000", "#fff");
+    background["backgroundColor"] = defaultBorderBackgroundColor;
+    borderColor = defaultBorderColor;
   } else {
     background["backgroundColor"] = "#eeeeee";
     borderColor = "#000";
@@ -74,13 +74,35 @@ export default function ViewPage() {
 
   const isDebug = (searchParams.get("debug") || "0") === "1";
 
-  const isSmall = window.innerWidth < 768;
-  console.log(`isSmall: ${isSmall} ${window.innerWidth}`);
-
   const toolbar = useBreakpointValue({
     base: <MobileToolbar currentZoom={currentZoom} />,
     lg: <DesktopToolbar currentZoom={currentZoom} />,
   }) || <DesktopToolbar currentZoom={currentZoom} />;
+
+  const onImageLoad = () => {
+    console.log(
+      `onload: ${currentZoom}, ${imageRef.current?.naturalWidth}, ${imageRef.current?.naturalHeight}`
+    );
+    setLoading(false);
+    setNaturalWidth(imageRef.current?.naturalWidth || 1);
+    setNaturalHeight(imageRef.current?.naturalHeight || 1);
+  };
+
+  useEffect(() => {
+    if (imageRef.current?.complete) {
+      onImageLoad();
+    }
+  }, [onImageLoad]);
+
+  useEffect(() => {
+    function handleResize() {
+      console.log(`resize: ${window.innerWidth}x${window.innerHeight}`);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <VStack w="100%" h="100vh" spacing="0" style={{ overflow: "hidden" }}>
@@ -101,6 +123,7 @@ export default function ViewPage() {
         {loadErr != null ? (
           <VStack>
             <img
+              alt={t("Red stop sign")}
               src="/images/error.svg"
               style={{ width: "5rem", height: "5rem" }}
             />
@@ -114,28 +137,24 @@ export default function ViewPage() {
           <Spinner size="xl" />
         ) : (
           <img
+            alt={url}
             src={url}
             style={{
               objectFit: "cover",
               overflow: "auto",
               ...imageCss,
             }}
+            title={url}
           />
         )}
         <img
+          alt={`${url} (preload/debug)`}
           onError={() => {
             console.log(`onerror: ${url}`);
             setLoadErr({});
             setLoading(false);
           }}
-          onLoad={() => {
-            console.log(
-              `onload: ${currentZoom}, ${imageRef.current?.naturalWidth}, ${imageRef.current?.naturalHeight}`
-            );
-            setLoading(false);
-            setNaturalWidth(imageRef.current?.naturalWidth || 1);
-            setNaturalHeight(imageRef.current?.naturalHeight || 1);
-          }}
+          onLoad={onImageLoad}
           ref={imageRef}
           src={url}
           style={{
@@ -183,8 +202,7 @@ export default function ViewPage() {
       </Flex>
     </VStack>
   );
-};
-
+}
 
 // from https://24ways.org/2010/calculating-color-contrast/
 function getContrastYIQ(hexcolor: String) {
@@ -194,4 +212,3 @@ function getContrastYIQ(hexcolor: String) {
   var yiq = (r * 299 + g * 587 + b * 114) / 1000;
   return yiq >= 128 ? "black" : "white";
 }
-

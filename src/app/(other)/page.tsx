@@ -42,7 +42,6 @@ export default function HomePage() {
             </Button>
             <Text>{t("view a random icon from IconSear.ch")}</Text>
           </HStack>
-          //LATER: upload
         </VStack>
       </Box>
   );

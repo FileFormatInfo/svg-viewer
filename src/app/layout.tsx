@@ -7,7 +7,6 @@ export const metadata: Metadata = {
   description: "An awesome way to preview SVG files",
 };
 
-
 export default function RootLayout({
   children,
 }: {
