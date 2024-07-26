@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SVG View [<img alt="Logo for SVG View" src="https://view.svg.zone/favicon.svg" height="96" align="right"/>](https://view.svg.zone/view.html?url=https%3A%2F%2Fview.svg.zone%2Fimages%2Fbanner.svg&zoom=max)
 
-## Getting Started
+[![deploy](https://github.com/VectorLogoZone/svgview/actions/workflows/gcr-deploy.yaml/badge.svg)](https://github.com/VectorLogoZone/svgview/actions/workflows/gcr-deploy.yaml)
 
-First, run the development server:
+[demo](https://view.svg.zone/view.html?url=https%3A%2F%2Fgithub.com%2FVectorLogoZone%2Fsvgview%2Factions%2Fworkflows%2Fgcr-deploy.yaml%2Fbadge.svg&zoom=max&backUrl=https%3A%2F%2Fgithub.com%2FVectorLogoZone%2Fsvgview&backText=Return+to+Github)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Integration
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+You can use this as a viewer from any website by passing the correct query string values.  Be sure the [encode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) them!
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* `backText` - tooltip text for the Exit button
+* `backUrl` - destination for the Exit button
+* `border` - border: one of "none", "dash", "thin" or "thick"
+* `bg` - background: a hex color (like "#abc123", but note that the "#" has to be escaped to "%23") or one of the [standard images](public/images/backgrounds/) (without the ".png" extension)
+* `url` - URL of the SVG file
+* `zoom` - zoom level: a number or "max"
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## License
 
-## Learn More
+[MIT](LICENSE.txt)
 
-To learn more about Next.js, take a look at the following resources:
+## Credits
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+[![Chakra UI](https://www.vectorlogo.zone/logos/chakra-ui/chakra-ui-ar21.svg)](https://v2.chakra-ui.com/ "UI Framework")
+[![Git](https://www.vectorlogo.zone/logos/git-scm/git-scm-ar21.svg)](https://git-scm.com/ "Version control")
+[![Github](https://www.vectorlogo.zone/logos/github/github-ar21.svg)](https://github.com/ "Code hosting")
+[![golang](https://www.vectorlogo.zone/logos/golang/golang-ar21.svg)](https://golang.org/ "Programming language")
+[![Google Noto Emoji](https://www.vectorlogo.zone/logos/google/google-ar21.svg)](https://github.com/googlefonts/noto-emoji/blob/master/svg/emoji_u1f441.svg "Logo/Favicon")
+[![NodePing](https://www.vectorlogo.zone/logos/nodeping/nodeping-ar21.svg)](https://nodeping.com?rid=201109281250J5K3P "Uptime monitoring")
+[![npm](https://www.vectorlogo.zone/logos/npmjs/npmjs-ar21.svg)](https://www.npmjs.com/ "JS Package Management")
+[![Phosphor Icons](https://www.vectorlogo.zone/logos/phosphoricons/phosphoricons-ar21.svg)](https://phosphoricons.com/ "Toolbar icons")
+[![react.js](https://www.vectorlogo.zone/logos/reactjs/reactjs-ar21.svg)](https://reactjs.org/ "UI Framework")
+[![React Router](https://www.vectorlogo.zone/logos/reactrouter/reactrouter-ar21.svg)](https://reactrouter.com/ "Client-side routing")
+[![TopTal](https://www.vectorlogo.zone/logos/toptal/toptal-ar21.svg)](https://www.toptal.com/designers/subtlepatterns/ "Background pattern")
+[![TypeScript](https://www.vectorlogo.zone/logos/typescriptlang/typescriptlang-ar21.svg)](https://www.typescriptlang.org/ "Programming Language")
+[![VectorLogoZone](https://www.vectorlogo.zone/logos/vectorlogozone/vectorlogozone-ar21.svg)](https://www.vectorlogo.zone/ "Logos")
+[![Vite](https://www.vectorlogo.zone/logos/vitejsdev/vitejsdev-ar21.svg)](https://vitejs.dev/ "Bundler")
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+* [bartstc/vite-ts-react-template](https://github.com/bartstc/vite-ts-react-template)
+* [jaredLunde/react-hook](https://github.com/jaredLunde/react-hook)

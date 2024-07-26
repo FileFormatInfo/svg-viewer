@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable no-console */
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 
 import {
   VStack,
@@ -25,6 +25,7 @@ export default function ViewPage() {
 
   const [naturalWidth, setNaturalWidth] = React.useState(1);
   const [naturalHeight, setNaturalHeight] = React.useState(1);
+  const [imageDisplay, setImageDisplay] = React.useState( 'none' );
   const [loading, setLoading] = React.useState(true);
   const [loadErr, setLoadErr] = React.useState<Object | null>(null);
 
@@ -79,20 +80,32 @@ export default function ViewPage() {
     lg: <DesktopToolbar currentZoom={currentZoom} />,
   }) || <DesktopToolbar currentZoom={currentZoom} />;
 
-  const onImageLoad = () => {
+  const onImageLoad = useCallback(() => {
     console.log(
-      `onload: ${currentZoom}, ${imageRef.current?.naturalWidth}, ${imageRef.current?.naturalHeight}`
+      `onload: ${imageRef.current?.naturalWidth}, ${imageRef.current?.naturalHeight}`
     );
     setLoading(false);
     setNaturalWidth(imageRef.current?.naturalWidth || 1);
     setNaturalHeight(imageRef.current?.naturalHeight || 1);
-  };
+    setImageDisplay( 'block' );
+  }, [ imageRef ]);
+
+  const onImageError = useCallback(() => {
+    console.log(`onerror`);
+    setLoading(false);
+    setLoadErr({});
+  }, []);
 
   useEffect(() => {
     if (imageRef.current?.complete) {
-      onImageLoad();
+      if (imageRef.current?.naturalWidth === 0) {
+        onImageError();
+      } else {
+        onImageLoad();
+      }
+      console.log(`via useEffect`);
     }
-  }, [onImageLoad]);
+  }, [ onImageError, onImageLoad ]);
 
   useEffect(() => {
     function handleResize() {
@@ -142,6 +155,7 @@ export default function ViewPage() {
             style={{
               objectFit: "cover",
               overflow: "auto",
+              display: imageDisplay,
               ...imageCss,
             }}
             title={url}
@@ -149,12 +163,8 @@ export default function ViewPage() {
         )}
         <img
           alt={`${url} (preload/debug)`}
-          onError={() => {
-            console.log(`onerror: ${url}`);
-            setLoadErr({});
-            setLoading(false);
-          }}
-          onLoad={onImageLoad}
+          onError={() => { onImageError(); console.log(`via onError`); }}
+          onLoad={() => { onImageLoad(); console.log(`via onLoad`); }}
           ref={imageRef}
           src={url}
           style={{

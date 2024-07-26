@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable no-console */
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
 import { Center, Flex, Spinner, Text, VStack } from "@chakra-ui/react";
 
@@ -8,7 +8,15 @@ import { t } from "../../utils/i18n";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function RandomImage() {
+export default function xRandomImage() {
+	  return (
+	<Suspense fallback={<RandomImage />}>
+	  <RandomImage />
+	</Suspense>
+  );
+}
+
+function RandomImage() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
