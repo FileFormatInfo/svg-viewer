@@ -10,7 +10,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 export default function xRandomImage() {
 	  return (
-	<Suspense fallback={<RandomImage />}>
+	<Suspense fallback={<Spinner />}>
 	  <RandomImage />
 	</Suspense>
   );

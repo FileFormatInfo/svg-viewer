@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable no-console */
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { Suspense, useCallback, useEffect, useRef } from "react";
 
 import {
   VStack,
@@ -19,7 +19,15 @@ import { DesktopToolbar } from "./DesktopToolbar";
 import { MobileToolbar } from "./MobileToolbar";
 import { calcMaxZoom } from "./calcMaxZoom";
 
-export default function ViewPage() {
+export default function xViewPage() {
+	  return (
+	<Suspense fallback={<Spinner />}>
+	  <ViewPage />
+	</Suspense>
+  );
+}
+
+function ViewPage() {
   const searchParams = useSearchParams();
   const url = searchParams.get("url") || undefined;
 
