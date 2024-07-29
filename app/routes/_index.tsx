@@ -1,5 +1,8 @@
 import type { MetaFunction } from "@remix-run/node";
 
+import { ColorSchemeToggle } from "~/components/ColorSchemeToggle";
+
+
 export const meta: MetaFunction = () => {
   return [
     { title: "New Remix App" },
@@ -42,6 +45,8 @@ export default function Index() {
             Remix Docs
           </a>
         </li>
+        <li>      <ColorSchemeToggle />
+</li>
       </ul>
     </div>
   );
