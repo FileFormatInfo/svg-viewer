@@ -12,6 +12,7 @@ import {
 import { Link as NextLink } from "@chakra-ui/next-js";
 
 import { t } from "../../utils/i18n";
+import { suffix } from "../../utils/pathfix";
 
 export default function OpenPage() {
   const defaultImage = "https://view.svg.zone/favicon.svg";
@@ -30,7 +31,7 @@ export default function OpenPage() {
         boxShadow="lg"
         p={{ base: 6, md: 8 }}
       >
-        <VStack action="/view.html" as="form" method="get" spacing={4}>
+        <VStack action={`/view${suffix}`} as="form" method="get" spacing={4}>
           <Input id="url" defaultValue={defaultImage} name="url" />
 
           <Button type="submit" colorScheme="blue" w="100%">

@@ -127,7 +127,7 @@ export const MobileToolbar = ({ currentZoom, setZoom }: IProps) => {
               <Switch
                 as={NextLink}
                 isChecked={isDebug}
-                href={`/view.html?${setQueryStringParam(searchParams, 
+                href={`?${setQueryStringParam(searchParams, 
                   "debug",
                   isDebug ? "0" : "1"
                 )}`}

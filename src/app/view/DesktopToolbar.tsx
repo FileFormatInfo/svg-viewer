@@ -64,7 +64,7 @@ export const DesktopToolbar = ({ currentZoom, setZoom }: IProps) => {
         <ToolbarButton
           ariaLabel={"Show debug info"}
           boxSize="1.75em"
-          href={`/view.html?${setQueryStringParam(searchParams,
+          href={`?${setQueryStringParam(searchParams,
             "debug",
             isDebug ? "0" : "1"
           )}`}

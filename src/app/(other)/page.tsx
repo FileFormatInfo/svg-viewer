@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 
 import { t } from "../utils/i18n";
+import { suffix } from "../utils/pathfix";
 
 import { Link as NextLink } from "@chakra-ui/next-js";
 
@@ -25,19 +26,19 @@ export default function HomePage() {
       >
         <VStack as="form" align="left" spacing={4}>
           <HStack>
-            <Button as={NextLink} href={"/open.html"}>
+            <Button as={NextLink} href={`/open${suffix}`}>
               {t("Open")}
             </Button>
             <Text>{t("view an SVG image from another website")}</Text>
           </HStack>
           <HStack>
-            <Button as={NextLink} href="/random.html?src=logosear.ch">
+          <Button as={NextLink} href={`/random${suffix}?src=logosear.ch`}>
               {t("Random Logo")}
             </Button>
             <Text>{t("view a random logo from LogoSear.ch")}</Text>
           </HStack>
           <HStack>
-            <Button as={NextLink} href="/random.html?src=iconsear.ch">
+          <Button as={NextLink} href={`/random${suffix}?src=iconsear.ch`}>
               {t("Random Icon")}
             </Button>
             <Text>{t("view a random icon from IconSear.ch")}</Text>

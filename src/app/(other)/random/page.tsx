@@ -5,6 +5,7 @@ import { Suspense, useEffect } from "react";
 import { Center, Flex, Spinner, Text, VStack } from "@chakra-ui/react";
 
 import { t } from "../../utils/i18n";
+import { suffix } from "../../utils/pathfix";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -41,7 +42,7 @@ function RandomImage() {
         setTimeout(() => {
           console.log(`random image: ${data.results[0].url}`);
           router.replace(
-            `/view.html?url=${encodeURIComponent(
+            `/view${suffix}?url=${encodeURIComponent(
               data.results[0].url
             )}&zoom=max`
           );
@@ -49,7 +50,7 @@ function RandomImage() {
       } catch (err) {
         console.error(err);
         if (err instanceof Error && err.name !== "AbortError") {
-          router.replace(`/open.html?error=${encodeURIComponent(err.name)}`);
+          router.replace(`/open${suffix}?error=${encodeURIComponent(err.name)}`);
         }
       }
     })();

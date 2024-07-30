@@ -32,7 +32,7 @@ export const ZoomButtons = ({ currentZoom, size, boxSize }: IProps) => {
       <ToolbarButton
         ariaLabel="Zoom out"
         boxSize={boxSize}
-        href={`/view.html?${setQueryStringParam(
+        href={`?${setQueryStringParam(
           searchParams,
           "zoom",
           String(zoomOut)
@@ -45,14 +45,14 @@ export const ZoomButtons = ({ currentZoom, size, boxSize }: IProps) => {
         ariaLabel="Original size"
         size={size}
         boxSize={boxSize}
-        href={`/view.html?${setQueryStringParam(searchParams, "zoom", "1")}`}
+        href={`?${setQueryStringParam(searchParams, "zoom", "1")}`}
         isActive={currentZoom === 1}
         icon={PiArrowsCounterClockwiseBold}
       />
       <ToolbarButton
         ariaLabel="Zoom In"
         boxSize={boxSize}
-        href={`/view.html?${setQueryStringParam(
+        href={`?${setQueryStringParam(
           searchParams,
           "zoom",
           String(currentZoom + 1)
@@ -64,7 +64,7 @@ export const ZoomButtons = ({ currentZoom, size, boxSize }: IProps) => {
       <ToolbarButton
         ariaLabel="Max zoom"
         boxSize={boxSize}
-        href={`/view.html?${setQueryStringParam(searchParams, "zoom", "max")}`}
+        href={`?${setQueryStringParam(searchParams, "zoom", "max")}`}
         isActive={searchParams.get("zoom") === "max"}
         size={size}
         icon={PiArrowsOutCardinalBold}

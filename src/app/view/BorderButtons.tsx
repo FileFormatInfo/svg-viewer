@@ -27,7 +27,7 @@ export const BorderButtons = ({ size, boxSize }: IProps) => {
       <ToolbarButton
         ariaLabel="No border"
         boxSize={boxSize}
-        href={`/view.html?${setQueryStringParam(
+        href={`?${setQueryStringParam(
           searchParams,
           "border",
           "none"
@@ -39,7 +39,7 @@ export const BorderButtons = ({ size, boxSize }: IProps) => {
       <ToolbarButton
         ariaLabel="Dash border"
         boxSize={boxSize}
-        href={`/view.html?${setQueryStringParam(
+        href={`?${setQueryStringParam(
           searchParams,
           "border",
           "dash"
@@ -51,7 +51,7 @@ export const BorderButtons = ({ size, boxSize }: IProps) => {
       <ToolbarButton
         ariaLabel="Thin border"
         boxSize={boxSize}
-        href={`/view.html?${setQueryStringParam(
+        href={`?${setQueryStringParam(
           searchParams,
           "border",
           "thin"
@@ -63,7 +63,7 @@ export const BorderButtons = ({ size, boxSize }: IProps) => {
       <ToolbarButton
         ariaLabel="Thick border"
         boxSize={boxSize}
-        href={`/view.html?${setQueryStringParam(
+        href={`?${setQueryStringParam(
           searchParams,
           "border",
           "thick"

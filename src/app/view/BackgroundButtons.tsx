@@ -13,6 +13,7 @@ import { setQueryStringParam } from "../utils/querystring";
 
 import { ToolbarButton } from "../components/ToolbarButton";
 import { useSearchParams } from "next/navigation";
+import { suffix } from "../utils/pathfix";
 
 interface IProps {
   boxSize: string;
@@ -28,7 +29,7 @@ export const BackgroundButtons = ({ size, boxSize }: IProps) => {
       <ToolbarButton
         ariaLabel={t("Squiggles background")}
         size={size}
-        href={`/view.html?${setQueryStringParam(
+        href={`?${setQueryStringParam(
           searchParams,
           "bg",
           "memphis-mini"
@@ -40,7 +41,7 @@ export const BackgroundButtons = ({ size, boxSize }: IProps) => {
       <ToolbarButton
         ariaLabel="Checkboard background"
         boxSize={boxSize}
-        href={`/view.html?${setQueryStringParam(
+        href={`?${setQueryStringParam(
           searchParams,
           "bg",
           "checkerboard"
@@ -52,7 +53,7 @@ export const BackgroundButtons = ({ size, boxSize }: IProps) => {
       <ToolbarButton
         ariaLabel="Light background"
         boxSize={boxSize}
-        href={`/view.html?${setQueryStringParam(
+        href={`?${setQueryStringParam(
           searchParams,
           "bg",
           "#eeeeee"
@@ -64,7 +65,7 @@ export const BackgroundButtons = ({ size, boxSize }: IProps) => {
       <ToolbarButton
         ariaLabel="Dark background"
         boxSize={boxSize}
-        href={`/view.html?${setQueryStringParam(
+        href={`?${setQueryStringParam(
           searchParams,
           "bg",
           "#111111"

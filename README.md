@@ -22,6 +22,7 @@ You can use this as a viewer from any website by passing the correct query strin
 ## Credits
 
 [![Chakra UI](https://www.vectorlogo.zone/logos/chakra-ui/chakra-ui-ar21.svg)](https://v2.chakra-ui.com/ "UI Framework")
+[![Google CloudRun](https://www.vectorlogo.zone/logos/google_cloud_run/google_cloud_run-ar21.svg)](https://cloud.google.com/run/ "Hosting")
 [![Git](https://www.vectorlogo.zone/logos/git-scm/git-scm-ar21.svg)](https://git-scm.com/ "Version control")
 [![Github](https://www.vectorlogo.zone/logos/github/github-ar21.svg)](https://github.com/ "Code hosting")
 [![golang](https://www.vectorlogo.zone/logos/golang/golang-ar21.svg)](https://golang.org/ "Programming language")
@@ -30,11 +31,9 @@ You can use this as a viewer from any website by passing the correct query strin
 [![npm](https://www.vectorlogo.zone/logos/npmjs/npmjs-ar21.svg)](https://www.npmjs.com/ "JS Package Management")
 [![Phosphor Icons](https://www.vectorlogo.zone/logos/phosphoricons/phosphoricons-ar21.svg)](https://phosphoricons.com/ "Toolbar icons")
 [![react.js](https://www.vectorlogo.zone/logos/reactjs/reactjs-ar21.svg)](https://reactjs.org/ "UI Framework")
-[![React Router](https://www.vectorlogo.zone/logos/reactrouter/reactrouter-ar21.svg)](https://reactrouter.com/ "Client-side routing")
+[![Next.js](https://www.vectorlogo.zone/logos/nextjs/nextjs-ar21.svg)](https://nextjs.org/ "React Framework")
 [![TopTal](https://www.vectorlogo.zone/logos/toptal/toptal-ar21.svg)](https://www.toptal.com/designers/subtlepatterns/ "Background pattern")
 [![TypeScript](https://www.vectorlogo.zone/logos/typescriptlang/typescriptlang-ar21.svg)](https://www.typescriptlang.org/ "Programming Language")
 [![VectorLogoZone](https://www.vectorlogo.zone/logos/vectorlogozone/vectorlogozone-ar21.svg)](https://www.vectorlogo.zone/ "Logos")
 [![Vite](https://www.vectorlogo.zone/logos/vitejsdev/vitejsdev-ar21.svg)](https://vitejs.dev/ "Bundler")
 
-* [bartstc/vite-ts-react-template](https://github.com/bartstc/vite-ts-react-template)
-* [jaredLunde/react-hook](https://github.com/jaredLunde/react-hook)
