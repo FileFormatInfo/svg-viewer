@@ -1,48 +1,61 @@
 import type { MetaFunction } from "@remix-run/node";
 
+import {
+  Box,
+  Button,
+  HStack,
+  Text,
+  useColorModeValue,
+  VStack,
+} from "@chakra-ui/react";
+import { Link as RemixLink } from "@remix-run/react";
+
+import { FullPage } from "~/components/FullPage";
+
+
+import { t } from "~/utils/i18n";
+
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "SVG View" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
 
-export default function Index() {
+export default function HomePage() {
   return (
-    <div className="font-sans p-4">
-      <h1 className="text-3xl">Welcome to Remix</h1>
-      <ul className="list-disc mt-4 pl-6 space-y-2">
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/quickstart"
-            rel="noreferrer"
-          >
-            5m Quick Start
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/tutorial"
-            rel="noreferrer"
-          >
-            30m Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/docs"
-            rel="noreferrer"
-          >
-            Remix Docs
-          </a>
-        </li>
-      </ul>
-    </div>
-  );
+    <FullPage>
+      <Box
+        rounded="lg"
+        bg={useColorModeValue("white", "gray.700")}
+        boxShadow="lg"
+        p={{ base: 6, md: 8 }}
+      >
+        <VStack as="form" align="left" spacing={4}>
+          <HStack>
+            <Button as={RemixLink} to={`/open.html`}>
+              {t("Open")}
+            </Button>
+            <Text>{t("view an SVG image from another website")}</Text>
+          </HStack>
+          <HStack>
+            <RemixLink prefetch="none" to={`/random.html?src=logosear.ch`} reloadDocument>
+              <Button>
+                {t("Random Logo")}
+              </Button>
+            </RemixLink>
+            <Text>{t("view a random logo from LogoSear.ch")}</Text>
+          </HStack>
+          <HStack>
+            <RemixLink prefetch="none" to={`/random.html?src=iconsear.ch`} reloadDocument>
+              <Button>
+                {t("Random Icon")}
+              </Button>
+            </RemixLink>
+            <Text>{t("view a random icon from IconSear.ch")}</Text>
+          </HStack>
+        </VStack>
+      </Box>
+    </FullPage>
+  )
 }
