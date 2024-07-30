@@ -23,16 +23,15 @@ function ToolbarButton({
   size,
 }: IProps) {
   return (
-    <Link href={href}>
       <IconButton
         aria-label={ariaLabel}
-        as="div"
+        as={Link}
+        href={href}
         icon={<Icon boxSize={boxSize} as={icon} />}
         isActive={isActive}
         size={size}
         title={ariaLabel}
       />
-    </Link>
   );
 }
 
