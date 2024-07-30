@@ -23,15 +23,15 @@ function ToolbarButton({
   size,
 }: IProps) {
   return (
-    <IconButton
-      as={NextLink}
-      aria-label={ariaLabel}
-      href={href}
-      icon={<Icon boxSize={boxSize} as={icon} />}
-      isActive={isActive}
-      size={size}
-      title={ariaLabel}
-    />
+    <NextLink href={href}>
+      <IconButton
+        aria-label={ariaLabel}
+        icon={<Icon boxSize={boxSize} as={icon} />}
+        isActive={isActive}
+        size={size}
+        title={ariaLabel}
+      />
+    </NextLink>
   );
 }
 
