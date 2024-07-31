@@ -34,11 +34,17 @@ export default function ViewPage() {
   //const imageSize = useSize(imageRef);
   //const containerSize = useSize(containerRef);
   const imageCss: Record<string, string> = {};
+  const noscriptImageCss: Record<string, string> = {};
+  let noscriptHeight:string|undefined;
 
   const urlZoom = searchParams.get("zoom") || "1";
   let currentZoom = safeParseFloat(urlZoom, 1);
   if (urlZoom === "max") {
     currentZoom = calcMaxZoom(naturalWidth, naturalHeight, containerRef);
+    noscriptImageCss["objectFit"] = "cover";
+    noscriptHeight = "99%";
+  } else {
+    noscriptImageCss["transform"] = `scale(${currentZoom})`;
   }
 
   imageCss["width"] = `${currentZoom * naturalWidth}px`;
@@ -62,21 +68,26 @@ export default function ViewPage() {
   }
 
   const border = searchParams.get("border") || "dash";
+  let borderCss = "";
   if (border === "dash") {
-    imageCss["outline"] = `1px dashed ${borderColor}`;
+    borderCss = `1px dashed ${borderColor}`;
   } else if (border === "thin") {
-    imageCss["outline"] = `1px solid ${borderColor}`;
+    borderCss = `1px solid ${borderColor}`;
   } else if (border === "thick") {
-    imageCss["outline"] = `4px solid ${borderColor}`;
+    borderCss = `4px solid ${borderColor}`;
   } else {
-    imageCss["outline"] = "none";
+    borderCss = "none";
   }
+  imageCss["outline"] = borderCss;
+  noscriptImageCss["outline"] = borderCss;
 
   const isDebug = (searchParams.get("debug") || "0") === "1";
 
   const toolbar = useBreakpointValue({
     base: <MobileToolbar currentZoom={currentZoom} />,
     lg: <DesktopToolbar currentZoom={currentZoom} />,
+  }, {
+    fallback: 'lg',
   }) || <DesktopToolbar currentZoom={currentZoom} />;
 
   const onImageLoad = useCallback(() => {
@@ -108,11 +119,11 @@ export default function ViewPage() {
 
   useEffect(() => {
     function handleResize() {
-      console.log(`resize: ${window.innerWidth}x${window.innerHeight}`);
+      console.log(`resize: ${window?.innerWidth}x${window?.innerHeight}`);
     }
-    window.addEventListener("resize", handleResize);
+    window?.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window?.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -146,7 +157,7 @@ export default function ViewPage() {
           <></>
         )}
         {loading ? (
-          <Spinner size="xl" />
+          <Spinner className="scriptonly" size="xl" />
         ) : (
           <img
             alt={url}
@@ -172,12 +183,13 @@ export default function ViewPage() {
             top: 0,
             right: 0,
           }}
-        />
-        {isDebug && (
-          <Text position={"absolute"} top={"0"} left={2}>
-            Window size: {window.innerWidth}x{window.innerHeight}
-          </Text>
-        )}
+        /><noscript style={{ "height": noscriptHeight, "display": "flex"}}>
+          <img
+            alt={url}
+            src={url}
+            style={{...noscriptImageCss}}
+            />
+        </noscript>
         {isDebug && (
           <Text position={"absolute"} top={"14pt"} left={2}>
             Image natural size: {imageRef.current?.naturalWidth}x

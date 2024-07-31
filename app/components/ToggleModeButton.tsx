@@ -14,6 +14,7 @@ const ToggleModeButton = (
   return (
     <IconButton
       aria-label="Switch mode"
+      className="scriptonly"
       onClick={toggleColorMode}
       variant="ghost"
       icon={

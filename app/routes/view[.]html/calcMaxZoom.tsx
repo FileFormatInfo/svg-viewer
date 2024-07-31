@@ -7,7 +7,7 @@ function calcMaxZoom(
 	naturalHeight: number,
 	containerRef: React.RefObject<HTMLDivElement>
 ) {
-	if (containerRef.current != null && naturalHeight > 0 && naturalWidth > 0) {
+	if (containerRef.current != null && naturalHeight > 0 && naturalWidth > 0 && window) {
 		// -4 so there is room for the border to be visible
 		const rect = containerRef.current.getBoundingClientRect();
 		const height = rect.height - 4;

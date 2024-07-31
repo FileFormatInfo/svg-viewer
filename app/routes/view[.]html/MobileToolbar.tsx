@@ -31,6 +31,7 @@ import { ToolbarButton } from "~/components/ToolbarButton";
 
 import { BackgroundButtons } from "./BackgroundButtons";
 import { BorderButtons } from "./BorderButtons";
+import { ExitButton } from "./ExitButton";
 import { ZoomButtons } from "./ZoomButtons";
 
 interface IProps {
@@ -45,6 +46,7 @@ export const MobileToolbar = ({ currentZoom, setZoom }: IProps) => {
   const btnRef = useRef<HTMLButtonElement | null>(null);
 
   const isDebug = (searchParams.get("debug") || "0") === "1";
+  searchParams.set("debug", isDebug ? "0" : "1");
   const backUrl = searchParams.get("backUrl") || "/";
   const backText = searchParams.get("backText") || t("Exit");
   return (
@@ -119,9 +121,9 @@ export const MobileToolbar = ({ currentZoom, setZoom }: IProps) => {
               </FormLabel>
               <Spacer />
               <Switch
-                as={RemixLink}
+              as={RemixLink}
                 isChecked={isDebug}
-                to={`?debug=1`/* LATER */}
+                to={`?${searchParams.toString()}`}
               />
             </FormControl>
           </DrawerBody>
@@ -140,13 +142,10 @@ export const MobileToolbar = ({ currentZoom, setZoom }: IProps) => {
         </Text>
       </Flex>
       <Spacer />
-      <ToolbarButton
-        ariaLabel={backText}
+      <ExitButton
+        text={backText}
         boxSize="1.75em"
-        param={backUrl /* LATER */}
-        value={backText /* LATER */}
-        icon={PiArrowSquareOutBold}
-        isActive={false}
+        link={backUrl}
         size="md"
       />
     </Flex>

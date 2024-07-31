@@ -1,4 +1,3 @@
-"use client";
 import { IconType } from "react-icons";
 
 import { Icon, IconButton } from "@chakra-ui/react";
@@ -8,6 +7,7 @@ import { Link as RemixLink, useSearchParams } from "@remix-run/react";
 interface IProps {
   ariaLabel: string;
   boxSize: string;
+  className?: string;
   param: string;
   value: string;
   icon: IconType;
@@ -18,6 +18,7 @@ interface IProps {
 function ToolbarButton({
   ariaLabel,
   boxSize,
+  className,
   param,
   value,
   icon,
@@ -29,16 +30,16 @@ function ToolbarButton({
   searchParams.set(param, value)
 
   return (
-      <RemixLink
-      to={`?${searchParams.toString() }`}>
       <IconButton
+        as={RemixLink}
         aria-label={ariaLabel}
+        className={className}
         icon={<Icon boxSize={boxSize} as={icon} />}
         isActive={isActive}
         size={size}
         title={ariaLabel}
+        to={`?${searchParams.toString()}`}
       />
-    </RemixLink>
   );
 }
 

@@ -17,6 +17,7 @@ import { ToolbarButton } from "~/components/ToolbarButton";
 
 import { BackgroundButtons } from "./BackgroundButtons";
 import { BorderButtons } from "./BorderButtons";
+import { ExitButton } from "./ExitButton";
 import { ZoomButtons } from "./ZoomButtons";
 
 interface IProps {
@@ -60,19 +61,17 @@ export const DesktopToolbar = ({ currentZoom }: IProps) => {
         <ToolbarButton
           ariaLabel={"Show debug info"}
           boxSize="1.75em"
+          className="scriptonly"
           param="debug"
           value={isDebug ? "0" : "1"}
           icon={PiBug}
           isActive={isDebug}
           size="md"
         />
-        <ToolbarButton
-          ariaLabel={backText}
+        <ExitButton
+          text={backText}
           boxSize="1.75em"
-          param={backUrl}
-          value={backText}
-          icon={PiArrowSquareOutBold}
-          isActive={false}
+          link={backUrl}
           size="md"
         />
       </ButtonGroup>
