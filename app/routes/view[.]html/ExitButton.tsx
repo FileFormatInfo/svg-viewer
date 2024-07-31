@@ -1,8 +1,6 @@
-import { IconType } from "react-icons";
-
 import { Icon, IconButton } from "@chakra-ui/react";
 
-import { Link as RemixLink, useSearchParams } from "@remix-run/react";
+import { Link as RemixLink } from "@remix-run/react";
 import { PiArrowSquareOutBold } from "react-icons/pi";
 
 interface IProps {

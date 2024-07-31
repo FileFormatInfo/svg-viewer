@@ -1,5 +1,5 @@
 import React from "react";
-import { PiArrowSquareOutBold, PiBug } from "react-icons/pi";
+import { PiBug } from "react-icons/pi";
 
 import {
   ButtonGroup,

@@ -1,6 +1,5 @@
-"use client";
 import { useRef } from "react";
-import { PiArrowSquareOutBold, PiListBold, PiXBold } from "react-icons/pi";
+import { PiListBold, PiXBold } from "react-icons/pi";
 
 import {
   Button,
@@ -26,8 +25,6 @@ import {
 import { Link as RemixLink, useSearchParams } from "@remix-run/react";
 
 import { t } from "~/utils/i18n";
-
-import { ToolbarButton } from "~/components/ToolbarButton";
 
 import { BackgroundButtons } from "./BackgroundButtons";
 import { BorderButtons } from "./BorderButtons";

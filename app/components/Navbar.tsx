@@ -2,12 +2,10 @@ import {
   Box,
   Flex,
   Text,
-  IconButton,
   HStack,
   useColorModeValue,
   Stack,
 } from "@chakra-ui/react";
-import { PiHouseBold } from "react-icons/pi";
 import { Link as RemixLink } from "@remix-run/react";
 
 
@@ -30,19 +28,6 @@ export const Navbar = () => {
         align="center"
         bg={bg}
       >
-        <Flex
-          flex={{ base: 1, md: "auto" }}
-          display={{ base: "flex", md: "none" }}
-        >
-          <IconButton
-            as={RemixLink}
-            boxSize="1.5em"
-            to="/"
-            icon={<PiHouseBold />}
-            variant="ghost"
-            aria-label="SVG View"
-          />
-        </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <Stack direction="row" spacing={4}>
