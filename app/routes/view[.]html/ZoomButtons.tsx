@@ -4,6 +4,7 @@ import {
   PiMagnifyingGlassMinusBold,
   PiMagnifyingGlassPlusBold,
   PiArrowsOutCardinalBold,
+  PiChartBarFill,
 } from "react-icons/pi";
 import { useSearchParams } from "@remix-run/react";
 
@@ -41,7 +42,7 @@ export const ZoomButtons = ({ currentZoom, size, boxSize }: IProps) => {
         boxSize={boxSize}
         param="zoom"
         value="1"
-        isActive={currentZoom === 1}
+        isActive={(searchParams.get("zoom") || "1") === "1"}
         icon={PiArrowsCounterClockwiseBold}
       />
       <ToolbarButton
@@ -52,6 +53,15 @@ export const ZoomButtons = ({ currentZoom, size, boxSize }: IProps) => {
         size={size}
         icon={PiMagnifyingGlassPlusBold}
         isActive={false}
+      />
+      <ToolbarButton
+        ariaLabel="Icons"
+        boxSize={boxSize}
+        param="zoom"
+        value="icons"
+        size={size}
+        icon={PiChartBarFill}
+        isActive={searchParams.get("zoom") === "icons"}
       />
       <ToolbarButton
         ariaLabel="Max zoom"

@@ -17,10 +17,11 @@ import { safeParseFloat } from "~/utils/safeParseFloat";
 import { DesktopToolbar } from "./DesktopToolbar";
 import { MobileToolbar } from "./MobileToolbar";
 import { calcMaxZoom } from "./calcMaxZoom";
+import { IconList } from "./IconList";
 
 export default function ViewPage() {
   const [ searchParams ] = useSearchParams();
-  const url = searchParams.get("url") || undefined;
+  const url = searchParams.get("url") || "";
 
   const [naturalWidth, setNaturalWidth] = React.useState(1);
   const [naturalHeight, setNaturalHeight] = React.useState(1);
@@ -31,8 +32,6 @@ export default function ViewPage() {
   const imageRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  //const imageSize = useSize(imageRef);
-  //const containerSize = useSize(containerRef);
   const imageCss: Record<string, string> = {};
   const noscriptImageCss: Record<string, string> = {};
   let noscriptHeight:string|undefined;
@@ -43,6 +42,8 @@ export default function ViewPage() {
     currentZoom = calcMaxZoom(naturalWidth, naturalHeight, containerRef);
     noscriptImageCss["objectFit"] = "cover";
     noscriptHeight = "99%";
+  } else if (urlZoom === "icons") {
+    // do nothing
   } else {
     noscriptImageCss["transform"] = `scale(${currentZoom})`;
   }
@@ -97,7 +98,7 @@ export default function ViewPage() {
     setLoading(false);
     setNaturalWidth(imageRef.current?.naturalWidth || 1);
     setNaturalHeight(imageRef.current?.naturalHeight || 1);
-    setImageDisplay( 'block' );
+    setImageDisplay( 'flex' );
   }, [ imageRef ]);
 
   const onImageError = useCallback(() => {
@@ -139,7 +140,7 @@ export default function ViewPage() {
         alignItems="center"
         justifyContent="center"
         style={{
-          overflow: "hidden",
+          overflow: ( urlZoom == "icons" ? "scroll" : "hidden" ),
           ...background,
         }}
       >
@@ -159,7 +160,7 @@ export default function ViewPage() {
         {loading ? (
           <Spinner className="scriptonly" size="xl" />
         ) : (
-          <img
+            (urlZoom === "icons" ? <IconList display={imageDisplay} imageCss={imageCss} url={url} /> : <img
             alt={url}
             src={url}
             style={{
@@ -169,7 +170,7 @@ export default function ViewPage() {
               ...imageCss,
             }}
             title={url}
-          />
+          />)
         )}
         <img
           alt={`${url} (preload/debug)`}
@@ -184,11 +185,13 @@ export default function ViewPage() {
             right: 0,
           }}
         /><noscript style={{ "height": noscriptHeight, "display": "flex"}}>
+          {(urlZoom === "icons" ? <IconList display="flex" imageCss={noscriptImageCss} url={url} /> :
           <img
             alt={url}
             src={url}
             style={{...noscriptImageCss}}
             />
+          )}
         </noscript>
         {isDebug && (
           <Text position={"absolute"} top={"14pt"} left={2}>
