@@ -4,13 +4,13 @@ import {
   PiMagnifyingGlassMinusBold,
   PiMagnifyingGlassPlusBold,
   PiArrowsOutCardinalBold,
-  PiChartBarFill,
 } from "react-icons/pi";
 import { useSearchParams } from "@remix-run/react";
 
 import { ButtonGroup } from "@chakra-ui/react";
 
 import { ToolbarButton } from "~/components/ToolbarButton";
+import { IconTool } from "~/components/IconTool";
 
 interface IProps {
   currentZoom: number;
@@ -60,7 +60,7 @@ export const ZoomButtons = ({ currentZoom, size, boxSize }: IProps) => {
         param="zoom"
         value="icons"
         size={size}
-        icon={PiChartBarFill}
+        icon={IconTool}
         isActive={searchParams.get("zoom") === "icons"}
       />
       <ToolbarButton
