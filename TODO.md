@@ -1,8 +1,12 @@
 # To Do
 
 - [ ] show `error` search param
-- [ ] keyboard support
-- [ ] multi-image icon view
+- [ ] i18n [article](https://remix.run/blog/remix-i18n)
+- [ ] keyboard support (see [qimgv](https://github.com/easymodo/qimgv))
+- [ ] customizable icon sizes
+- [ ] mobile-friendly footer: no text?  fewer icons?
+- [ ] help page
+- [ ] analytics
 
 ## General
 
@@ -23,7 +27,6 @@
 - [ ] shell script for post endpoint
 
 ## Preview
-- [ ] `icon` zoom mode (PiChartBarFill) that shows multiple fixes sizes (16, 32...)
 - [ ] `%` zoom mode (no toolbar button: only for incoming links)
 - [ ] support a second exit parameter (`src`?) that goes to the hosting webpage (PiCircuitryBold, PiCubeFocus, PiLinkBold, PiOrangeBold, PiSignPostBold)
 - [ ] `info` parameter (and toolbar button) with markdown (instead of `src` param?)
@@ -33,14 +36,13 @@
 - [ ] image info (PiInfoBold, PiRuler)
 - [ ] edit (but which editor?  configurable?) (PiPencil)
 - [ ] share (PiShareNetworkFill)
+- [ ] copy to clipboard
 - [ ] download (PiDownloadBold, PiBoxArrowDownBold)
 - [ ] source (PiCodeBold or PiFileCode)
 - [ ] double-click: zoom in, shift: zoom out
 - [ ] drag rectangle: zoom
-- [ ] keyboard control (see [qimgv](https://github.com/easymodo/qimgv))
 - [ ] mouse control
 - [ ] mobile pinch to zoom in/out [library](https://www.npmjs.com/package/react-map-interaction)
-- [ ] copy to clipboard
 - [ ] PiSignOutBold for exit icon?
 - [ ] `diff` mode: select a second image and use the WebAwesome [ImageComparer](https://backers.webawesome.com/docs/components/image-comparer) widget
 
