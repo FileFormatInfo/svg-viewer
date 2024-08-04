@@ -11,10 +11,14 @@ import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
+import i18next, { createInstance } from "i18next";
+import i18nServer from "./i18next.server";
+import { I18nextProvider, initReactI18next } from "react-i18next";
+import * as i18n from "./i18n";
 
 const ABORT_DELAY = 5_000;
 
-export default function handleRequest(
+export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
@@ -24,6 +28,11 @@ export default function handleRequest(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   loadContext: AppLoadContext
 ) {
+    const instance = createInstance();
+    const lng = await i18nServer.getLocale(request);
+    const ns = i18nServer.getRouteNamespaces(remixContext);
+
+    await instance.use(initReactI18next).init({ ...i18n, lng, ns });
   return isbot(request.headers.get("user-agent") || "")
     ? handleBotRequest(
         request,
@@ -48,11 +57,12 @@ function handleBotRequest(
   return new Promise((resolve, reject) => {
     let shellRendered = false;
     const { pipe, abort } = renderToPipeableStream(
+        <I18nextProvider i18n={i18next}>
       <RemixServer
         context={remixContext}
         url={request.url}
         abortDelay={ABORT_DELAY}
-      />,
+      /></I18nextProvider>,
       {
         onAllReady() {
           shellRendered = true;

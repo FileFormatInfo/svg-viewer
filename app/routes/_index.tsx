@@ -9,11 +9,10 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Link as RemixLink } from "@remix-run/react";
+import { useTranslation } from "react-i18next";
 
 import { FullPage } from "~/components/FullPage";
 
-
-import { t } from "~/utils/i18n";
 
 export const meta: MetaFunction = () => {
   return [
@@ -23,6 +22,10 @@ export const meta: MetaFunction = () => {
 };
 
 export default function HomePage() {
+    const { t, i18n, ready } = useTranslation();
+
+    console.log("_index", i18n, ready)
+
   return (
     <FullPage>
       <Box
@@ -41,10 +44,10 @@ export default function HomePage() {
           <HStack>
             <RemixLink prefetch="none" to={`/random.html?src=logosear.ch`} reloadDocument>
               <Button>
-                {t("Random Logo")}
+                {t("RANDOM_LOGO_BUTTON")}
               </Button>
             </RemixLink>
-            <Text>{t("view a random logo from LogoSear.ch")}</Text>
+            <Text>{t("RANDOM_LOGO_TEXT")}</Text>
           </HStack>
           <HStack>
             <RemixLink prefetch="none" to={`/random.html?src=iconsear.ch`} reloadDocument>
