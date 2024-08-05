@@ -1,7 +1,8 @@
 # To Do
 
 - [ ] show `error` search param
-- [ ] i18n [article](https://remix.run/blog/remix-i18n)
+- [ ] ErrorBoundary
+- [ ] img load error: make url clickable/selectable
 - [ ] keyboard support (see [qimgv](https://github.com/easymodo/qimgv))
 - [ ] customizable icon sizes
 - [ ] mobile-friendly footer: no text?  fewer icons?
@@ -25,6 +26,7 @@
 - [ ] support for multiple images with next/prev buttons, thumbnail view (see [qimgv](https://github.com/easymodo/qimgv))
 - [ ] upload page and post endpoint (loads SVG into temporary server url then redirects)
 - [ ] shell script for post endpoint
+- [ ] i18n support (when supported by remix)
 
 ## Preview
 - [ ] `%` zoom mode (no toolbar button: only for incoming links)
