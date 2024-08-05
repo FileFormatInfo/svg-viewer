@@ -39,7 +39,7 @@ export default function HomePage() {
             <Text>{t("view an SVG image from another website")}</Text>
           </HStack>
           <HStack>
-            <RemixLink prefetch="none" to={`/random.html?src=logosear.ch`} reloadDocument>
+            <RemixLink prefetch="none" to={`/random.html?src=logosear.ch&zoom=max`} reloadDocument>
               <Button>
                 {t("Random Logo")}
               </Button>
@@ -47,7 +47,7 @@ export default function HomePage() {
             <Text>{t("view a random logo from LogoSear.ch")}</Text>
           </HStack>
           <HStack>
-            <RemixLink prefetch="none" to={`/random.html?src=iconsear.ch`} reloadDocument>
+            <RemixLink prefetch="none" to={`/random.html?src=iconsear.ch&zoom=icons`} reloadDocument>
               <Button>
                 {t("Random Icon")}
               </Button>

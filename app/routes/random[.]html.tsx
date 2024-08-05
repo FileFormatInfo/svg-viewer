@@ -18,12 +18,15 @@ export async function loader({
         hostname = "logosear.ch";
     }
 
+    const zoom = new URL(request.url).searchParams.get('zoom') || "max";
+
+
     try {
         //LATER: for testing await new Promise(r => setTimeout(r, 1000))
         const resp = await fetch(`https://${hostname}/api/random.json?max=1`);
         const data = await resp.json();
 
-        return redirect(`/view.html?url=${encodeURIComponent(data.results[0].url)}&zoom=max`);
+        return redirect(`/view.html?url=${encodeURIComponent(data.results[0].url)}&zoom=${encodeURIComponent(zoom)}`);
     } catch (e: unknown) {
         const err = e instanceof Error ? e : new Error(`An error occurred ${e}`);
         return redirect(`/?error=${encodeURIComponent(err.message)}`);
