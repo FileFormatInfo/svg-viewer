@@ -25,6 +25,8 @@ export default function ViewPage() {
 
     const [naturalWidth, setNaturalWidth] = React.useState(1);
     const [naturalHeight, setNaturalHeight] = React.useState(1);
+    const [containerWidth, setContainerWidth] = React.useState(1);
+    const [containerHeight, setContainerHeight] = React.useState(1);
     const [imageDisplay, setImageDisplay] = React.useState('none');
     const [loading, setLoading] = React.useState(true);
     const [loadErr, setLoadErr] = React.useState<object | null>(null);
@@ -39,7 +41,7 @@ export default function ViewPage() {
     const urlZoom = searchParams.get("zoom") || "1";
     let currentZoom = safeParseFloat(urlZoom, 1);
     if (urlZoom === "max") {
-        currentZoom = calcMaxZoom(naturalWidth, naturalHeight, containerRef);
+        currentZoom = calcMaxZoom(naturalWidth, naturalHeight, containerWidth, containerHeight);
         noscriptImageCss["objectFit"] = "cover";
         noscriptHeight = "99%";
     } else if (urlZoom === "icons") {
@@ -105,6 +107,14 @@ export default function ViewPage() {
         console.log(`onerror`);
         setLoading(false);
         setLoadErr({});
+    }, []);
+
+    useEffect(() => {
+        if (containerRef.current) {
+            const rect = containerRef.current.getBoundingClientRect();
+            setContainerWidth(rect.width);
+            setContainerHeight(rect.height);
+        }
     }, []);
 
     useEffect(() => {

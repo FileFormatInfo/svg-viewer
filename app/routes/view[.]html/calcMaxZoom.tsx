@@ -1,21 +1,20 @@
 /* eslint-disable no-console */
-import React from "react";
 
 
 function calcMaxZoom(
 	naturalWidth: number,
 	naturalHeight: number,
-	containerRef: React.RefObject<HTMLDivElement>
+	containerWidth: number,
+	containerHeight: number,
 ) {
-	if (containerRef.current != null && naturalHeight > 0 && naturalWidth > 0 && window) {
+	if (containerWidth > 0 && containerHeight > 0 && naturalHeight > 0 && naturalWidth > 0) {
 		// -4 so there is room for the border to be visible
-		const rect = containerRef.current.getBoundingClientRect();
-		const height = rect.height - 4;
+		const height = containerHeight - 4;
 		const maxZoom = Math.min(
-			(window.innerWidth - 4) / naturalWidth,
+			(containerWidth - 4) / naturalWidth,
 			(height) / naturalHeight
 		);
-		console.log(`calcMaxZoom: ${maxZoom} (height=${height}, naturalHeight=${naturalHeight})`);
+		console.log(`calcMaxZoom: ${maxZoom} (height=${height}, naturalHeight=${naturalHeight}, containerHeight=${containerHeight})`);
 		return maxZoom;
 	}
 	console.log('calcMaxZoom: 1');

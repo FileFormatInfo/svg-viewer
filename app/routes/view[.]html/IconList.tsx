@@ -31,6 +31,12 @@ interface IProps {
     url: string;
 }
 
+type VHSettings = {
+    direction: StackDirection;
+    spacing: number;
+    styles: object;
+}
+
 
 function IconList({
     display,
@@ -38,15 +44,15 @@ function IconList({
     url,
 }: IProps) {
 
-    const direction:StackDirection = useBreakpointValue({
-        base: 'column',
-        lg: 'row',
+    const vhsettings:VHSettings = useBreakpointValue({
+        base: { direction: 'column', spacing: 4, styles: { "position": "absolute", "top": "4px"}},
+        lg: { direction: 'row', spacing: 12, styles: {}},
     }, {
         fallback: 'lg',
-    }) || 'row';
-    
+    }) || { direction: 'row', spacing: 10, styles: {}};
+
     return(
-        <Stack direction={direction} justifyItems="center" spacing={10} style={{"display": display}}>
+        <Stack direction={vhsettings.direction}  justifyItems="center" spacing={vhsettings.spacing} style={{"display": display, ...vhsettings.styles}}>
             {sizes.map((size) => ( <IconCard imageCss={imageCss} key={size} size={size} url={url} /> ))}
         </Stack>
     );
