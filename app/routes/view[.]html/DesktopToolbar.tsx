@@ -30,7 +30,8 @@ export const DesktopToolbar = ({ currentZoom }: IProps) => {
   const backUrl = searchParams.get("backUrl") || "/";
   const backText = searchParams.get("backText") || "Exit";
 
-  const isDebug = (searchParams.get("debug") || "0") === "1";
+    const urlDebug = searchParams.get("debug")
+  const isDebug = (urlDebug || "0") === "1";
 
   return (
     <Flex
@@ -58,7 +59,7 @@ export const DesktopToolbar = ({ currentZoom }: IProps) => {
       <BackgroundButtons boxSize="1.75em" size="md" />
       <Spacer />
       <ButtonGroup gap="0.25">
-        <ToolbarButton
+        { urlDebug && <ToolbarButton
           ariaLabel={"Show debug info"}
           boxSize="1.75em"
           className="scriptonly"
@@ -67,7 +68,7 @@ export const DesktopToolbar = ({ currentZoom }: IProps) => {
           icon={PiBug}
           isActive={isDebug}
           size="md"
-        />
+        />}
         <ExitButton
           text={backText}
           boxSize="1.75em"

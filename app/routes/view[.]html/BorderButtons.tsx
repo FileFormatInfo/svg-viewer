@@ -1,8 +1,8 @@
 import {
-  PiSelectionSlashLight,
-  PiSelectionLight,
-  PiSquareBold,
-  PiSquareLight,
+    PiSelectionSlashLight,
+    PiSelectionLight,
+    PiSquareBold,
+    PiSquareLight,
 } from "react-icons/pi";
 import { useSearchParams } from "@remix-run/react";
 
@@ -10,54 +10,48 @@ import { ButtonGroup } from "@chakra-ui/react";
 
 
 import { ToolbarButton } from "~/components/ToolbarButton";
+import { IconType } from "react-icons";
 
 interface IProps {
-  boxSize: string;
-  size: string;
+    boxSize: string;
+    size: string;
 }
 
-export const BorderButtons = ({ size, boxSize }: IProps) => {
-  const [searchParams] = useSearchParams();
-  const currentBorder = searchParams.get("border") || "dash";
+type BorderDefinition = {
+    value: string;
+    icon: IconType;
+    label: string;
+}
 
-  return (
-    <ButtonGroup isAttached>
-      <ToolbarButton
-        ariaLabel="No border"
-        boxSize={boxSize}
-        param="border"
-        value="none"
-        icon={PiSelectionSlashLight}
-        isActive={currentBorder === "none"}
-        size={size}
-      />
-      <ToolbarButton
-        ariaLabel="Dash border"
-        boxSize={boxSize}
-        param="border"
-        value="dash"
-        icon={PiSelectionLight}
-        isActive={currentBorder === "dash"}
-        size={size}
-      />
-      <ToolbarButton
-        ariaLabel="Thin border"
-        boxSize={boxSize}
-        param="border"
-        value="thin"
-        icon={PiSquareLight}
-        isActive={currentBorder === "thin"}
-        size={size}
-      />
-      <ToolbarButton
-        ariaLabel="Thick border"
-        boxSize={boxSize}
-        param="border"
-        value="thick"
-        icon={PiSquareBold}
-        isActive={currentBorder === "thick"}
-        size={size}
-      />
-    </ButtonGroup>
-  );
+const borders: BorderDefinition[] = [
+    { value: "none", icon: PiSelectionSlashLight, label: "No border" },
+    { value: "dash", icon: PiSelectionLight, label: "Dash border" },
+    { value: "thin", icon: PiSquareLight, label: "Thin border" },
+    { value: "thick", icon: PiSquareBold, label: "Thick border" },
+];
+
+const BorderButtons = ({ size, boxSize }: IProps) => {
+    const [searchParams] = useSearchParams();
+    const currentBorder = searchParams.get("border") || "dash";
+
+    return (
+        <ButtonGroup isAttached>
+            {borders.map((border) => (
+                <ToolbarButton
+                    ariaLabel={border.label}
+                    boxSize={boxSize}
+                    icon={border.icon}
+                    isActive={currentBorder === border.value}
+                    key={border.value}
+                    param="border"
+                    size={size}
+                    value={border.value}
+                />))}
+        </ButtonGroup>
+    );
 };
+
+export {
+    BorderButtons,
+    borders
+}

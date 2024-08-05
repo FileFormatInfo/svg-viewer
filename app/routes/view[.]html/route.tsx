@@ -9,7 +9,7 @@ import {
     useBreakpointValue,
     useColorModeValue,
 } from "@chakra-ui/react";
-import { useSearchParams } from "@remix-run/react";
+import { useNavigate, useSearchParams } from "@remix-run/react";
 
 import { t } from "~/utils/i18n";
 import { safeParseFloat } from "~/utils/safeParseFloat";
@@ -18,9 +18,12 @@ import { DesktopToolbar } from "./DesktopToolbar";
 import { MobileToolbar } from "./MobileToolbar";
 import { calcMaxZoom } from "./calcMaxZoom";
 import { IconList } from "./IconList";
+import { KeyHandler } from "./KeyHandler";
 
 export default function ViewPage() {
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
+
     const url = searchParams.get("url") || "";
 
     const [naturalWidth, setNaturalWidth] = React.useState(1);
@@ -140,7 +143,10 @@ export default function ViewPage() {
 
     useEffect(() => {
         function handleKeyDown(e: KeyboardEvent) {
-            console.log(e);
+            const sp = KeyHandler(searchParams, border, currentZoom, e);
+            if (sp != null) {
+                navigate(`?${sp.toString()}`);
+            }
         }
 
         document.addEventListener('keydown', handleKeyDown);
@@ -149,7 +155,7 @@ export default function ViewPage() {
         return function cleanup() {
             document.removeEventListener('keydown', handleKeyDown);
         }
-    }, []);
+    }, [border, currentZoom, navigate, searchParams]);
 
     return (
         <VStack w="100%" h="100vh" spacing="0" style={{ overflow: "hidden" }}>
