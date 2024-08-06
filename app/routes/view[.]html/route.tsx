@@ -8,6 +8,7 @@ import {
     Text,
     useBreakpointValue,
     useColorModeValue,
+    Link,
 } from "@chakra-ui/react";
 import { useNavigate, useSearchParams } from "@remix-run/react";
 
@@ -181,7 +182,7 @@ export default function ViewPage() {
                             style={{ width: "5rem", height: "5rem" }}
                         />
                         <Text>{t("Error loading image")}</Text>
-                        <Text>{url}</Text>
+                        <Link href={url}>{url}</Link>
                     </VStack>
                 ) : (
                     <></>

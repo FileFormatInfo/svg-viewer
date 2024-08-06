@@ -1,6 +1,4 @@
-
 import { borders } from './BorderButtons'
-
 
 function nextBorder(current: string): string {
     const currentIndex = borders.findIndex((border) => border.value === current);
@@ -9,10 +7,6 @@ function nextBorder(current: string): string {
 }
 
 function KeyHandler(searchParams: URLSearchParams, border: string, currentZoom: number, e: KeyboardEvent): URLSearchParams | null {
-
-
-
-    console.log(e);
 
     switch (e.key.toLocaleLowerCase()) {
         case '1':
