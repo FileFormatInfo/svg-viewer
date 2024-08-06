@@ -1,7 +1,8 @@
 import { VStack, Stack, Text, useBreakpointValue, StackDirection } from "@chakra-ui/react";
+import { useSearchParams } from "@remix-run/react";
 
 
-const sizes = [ 16, 24, 32, 48, 64, 96, 128 ]
+const defaultSizes = "16,24,32,48,64,96,128";
 
 interface ICardProps {
     imageCss: Record<string, string>;
@@ -37,12 +38,25 @@ type VHSettings = {
     styles: object;
 }
 
+function getSizes(urlSizes: string): number[] {
+
+    if (!/[0-9]+(,[0-9]+)*/.test(urlSizes)) {
+        urlSizes = defaultSizes;
+    }
+    const strSizes = urlSizes.split(',');
+    return strSizes.map((size) => parseInt(size));
+}
+
 
 function IconList({
     display,
     imageCss,
     url,
 }: IProps) {
+
+    const [searchParams] = useSearchParams();
+
+    const sizes = getSizes(searchParams.get('sizes') || defaultSizes);
 
     const vhsettings:VHSettings = useBreakpointValue({
         base: { direction: 'column', spacing: 4, styles: { "position": "absolute", "top": "4px"}},

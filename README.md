@@ -12,7 +12,8 @@ You can use this as a viewer from any website by passing the correct query strin
 * `backUrl` - destination for the Exit button
 * `border` - border: one of "none", "dash", "thin" or "thick"
 * `bg` - background: a hex color (like "#abc123", but note that the "#" has to be escaped to "%23") or one of the [standard images](public/images/backgrounds/) (without the ".png" extension)
-* `url` - URL of the SVG file
+* `sizes` - comma-separated list of sizes for the icon view
+* `url` - (*required*) URL of the SVG file
 * `zoom` - zoom level: a number or "max"
 
 ## License
