@@ -242,7 +242,7 @@ export default function ViewPage() {
                 {isDebug && (
                     <Text position={"absolute"} top={"42pt"} left={2}>
                         Zoom: cur={currentZoom}, url={urlZoom}, max=
-                        {calcMaxZoom(naturalWidth, naturalHeight, containerRef)})
+                        {calcMaxZoom(naturalWidth, naturalHeight, containerWidth, containerHeight)})
                     </Text>
                 )}
                 {isDebug && (

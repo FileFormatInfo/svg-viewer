@@ -29,7 +29,7 @@ export async function loader({
         return redirect(`/view.html?url=${encodeURIComponent(data.results[0].url)}&zoom=${encodeURIComponent(zoom)}`);
     } catch (e: unknown) {
         const err = e instanceof Error ? e : new Error(`An error occurred ${e}`);
-        return redirect(`/?error=${encodeURIComponent(err.message)}`);
+        throw(err);
     }
 }
 
