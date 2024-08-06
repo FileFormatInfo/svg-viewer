@@ -1,18 +1,13 @@
 # To Do
 
-- [ ] show `error` search param
-- [ ] ErrorBoundary
-- [ ] img load error: make url clickable/selectable
-- [ ] keyboard support (see [qimgv](https://github.com/easymodo/qimgv))
 - [ ] customizable icon sizes
 - [ ] mobile-friendly footer: no text?  fewer icons?
+- [ ] mouse wheel: zoom
 - [ ] help page
 - [ ] analytics
 
 ## General
 
-- [ ] clean mobile layout for non-view pages
-- [ ] 404 handler
 - [ ] /info.html - info about the current SVG
 	- url
 	- dimensions
@@ -29,6 +24,7 @@
 - [ ] i18n support (when supported by remix)
 
 ## Preview
+- [ ] more keyboard support (see [qimgv](https://github.com/easymodo/qimgv))
 - [ ] `%` zoom mode (no toolbar button: only for incoming links)
 - [ ] support a second exit parameter (`src`?) that goes to the hosting webpage (PiCircuitryBold, PiCubeFocus, PiLinkBold, PiOrangeBold, PiSignPostBold)
 - [ ] `info` parameter (and toolbar button) with markdown (instead of `src` param?)

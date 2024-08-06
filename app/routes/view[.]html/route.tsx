@@ -144,7 +144,7 @@ export default function ViewPage() {
 
     useEffect(() => {
         function handleKeyDown(e: KeyboardEvent) {
-            const sp = KeyHandler(searchParams, border, currentZoom, e);
+            const sp = KeyHandler(searchParams, bg, border, currentZoom, e);
             if (sp != null) {
                 navigate(`?${sp.toString()}`);
             }
@@ -156,7 +156,7 @@ export default function ViewPage() {
         return function cleanup() {
             document.removeEventListener('keydown', handleKeyDown);
         }
-    }, [border, currentZoom, navigate, searchParams]);
+    }, [bg, border, currentZoom, navigate, searchParams]);
 
     return (
         <VStack w="100%" h="100vh" spacing="0" style={{ overflow: "hidden" }}>
