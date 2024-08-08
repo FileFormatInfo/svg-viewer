@@ -1,5 +1,6 @@
 import { backgrounds } from './BackgroundButtons';
 import { borders } from './BorderButtons'
+import { calcZoomIn, calcZoomOut } from './calcZoom';
 
 function nextBorder(current: string): string {
     const currentIndex = borders.findIndex((border) => border.value === current);
@@ -32,13 +33,13 @@ function KeyHandler(searchParams: URLSearchParams, background: string, border: s
             searchParams.set('debug', searchParams.get('debug') === '1' ? '0' : '1');
             return searchParams;
         case '+':
-            searchParams.set('zoom', (currentZoom + 1).toString());
+            searchParams.set('zoom', calcZoomIn(currentZoom).toString());
             return searchParams;
         case ' ':
             searchParams.set('bg', nextBackground(background));
             return searchParams;
         case '-':
-            searchParams.set('zoom', (currentZoom > 1 ? currentZoom - 1 : currentZoom * 0.5).toString());
+            searchParams.set('zoom', calcZoomOut(currentZoom).toString());
             return searchParams;
     }
     return null;

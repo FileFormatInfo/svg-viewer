@@ -9,6 +9,7 @@ import {
     useBreakpointValue,
     useColorModeValue,
     Link,
+    calc,
 } from "@chakra-ui/react";
 import { useNavigate, useSearchParams } from "@remix-run/react";
 
@@ -17,7 +18,7 @@ import { safeParseFloat } from "~/utils/safeParseFloat";
 
 import { DesktopToolbar } from "./DesktopToolbar";
 import { MobileToolbar } from "./MobileToolbar";
-import { calcMaxZoom } from "./calcMaxZoom";
+import { calcMaxZoom, calcZoomIn, calcZoomOut } from "./calcZoom";
 import { IconList } from "./IconList";
 import { KeyHandler } from "./KeyHandler";
 
@@ -150,11 +151,31 @@ export default function ViewPage() {
             }
         }
 
+        function handleWheel(e: WheelEvent) {
+            console.log(e);
+            const newZoom = (e.deltaY < 0 ? calcZoomIn(currentZoom) : calcZoomOut(currentZoom));
+            searchParams.set("zoom", newZoom.toString());
+            navigate(`?${searchParams.toString()}`);
+        }
+
+        function handleTouch(e: TouchEvent) {
+            console.log(e);
+            /*if (e.scale != 0) {
+                const newZoom = e.scale > 1 ? calcZoomIn(currentZoom) : calcZoomOut(currentZoom);
+                searchParams.set("zoom", newZoom.toString());
+                navigate(`?${searchParams.toString()}`);
+            }*/
+        }
+
         document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('wheel', handleWheel);
+        document.addEventListener('touchend', handleTouch);
 
         // Don't forget to clean up
         return function cleanup() {
             document.removeEventListener('keydown', handleKeyDown);
+            document.removeEventListener('wheel', handleWheel);
+            document.removeEventListener('touchend', handleTouch);
         }
     }, [bg, border, currentZoom, navigate, searchParams]);
 
@@ -174,6 +195,19 @@ export default function ViewPage() {
                     ...background,
                 }}
             >
+                <img
+                    alt={`${url} (preload/debug)`}
+                    onError={() => { onImageError(); console.log(`via onError`); }}
+                    onLoad={() => { onImageLoad(); console.log(`via onLoad`); }}
+                    ref={imageRef}
+                    src={url}
+                    style={{
+                        opacity: isDebug ? 1 : 0,
+                        position: "absolute",
+                        top: 0,
+                        right: 0,
+                    }}
+                />
                 {loadErr != null ? (
                     <VStack>
                         <img
@@ -182,7 +216,7 @@ export default function ViewPage() {
                             style={{ width: "5rem", height: "5rem" }}
                         />
                         <Text>{t("Error loading image")}</Text>
-                        <Link href={url}>{url}</Link>
+                        <a href={url}>{url}</a>
                     </VStack>
                 ) : (
                     <></>
@@ -202,19 +236,7 @@ export default function ViewPage() {
                         title={url}
                     />)
                 )}
-                <img
-                    alt={`${url} (preload/debug)`}
-                    onError={() => { onImageError(); console.log(`via onError`); }}
-                    onLoad={() => { onImageLoad(); console.log(`via onLoad`); }}
-                    ref={imageRef}
-                    src={url}
-                    style={{
-                        opacity: isDebug ? 1 : 0,
-                        position: "absolute",
-                        top: 0,
-                        right: 0,
-                    }}
-                /><noscript style={{ "height": noscriptHeight, "display": "flex" }}>
+                <noscript style={{ "height": noscriptHeight, "display": "flex" }}>
                     {(urlZoom === "icons" ? <IconList display="flex" imageCss={noscriptImageCss} url={url} /> :
                         <img
                             alt={url}

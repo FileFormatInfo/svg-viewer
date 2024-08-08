@@ -11,6 +11,7 @@ import { ButtonGroup } from "@chakra-ui/react";
 
 import { ToolbarButton } from "~/components/ToolbarButton";
 import { IconTool } from "~/components/IconTool";
+import { calcZoomIn, calcZoomOut } from "./calcZoom";
 
 interface IProps {
   currentZoom: number;
@@ -21,17 +22,14 @@ interface IProps {
 
 export const ZoomButtons = ({ currentZoom, size, boxSize }: IProps) => {
   const [searchParams] = useSearchParams();
-  let zoomOut = currentZoom > 1 ? currentZoom - 1 : currentZoom * 0.5;
-  if (zoomOut < 0.01) {
-    zoomOut = 0.01;
-  }
+
   return (
     <ButtonGroup isAttached>
       <ToolbarButton
         ariaLabel="Zoom out"
         boxSize={boxSize}
         param="zoom"
-        value={String(zoomOut)}
+        value={String(calcZoomOut(currentZoom))}
         isActive={false}
         size={size}
         icon={PiMagnifyingGlassMinusBold}
@@ -49,7 +47,7 @@ export const ZoomButtons = ({ currentZoom, size, boxSize }: IProps) => {
         ariaLabel="Zoom In"
         boxSize={boxSize}
         param="zoom"
-        value={String(currentZoom + 1)}
+        value={String(calcZoomIn(currentZoom ))}
         size={size}
         icon={PiMagnifyingGlassPlusBold}
         isActive={false}

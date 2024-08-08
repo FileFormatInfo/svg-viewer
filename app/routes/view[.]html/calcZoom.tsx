@@ -21,6 +21,16 @@ function calcMaxZoom(
 	return 1;
 }
 
+function calcZoomIn(currentZoom: number):number {
+	return currentZoom + 1;
+}
+
+function calcZoomOut(currentZoom: number):number {
+	return (currentZoom > 1 ? currentZoom - 1 : currentZoom * 0.5);
+}
+
 export {
 	calcMaxZoom,
+	calcZoomIn,
+	calcZoomOut,
 }
