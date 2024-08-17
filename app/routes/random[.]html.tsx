@@ -1,10 +1,17 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
-import { Await, useLoaderData } from "@remix-run/react";
+import { Await, MetaFunction, useLoaderData } from "@remix-run/react";
 import { Center, Flex, Spinner, Text, VStack } from "@chakra-ui/react";
 import { redirect } from "@remix-run/node";
 import { Suspense } from "react";
 
 import { t } from "~/utils/i18n";
+
+export const meta: MetaFunction = () => {
+    return [
+        { title: "Random image - SVG View" },
+        { name: "description", content: "View your SVG images in a variety of sizes and backgrounds" },
+    ];
+};
 
 export async function loader({
     request,

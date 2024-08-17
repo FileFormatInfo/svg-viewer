@@ -1,8 +1,8 @@
 # To Do
 
-- [ ] customizable icon sizes
 - [ ] mobile-friendly footer: no text?  fewer icons?
-- [ ] mouse wheel: zoom
+- [ ] geiger
+- [ ] translations
 - [ ] help page
 - [ ] analytics
 
@@ -24,6 +24,7 @@
 - [ ] i18n support (when supported by remix)
 
 ## Preview
+- [ ] meta title with name of SVG file
 - [ ] more keyboard support (see [qimgv](https://github.com/easymodo/qimgv))
 - [ ] `%` zoom mode (no toolbar button: only for incoming links)
 - [ ] support a second exit parameter (`src`?) that goes to the hosting webpage (PiCircuitryBold, PiCubeFocus, PiLinkBold, PiOrangeBold, PiSignPostBold)

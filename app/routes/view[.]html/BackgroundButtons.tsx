@@ -7,10 +7,9 @@ import {
 
 import { ButtonGroup, useColorModeValue } from "@chakra-ui/react";
 
-import { t } from "~/utils/i18n";
-
 import { ToolbarButton } from "~/components/ToolbarButton";
 import { useSearchParams } from "@remix-run/react";
+import { IconType } from "react-icons";
 
 interface IProps {
     boxSize: string;

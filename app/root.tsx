@@ -36,9 +36,9 @@ function MyLayout({ children }: { children: React.ReactNode }) {
 export default function App() {
     return (
         <MyLayout>
-        <ChakraProvider>
-            <Outlet />
-        </ChakraProvider>
+            <ChakraProvider>
+                <Outlet />
+            </ChakraProvider>
         </MyLayout>
     )
 }
@@ -46,15 +46,15 @@ export default function App() {
 function ErrorDisplay({ error }: { error: unknown }) {
     if (isRouteErrorResponse(error)) {
         return (
-                <VStack>
-                    <img
-                        alt="Error icon"
-                        src="/images/error.svg"
-                        style={{ width: "5rem", height: "5rem" }}
-                    />
-                    <Text>{error.status} {error.statusText}</Text>
+            <VStack>
+                <img
+                    alt="Error icon"
+                    src="/images/error.svg"
+                    style={{ width: "5rem", height: "5rem" }}
+                />
+                <Text>{error.status} {error.statusText}</Text>
                 <Text>{error.data}</Text>
-                </VStack>
+            </VStack>
         );
     } else if (error instanceof Error) {
         return (
@@ -65,7 +65,7 @@ function ErrorDisplay({ error }: { error: unknown }) {
                     style={{ width: "5rem", height: "5rem" }}
                 />
                 <Text>{error.message}</Text>
-                <pre style={{"display":"none"}}>{error.stack}</pre>
+                <pre style={{ "display": "none" }}>{error.stack}</pre>
             </VStack>
         );
     } else {

@@ -7,12 +7,20 @@ import {
     useColorModeValue,
     VStack,
 } from "@chakra-ui/react";
-import { Link as RemixLink } from "@remix-run/react";
+import { MetaFunction, Link as RemixLink } from "@remix-run/react";
 
 import { t } from "~/utils/i18n";
 import { FullPage } from "~/components/FullPage";
 
+export const meta: MetaFunction = () => {
+    return [
+        { title: "Open URL - SVG View" },
+        { name: "description", content: "Select an SVG image URL to view" },
+    ];
+};
+
 export default function OpenPage() {
+    const bg = useColorModeValue("white", "gray.700");
     const defaultImage = "https://view.svg.zone/favicon.svg";
 
     return (
@@ -26,7 +34,7 @@ export default function OpenPage() {
                 </VStack>
                 <Box
                     rounded="lg"
-                    bg={useColorModeValue("white", "gray.700")}
+                    bg={bg}
                     boxShadow="lg"
                     p={{ base: 6, md: 8 }}
                 >

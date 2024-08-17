@@ -14,7 +14,7 @@ function nextBackground(current: string): string {
     return backgrounds[nextIndex].value;
 }
 
-function KeyHandler(searchParams: URLSearchParams, background: string, border: string, currentZoom: number, e: KeyboardEvent): URLSearchParams | null {
+function keyHandler(searchParams: URLSearchParams, background: string, border: string, currentZoom: number, e: KeyboardEvent): URLSearchParams | null {
 
     switch (e.key.toLocaleLowerCase()) {
         case '1':
@@ -45,4 +45,4 @@ function KeyHandler(searchParams: URLSearchParams, background: string, border: s
     return null;
 }
 
-export { KeyHandler };
+export { keyHandler };

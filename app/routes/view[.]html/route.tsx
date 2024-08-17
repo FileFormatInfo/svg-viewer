@@ -8,8 +8,6 @@ import {
     Text,
     useBreakpointValue,
     useColorModeValue,
-    Link,
-    calc,
 } from "@chakra-ui/react";
 import { useNavigate, useSearchParams } from "@remix-run/react";
 
@@ -20,7 +18,7 @@ import { DesktopToolbar } from "./DesktopToolbar";
 import { MobileToolbar } from "./MobileToolbar";
 import { calcMaxZoom, calcZoomIn, calcZoomOut } from "./calcZoom";
 import { IconList } from "./IconList";
-import { KeyHandler } from "./KeyHandler";
+import { keyHandler } from "./KeyHandler";
 
 export default function ViewPage() {
     const [searchParams] = useSearchParams();
@@ -47,16 +45,16 @@ export default function ViewPage() {
     let currentZoom = safeParseFloat(urlZoom, 1);
     if (urlZoom === "max") {
         currentZoom = calcMaxZoom(naturalWidth, naturalHeight, containerWidth, containerHeight);
-        noscriptImageCss["objectFit"] = "cover";
+        noscriptImageCss.objectFit = "cover";
         noscriptHeight = "99%";
     } else if (urlZoom === "icons") {
         // do nothing
     } else {
-        noscriptImageCss["transform"] = `scale(${currentZoom})`;
+        noscriptImageCss.transform = `scale(${currentZoom})`;
     }
 
-    imageCss["width"] = `${currentZoom * naturalWidth}px`;
-    imageCss["height"] = `${currentZoom * naturalHeight}px`;
+    imageCss.width = `${currentZoom * naturalWidth}px`;
+    imageCss.height = `${currentZoom * naturalHeight}px`;
 
     const bg = searchParams.get("bg") || "memphis-mini";
     const defaultBorderBackgroundColor = useColorModeValue("#fff", "#111");
@@ -64,14 +62,14 @@ export default function ViewPage() {
     const background: Record<string, string> = {};
     let borderColor: string;
     if (/^#[0-9A-Fa-f]{6}$/.test(bg)) {
-        background["backgroundColor"] = bg;
+        background.backgroundColor = bg;
         borderColor = getContrastYIQ(bg.slice(1));
     } else if (/^[-a-z]+$/.test(bg)) {
-        background["backgroundImage"] = `url(/images/backgrounds/${bg}.png)`;
-        background["backgroundColor"] = defaultBorderBackgroundColor;
+        background.backgroundImage = `url(/images/backgrounds/${bg}.png)`;
+        background.backgroundColor = defaultBorderBackgroundColor;
         borderColor = defaultBorderColor;
     } else {
-        background["backgroundColor"] = "#eeeeee";
+        background.backgroundColor = "#eeeeee";
         borderColor = "#000";
     }
 
@@ -86,8 +84,8 @@ export default function ViewPage() {
     } else {
         borderCss = "none";
     }
-    imageCss["outline"] = borderCss;
-    noscriptImageCss["outline"] = borderCss;
+    imageCss.outline = borderCss;
+    noscriptImageCss.outline = borderCss;
 
     const isDebug = (searchParams.get("debug") || "0") === "1";
 
@@ -106,7 +104,7 @@ export default function ViewPage() {
         setNaturalWidth(imageRef.current?.naturalWidth || 1);
         setNaturalHeight(imageRef.current?.naturalHeight || 1);
         setImageDisplay('flex');
-    }, [imageRef]);
+    }, []);
 
     const onImageError = useCallback(() => {
         console.log(`onerror`);
@@ -145,7 +143,7 @@ export default function ViewPage() {
 
     useEffect(() => {
         function handleKeyDown(e: KeyboardEvent) {
-            const sp = KeyHandler(searchParams, bg, border, currentZoom, e);
+            const sp = keyHandler(searchParams, bg, border, currentZoom, e);
             if (sp != null) {
                 navigate(`?${sp.toString()}`);
             }
@@ -245,41 +243,31 @@ export default function ViewPage() {
                         />
                     )}
                 </noscript>
-                {isDebug && (
+                {isDebug && (<>
                     <Text position={"absolute"} top={"0pt"} left={2}>
                         Window.inner: {globalThis.innerWidth}x{globalThis.innerHeight}
                     </Text>
-                )}
-                {isDebug && (
                     <Text position={"absolute"} top={"14pt"} left={2}>
                         Image natural size: {imageRef.current?.naturalWidth}x
                         {imageRef.current?.naturalHeight}
                     </Text>
-                )}
-                {isDebug && (
                     <Text position={"absolute"} top={"28pt"} left={2}>
                         Image display size: {imageCss["width"]}x{imageCss["height"]}
                     </Text>
-                )}
-                {isDebug && (
                     <Text position={"absolute"} top={"42pt"} left={2}>
                         Zoom: cur={currentZoom}, url={urlZoom}, max=
                         {calcMaxZoom(naturalWidth, naturalHeight, containerWidth, containerHeight)})
                     </Text>
-                )}
-                {isDebug && (
                     <Text position={"absolute"} top={"56pt"} left={2}>
                         Container boundingClientRect:{" "}
                         {containerRef.current?.getBoundingClientRect().width}x
                         {containerRef.current?.getBoundingClientRect().height}
                     </Text>
-                )}
-                {isDebug && (
                     <Text position={"absolute"} top={"70pt"} left={2}>
                         Container client: {containerRef.current?.clientWidth}x
                         {containerRef.current?.clientHeight}
                     </Text>
-                )}
+                </>)}
             </Flex>
         </VStack>
     );

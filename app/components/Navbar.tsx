@@ -14,6 +14,7 @@ import { LogoIcon } from "./LogoIcon";
 
 export const Navbar = () => {
     const bg = useColorModeValue("white", "gray.800");
+    const borderColor = useColorModeValue("gray.200", "gray.900");
 
     return (
         <Box w="100%" position="fixed" zIndex="10">
@@ -24,7 +25,7 @@ export const Navbar = () => {
                 px={4}
                 borderBottom={1}
                 borderStyle="solid"
-                borderColor={useColorModeValue("gray.200", "gray.900")}
+                borderColor={borderColor}
                 align="center"
                 bg={bg}
             >
