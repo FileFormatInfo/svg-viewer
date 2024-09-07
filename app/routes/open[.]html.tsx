@@ -7,10 +7,11 @@ import {
     useColorModeValue,
     VStack,
 } from "@chakra-ui/react";
-import { MetaFunction, Link as RemixLink } from "@remix-run/react";
+import { MetaFunction, Link as RemixLink, useNavigate } from "@remix-run/react";
 
 import { t } from "~/utils/i18n";
 import { FullPage } from "~/components/FullPage";
+import { useRef } from "react";
 
 export const meta: MetaFunction = () => {
     return [
@@ -22,6 +23,15 @@ export const meta: MetaFunction = () => {
 export default function OpenPage() {
     const bg = useColorModeValue("white", "gray.700");
     const defaultImage = "https://view.svg.zone/favicon.svg";
+    const urlRef = useRef<HTMLInputElement | null>(null);
+    const navigate = useNavigate();
+
+    const doSubmit = (e: React.FormEvent<HTMLDivElement>) => {
+        if (!urlRef.current) return;
+        e.preventDefault();
+        const url = urlRef.current.value;
+        navigate(`/view.html?url=${encodeURIComponent(url)}`);
+    };
 
     return (
         <FullPage>
@@ -38,8 +48,8 @@ export default function OpenPage() {
                     boxShadow="lg"
                     p={{ base: 6, md: 8 }}
                 >
-                    <VStack action={`/view.html`} as="form" method="get" spacing={4}>
-                        <Input id="url" defaultValue={defaultImage} name="url" />
+                    <VStack action={`/view.html`} as="form" method="get" onSubmit={doSubmit} spacing={4}>
+                        <Input id="url" defaultValue={defaultImage} name="url" ref={urlRef} />
                         <Button type="submit" colorScheme="blue" w="100%">
                             {t("Open")}
                         </Button>
