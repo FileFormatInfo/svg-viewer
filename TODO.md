@@ -24,6 +24,7 @@
 - [ ] i18n support (when supported by remix)
 
 ## Preview
+- [ ] z-order for transparent image: big images cause issues with clicking & mouse wheel
 - [ ] meta title with name of SVG file
 - [ ] more keyboard support (see [qimgv](https://github.com/easymodo/qimgv))
 - [ ] `%` zoom mode (no toolbar button: only for incoming links)
