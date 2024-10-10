@@ -15,6 +15,7 @@ import { FullPage } from "~/components/FullPage";
 
 import { t } from "~/utils/i18n";
 import { LinksFunction } from "@remix-run/node";
+import React from "react";
 
 export const meta: MetaFunction = () => {
     return [
@@ -31,6 +32,19 @@ export const links: LinksFunction = () => {
 
 export default function HomePage() {
     const bg = useColorModeValue("white", "gray.700");
+    const fileInput = React.useRef<HTMLInputElement>(null);
+
+    const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.item(0);
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const url = reader.result as string;
+                window.location.href = `/view.html?url=${encodeURIComponent(url)}`;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
 
     return (
         <FullPage>
@@ -43,9 +57,16 @@ export default function HomePage() {
                 <VStack as="form" align="left" spacing={4}>
                     <HStack>
                         <Button as={RemixLink} to={`/open.html`}>
-                            {t("Open")}
+                            {t("Open URL")}
                         </Button>
                         <Text>{t("view an SVG image from another website")}</Text>
+                    </HStack>
+                    <HStack className="scriptonly">
+                        <input accept="image/svg+xml" onChange={onFileChange} type="file" style={{"display":"none"}} ref={fileInput} />
+                        <Button onClick={() => fileInput.current?.click()}>
+                            {t("Open File")}
+                        </Button>
+                        <Text>{t("view an SVG image from your computer")}</Text>
                     </HStack>
                     <HStack>
                         <RemixLink prefetch="none" to={`/random.html?src=logosear.ch&zoom=max`} reloadDocument>

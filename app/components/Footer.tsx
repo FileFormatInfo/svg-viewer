@@ -49,10 +49,10 @@ export const Footer = () => {
               <img
                 src={link.icon}
                 alt={link.label}
-                style={{ height: "1.25em" }}
+                style={{ height: "1.75em", width: "1.75em" }}
               />
             </Box>
-            <Text>{link.label}</Text>
+                  <Text display={{ base: 'none', md: 'block' }}>{link.label}</Text>
           </Flex>
         </Link>
       ))}
