@@ -1,65 +1,62 @@
-import type { LoaderFunctionArgs } from "@remix-run/node";
-import { Await, MetaFunction, useLoaderData } from "@remix-run/react";
+import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
+import { Await, useLoaderData, useNavigate, useSearchParams } from "@remix-run/react";
 import { Center, Flex, Spinner, Text, VStack } from "@chakra-ui/react";
 import { redirect } from "@remix-run/node";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 
 import { t } from "~/utils/i18n";
+import { FullPage } from "~/components/FullPage";
 
-export const meta: MetaFunction = () => {
-    return [
-        { title: "Random image - SVG View" },
-        { name: "description", content: "View your SVG images in a variety of sizes and backgrounds" },
-    ];
-};
 
-export async function loader({
-    request,
-}: LoaderFunctionArgs) {
-    let hostname = new URL(request.url).searchParams.get('src');
+async function getRandomImage(hostname: string|null, zoom: string|null): Promise<string> {
     if (
         hostname == null ||
-        /^(([a-z0-9]|[a-z0-9][-a-z0-9]*[a-z0-9])\.)+([a-z]{2,})$/.exec(hostname) ==
-        null
+        !/^(([a-z0-9]|[a-z0-9][-a-z0-9]*[a-z0-9])\.)+([a-z]{2,})$/.test(hostname)
     ) {
         hostname = "logosear.ch";
     }
 
-    const zoom = new URL(request.url).searchParams.get('zoom') || "max";
-
+    zoom = zoom || "max";
 
     try {
-        //LATER: for testing await new Promise(r => setTimeout(r, 1000))
+        await new Promise(r => setTimeout(r, 2000))
         const resp = await fetch(`https://${hostname}/api/random.json?max=1`);
         const data = await resp.json();
 
-        return redirect(`/view.html?url=${encodeURIComponent(data.results[0].url)}&zoom=${encodeURIComponent(zoom)}`);
+        return `/view.html?url=${encodeURIComponent(data.results[0].url)}&zoom=${encodeURIComponent(zoom)}`;
+
     } catch (e: unknown) {
+        console.log('error calling random image API', hostname, e);
         const err = e instanceof Error ? e : new Error(`An error occurred ${e}`);
-        throw(err);
+        throw (err);
     }
 }
 
-//LATER: neither is being shown...
+
 export default function RandomImage() {
-    const { url } = useLoaderData<typeof loader>();
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        getRandomImage(searchParams.get('src'), searchParams.get('zoom'))
+        .then(url => navigate(url));
+    }, [searchParams, navigate]);
+
     return (
-        <Suspense fallback={<FullPageSpinner color="red" message={t("Loading...")} />}>
-            <Await resolve={url}>
-                {(url) => <FullPageSpinner color="blue" message={t("Redirecting...") + url} />}
-            </Await>
-        </Suspense>
+        <FullPage>
+            <FullPageSpinner message={t("Loading...")} />
+        </FullPage>
     );
 }
 
 type IProps = {
     message: string;
-    color: string;
+    color?: string;
 }
 
 function FullPageSpinner({ color, message }: IProps) {
     return (
-        <Flex w="100vw" h="100vh" bg={"url(/images/backgrounds/memphis-mini.png)"}>
+        <Flex w="100vw" h="100vh">
             <Center flex={1} bg={color}>
                 <VStack>
                     <Spinner size="xl" />
@@ -68,4 +65,14 @@ function FullPageSpinner({ color, message }: IProps) {
             </Center>
         </Flex>
     );
+}
+
+export async function action({
+    request,
+}: ActionFunctionArgs) {
+
+    const formData = await request.formData();
+    const url = await getRandomImage(formData.get("src") as string|null, formData.get("zoom") as string|null);
+
+    return redirect(url);
 }
