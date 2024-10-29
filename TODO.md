@@ -19,9 +19,9 @@
 - [ ] convert to PNG
 - [ ] convert to PDF
 - [ ] support for multiple images with next/prev buttons, thumbnail view (see [qimgv](https://github.com/easymodo/qimgv))
-- [ ] upload page and post endpoint (loads SVG into temporary server url then redirects)
 - [ ] shell script for post endpoint
 - [ ] i18n support (when supported by remix)
+- [ ] in-browser conversion to PNG with [ImageScript](https://github.com/matmen/ImageScript)
 
 ## Preview
 - [ ] z-order for transparent image: big images cause issues with clicking & mouse wheel
