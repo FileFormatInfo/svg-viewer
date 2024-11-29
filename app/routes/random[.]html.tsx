@@ -1,8 +1,8 @@
-import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
-import { Await, useLoaderData, useNavigate, useSearchParams } from "@remix-run/react";
+import type { ActionFunctionArgs } from "@remix-run/node";
+import { useNavigate, useSearchParams } from "@remix-run/react";
 import { Center, Flex, Spinner, Text, VStack } from "@chakra-ui/react";
 import { redirect } from "@remix-run/node";
-import { Suspense, useEffect } from "react";
+import { useEffect } from "react";
 
 import { t } from "~/utils/i18n";
 import { FullPage } from "~/components/FullPage";

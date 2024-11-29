@@ -2,7 +2,7 @@ import { IconType } from "react-icons";
 import { Icon, IconButton } from "@chakra-ui/react";
 import { Link as RemixLink, useSearchParams } from "@remix-run/react";
 
-import { useColorModeValue } from "~/components/ui/color-mode";
+//import { useColorModeValue } from "~/components/ui/color-mode";
 
 interface IProps {
     ariaLabel: string;
@@ -17,13 +17,11 @@ interface IProps {
 
 function ToolbarButton({
     ariaLabel,
-    boxSize,
-    className,
     param,
     value,
     icon,
-    isActive,
-    size,
+//    isActive,
+//    size,
 }: IProps) {
 
     const [searchParams] = useSearchParams();

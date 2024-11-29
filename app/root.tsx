@@ -45,7 +45,7 @@ export default function App() {
     return (
         <MyLayout>
             <ChakraProvider value={themeSystem}>
-                <ColorModeProvider enableSystem={true} defaultTheme="light">
+                <ColorModeProvider enableSystem={false} defaultTheme="light">
                 <Outlet />
                 </ColorModeProvider>
             </ChakraProvider>

@@ -26,7 +26,7 @@ export default function OpenPage() {
     const urlRef = useRef<HTMLInputElement | null>(null);
     const navigate = useNavigate();
 
-    const doSubmit = (e: React.FormEvent<HTMLDivElement>) => {
+    const doSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         if (!urlRef.current) return;
         e.preventDefault();
         const url = urlRef.current.value;
@@ -35,7 +35,7 @@ export default function OpenPage() {
 
     return (
         <FullPage>
-            <VStack align="stretch" spacing={8} w="100%" maxW="lg">
+            <VStack align="stretch" gap={8} w="100%" maxW="lg">
                 <VStack textAlign="center">
                     <Heading fontSize={{ base: "2xl", md: "4xl" }}>
                         {t("Select an SVG image")}
@@ -48,20 +48,23 @@ export default function OpenPage() {
                     boxShadow="lg"
                     p={{ base: 6, md: 8 }}
                 >
-                    <VStack action={`/view.html`} as="form" method="get" onSubmit={doSubmit} spacing={4}>
+                    <VStack asChild gap={4}>
+                        <form action={`/view.html`} method="get" onSubmit={doSubmit} >
                         <Input id="url" defaultValue={defaultImage} name="url" ref={urlRef} />
                         <Button type="submit" colorScheme="blue" w="100%">
                             {t("Open")}
                         </Button>
                         <Button
-                            as={RemixLink}
-                            to="/"
+                            asChild
                             colorScheme="blue"
                             variant="outline"
                             w="100%"
                         >
+                                <RemixLink to="/">
                             {t("Cancel")}
+                            </RemixLink>
                         </Button>
+                        </form>
                     </VStack>
                 </Box>
             </VStack>

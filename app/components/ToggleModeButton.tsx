@@ -7,9 +7,14 @@ import {
 } from "@chakra-ui/react";
 import { useColorMode } from "~/components/ui/color-mode";
 
+const DummyToggleModeButton = (props:any) => {
+    return (<></>);
+}
+
 const ToggleModeButton = (
   props: Omit<IconButtonProps, "aria-label" | "onClick" | "variant" | "icon">
 ) => {
+
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <IconButton
@@ -29,4 +34,7 @@ const ToggleModeButton = (
   );
 };
 
-export { ToggleModeButton };
+export {
+    ToggleModeButton as Dummy,
+    DummyToggleModeButton as ToggleModeButton,
+ };

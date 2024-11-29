@@ -28,8 +28,9 @@ export function useColorMode() {
 }
 
 export function useColorModeValue<T>(light: T, dark: T) {
-  const { colorMode } = useColorMode()
-  return colorMode === "light" ? light : dark
+  //const { colorMode } = useColorMode()
+  //return colorMode === "light" ? light : dark
+  return light;
 }
 
 export function ColorModeIcon() {
