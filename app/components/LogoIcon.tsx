@@ -1,7 +1,8 @@
 import { Icon, IconProps } from "@chakra-ui/react";
 
 const LogoIcon = (props: IconProps) => (
-  <Icon viewBox="0 0 64 64" {...props}>
+    <Icon {...props}>
+    <svg viewBox="0 0 64 64">
     <path
       d="m 32.169358,54.245788 c -18.150581,0 -28.5672968,-17.670548 -30.3700874,-21.00411 1.6374459,-3.34423 11.1527664,-20.940106 30.3700874,-20.940106 19.217321,0 28.732642,17.590542 30.370088,20.940106 -1.80279,3.333562 -12.22484,21.00411 -30.370088,21.00411"
       fill="#fafafa"
@@ -44,6 +45,7 @@ const LogoIcon = (props: IconProps) => (
       fill="#616161"
       id="path5"
     />
+    </svg>
   </Icon>
 );
 

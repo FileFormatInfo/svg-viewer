@@ -1,9 +1,10 @@
-import { Flex, VStack, chakra } from "@chakra-ui/react";
+import { Text, Flex, VStack, chakra } from "@chakra-ui/react";
 
 import { Footer } from "./Footer";
 import { Navbar } from "./Navbar";
 
 export const FullPage = ({ children }: { children: React.ReactNode }) => {
+
   return (
     <chakra.main minH="100vh" bg={"url(/images/backgrounds/memphis-mini.png)"}>
       <VStack w="100%" minH="100vh" spacing="0" style={{ overflow: "clip" }}>
@@ -21,3 +22,4 @@ export const FullPage = ({ children }: { children: React.ReactNode }) => {
     </chakra.main>
   );
 }
+

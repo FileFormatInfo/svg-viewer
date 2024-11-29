@@ -4,8 +4,8 @@ import {
   Link,
   Stack,
   Text,
-  useColorModeValue,
 } from "@chakra-ui/react";
+import { useColorModeValue } from "~/components/ui/color-mode";
 
 const links = [
   {

@@ -1,46 +1,54 @@
 import { IconType } from "react-icons";
-
 import { Icon, IconButton } from "@chakra-ui/react";
-
 import { Link as RemixLink, useSearchParams } from "@remix-run/react";
 
+import { useColorModeValue } from "~/components/ui/color-mode";
+
 interface IProps {
-  ariaLabel: string;
-  boxSize: string;
-  className?: string;
-  param: string;
-  value: string;
-  icon: IconType;
-  isActive: boolean;
-  size: string;
+    ariaLabel: string;
+    boxSize: string;
+    className?: string;
+    param: string;
+    value: string;
+    icon: IconType;
+    isActive: boolean;
+    size: 'xs' | 'sm' | 'md' | 'lg';
 }
 
 function ToolbarButton({
-  ariaLabel,
-  boxSize,
-  className,
-  param,
-  value,
-  icon,
-  isActive,
-  size,
+    ariaLabel,
+    boxSize,
+    className,
+    param,
+    value,
+    icon,
+    isActive,
+    size,
 }: IProps) {
 
-  const [searchParams] = useSearchParams();
-  searchParams.set(param, value)
+    const [searchParams] = useSearchParams();
+    searchParams.set(param, value);
 
-  return (
-      <IconButton
-        as={RemixLink}
-        aria-label={ariaLabel}
-        className={className}
-        icon={<Icon boxSize={boxSize} as={icon} />}
-        isActive={isActive}
-        size={size}
-        title={ariaLabel}
-        to={`?${searchParams.toString()}`}
-      />
-  );
+
+    const TheIcon = icon;
+
+    return (
+        <IconButton
+            aria-label={ariaLabel}
+            title={ariaLabel}
+            variant="outline"
+        >
+            <RemixLink to={`?${searchParams.toString()}`}>
+                <Icon fontSize="3xl">
+                    <TheIcon />
+                </Icon>
+            </RemixLink>
+        </IconButton>
+    );
 }
+//        to={`?${searchParams.toString()}`}
+//        className={className}
+//background={isActive ? activeBg : bg}
+//style={{ "width": "100%", "height": "100%", "display": "flex", "justifyContent": "center", "alignItems": "center" }}
 
 export { ToolbarButton };

@@ -3,9 +3,9 @@ import { PiSunBold, PiMoonBold } from "react-icons/pi";
 import {
   Icon,
   IconButton,
-  useColorMode,
   IconButtonProps,
 } from "@chakra-ui/react";
+import { useColorMode } from "~/components/ui/color-mode";
 
 const ToggleModeButton = (
   props: Omit<IconButtonProps, "aria-label" | "onClick" | "variant" | "icon">
@@ -17,15 +17,15 @@ const ToggleModeButton = (
       className="scriptonly"
       onClick={toggleColorMode}
       variant="ghost"
-      icon={
-        colorMode === "light" ? (
-          <Icon boxSize="1.5em" as={PiMoonBold} />
-        ) : (
-          <Icon boxSize="1.5em" as={PiSunBold} />
-        )
-      }
       {...props}
-    />
+    > {
+    colorMode === "light" ? (
+    <Icon fontSize="1.5em"><PiMoonBold /></Icon>
+) : (
+    <Icon fontSize="1.5em"><PiSunBold/></Icon>
+)
+      }
+        </IconButton>
   );
 };
 

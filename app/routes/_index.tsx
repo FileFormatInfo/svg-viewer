@@ -1,22 +1,19 @@
 import type { MetaFunction } from "@remix-run/react";
-
+import { isRouteErrorResponse, Link as RemixLink, useNavigate, useRouteError } from "@remix-run/react";
+import { LinksFunction } from "@remix-run/node";
+import React from "react";
 import {
     Box,
     Button,
     HStack,
-    Input,
     Text,
-    useColorModeValue,
     VStack,
 } from "@chakra-ui/react";
-import { isRouteErrorResponse, redirect, Link as RemixLink, useNavigate, useRouteError } from "@remix-run/react";
+
+import { useColorModeValue } from "~/components/ui/color-mode";
 
 import { FullPage } from "~/components/FullPage";
-
-
 import { t } from "~/utils/i18n";
-import { LinksFunction } from "@remix-run/node";
-import React from "react";
 
 export const meta: MetaFunction = () => {
     return [
@@ -36,7 +33,7 @@ export default function HomePage() {
     const bg = useColorModeValue("white", "gray.700");
     const fileInput = React.useRef<HTMLInputElement>(null);
 
-    const randomSubmit = (e: React.FormEvent<HTMLDivElement>,hostname: string, zoom: string) => {
+    const randomSubmit = (e: React.FormEvent<HTMLFormElement>, hostname: string, zoom: string) => {
         e.preventDefault();
         navigate(`/random.html?src=${hostname}&zoom=${zoom}`);
     }
@@ -62,43 +59,51 @@ export default function HomePage() {
                 boxShadow="lg"
                 p={{ base: 6, md: 8 }}
             >
-                <VStack align="left" spacing={4}>
+                <VStack align="left" gap={4}>
 
                     <HStack>
-                        <Button as={RemixLink} to={`/open.html`}>
-                            {t("Open URL")}
+                        <Button asChild variant="subtle">
+                            <RemixLink to={`/open.html`}>
+                                {t("Open URL")}
+                            </RemixLink>
                         </Button>
                         <Text>{t("view an SVG image from another website")}</Text>
                     </HStack>
 
                     <HStack as="form" className="scriptonly">
                         <input accept="image/svg+xml" onChange={onFileChange} type="file" style={{ "display": "none" }} ref={fileInput} />
-                        <Button onClick={() => fileInput.current?.click()}>
+                        <Button onClick={() => fileInput.current?.click()} variant="subtle">
                             {t("Open File")}
                         </Button>
                         <Text>{t("view an SVG image from your computer (JS)")}</Text>
                     </HStack>
 
-                    <HStack action={`/localpost`} as="form" encType="multipart/form-data" method="post" onSubmit={() => { console.log("how is this happening w/noscript???"); }} className="noscriptonly">
-                        <input accept="image/svg+xml" name="imgfile" type="file" />
-                        <Button type="submit">Open</Button>
-                    </HStack>
+                    <form action={`/localpost`} encType="multipart/form-data" method="post" onSubmit={() => { console.log("how is this happening w/noscript???"); }} className="noscriptonly">
+                        <HStack>
+                            <input accept="image/svg+xml" name="imgfile" type="file" />
+                            <Button type="submit" variant="subtle">Open</Button>
+                        </HStack>
+                    </form>
 
-                    <HStack action="/random.html" as="form" method="post" onSubmit={(e) => randomSubmit(e, 'logosear.ch', 'max')}>
-                        <Button type="submit">
-                            {t("Random Logo")}
-                        </Button>
-                        <Text>{t("view a random logo from LogoSear.ch")}</Text>
-                    </HStack>
+                    <form action="/random.html" method="post" onSubmit={(e) => randomSubmit(e, 'logosear.ch', 'max')}>
+                        <HStack>
+                            <Button type="submit" variant="subtle">
+                                {t("Random Logo")}
+                            </Button>
+                            <Text>{t("view a random logo from LogoSear.ch")}</Text>
+                        </HStack>
+                    </form>
 
-                    <HStack action="/random.html" as="form" method="post" onSubmit={(e) => randomSubmit(e, 'iconsear.ch', 'max')}>
-                        <input type="hidden" name="src" value="iconsear.ch" />
-                        <input type="hidden" name="zoom" value="icons" />
-                        <Button type="submit">
-                            {t("Random Icon")}
-                        </Button>
-                        <Text>{t("view a random logo from IconSear.ch")}</Text>
-                    </HStack>
+                    <form action="/random.html" method="post" onSubmit={(e) => randomSubmit(e, 'iconsear.ch', 'max')}>
+                        <HStack>
+                            <input type="hidden" name="src" value="iconsear.ch" />
+                            <input type="hidden" name="zoom" value="icons" />
+                            <Button type="submit" variant="subtle">
+                                {t("Random Icon")}
+                            </Button>
+                            <Text>{t("view a random logo from IconSear.ch")}</Text>
+                        </HStack>
+                    </form>
 
                 </VStack>
             </Box>

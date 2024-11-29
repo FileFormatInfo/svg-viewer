@@ -11,20 +11,19 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.8.2",
-    "@emotion/react": "^11.13.0",
+    "@chakra-ui/react": "^3.2.0",
+    "@emotion/react": "^11.13.5",
     "@emotion/server": "^11.11.0",
-    "@emotion/styled": "^11.13.0",
     "@remix-run/express": "^2.10.3",
     "@remix-run/node": "^2.10.3",
     "@remix-run/react": "^2.10.3",
     "compression": "^1.7.4",
     "cross-env": "^7.0.3",
     "express": "^4.19.2",
-    "framer-motion": "^11.3.19",
     "intl-messageformat": "^10.5.14",
     "isbot": "^4.1.0",
     "morgan": "^1.10.0",
+    "next-themes": "^0.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.2.1"

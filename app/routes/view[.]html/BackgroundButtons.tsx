@@ -5,7 +5,8 @@ import {
     PiScribbleBold,
 } from "react-icons/pi";
 
-import { ButtonGroup, useColorModeValue } from "@chakra-ui/react";
+import { Group } from "@chakra-ui/react";
+import { useColorModeValue } from "~/components/ui/color-mode";
 
 import { ToolbarButton } from "~/components/ToolbarButton";
 import { useSearchParams } from "@remix-run/react";
@@ -13,7 +14,7 @@ import { IconType } from "react-icons";
 
 interface IProps {
     boxSize: string;
-    size: string;
+    size: 'xs' | 'sm' | 'md' | 'lg';
 }
 
 type BackgroundDefinition = {
@@ -37,7 +38,7 @@ const BackgroundButtons = ({ size, boxSize }: IProps) => {
     const isDark = useColorModeValue(true, false);
 
     return (
-        <ButtonGroup isAttached>
+        <Group attached>
             {backgrounds.map((background) => (
                 <ToolbarButton
                     ariaLabel={background.label}
@@ -50,7 +51,7 @@ const BackgroundButtons = ({ size, boxSize }: IProps) => {
                     value={background.value}
                 />
             ))}
-        </ButtonGroup>
+        </Group>
     );
 };
 

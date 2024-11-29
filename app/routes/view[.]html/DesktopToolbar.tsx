@@ -2,13 +2,13 @@ import React from "react";
 import { PiBug } from "react-icons/pi";
 
 import {
-    ButtonGroup,
+    Group,
     Flex,
     Spacer,
     Text,
-    useColorModeValue,
 } from "@chakra-ui/react";
 import { Link as RemixLink, useSearchParams } from "@remix-run/react";
+import { useColorModeValue } from "~/components/ui/color-mode";
 
 
 import { LogoIcon } from "~/components/LogoIcon";
@@ -39,19 +39,21 @@ export const DesktopToolbar = ({ currentZoom }: IProps) => {
             w="100%"
             minW="100%"
             minH="60px"
-            py={2}
             px={4}
+            alignItems={"center"}
             borderBottom={1}
             direction="row"
             borderStyle="solid"
             borderColor={borderColor}
         >
-            <Flex as={RemixLink} to="/">
+                <RemixLink to="/">
+            <Flex alignItems="center">
                 <LogoIcon boxSize={10} />
-                <Text fontSize="xl" fontWeight="bold" ps={3} pt={1}>
+                <Text fontSize="xl" fontWeight="bold" ps={3}>
                     SVG View
                 </Text>
-            </Flex>
+                </Flex>
+                </RemixLink>
             <Spacer />
             <ZoomButtons currentZoom={currentZoom} boxSize="1.75em" size="md" />
             <Spacer />
@@ -59,7 +61,7 @@ export const DesktopToolbar = ({ currentZoom }: IProps) => {
             <Spacer />
             <BackgroundButtons boxSize="1.75em" size="md" />
             <Spacer />
-            <ButtonGroup gap="0.25">
+            <Group gap="0.25">
                 {urlDebug && <ToolbarButton
                     ariaLabel={"Show debug info"}
                     boxSize="1.75em"
@@ -76,7 +78,7 @@ export const DesktopToolbar = ({ currentZoom }: IProps) => {
                     link={backUrl}
                     size="md"
                 />
-            </ButtonGroup>
+            </Group>
             <ToggleModeButton ms={2} />
         </Flex>
     );

@@ -1,29 +1,25 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { PiListBold, PiXBold } from "react-icons/pi";
 
 import {
     Button,
-    FormControl,
-    FormLabel,
-    Drawer,
+    DrawerRoot,
     DrawerBody,
+    DrawerBackdrop,
     DrawerFooter,
     DrawerHeader,
-    DrawerOverlay,
     DrawerContent,
-    DrawerCloseButton,
     Flex,
+    HStack,
     Icon,
     IconButton,
     Spacer,
-    Switch,
     Text,
-    useColorModeValue,
-    useDisclosure,
-    border,
-
 } from "@chakra-ui/react";
 import { Link as RemixLink, useSearchParams } from "@remix-run/react";
+import { useColorModeValue } from "~/components/ui/color-mode";
+import { CloseButton } from "~/components/ui/close-button"
+import { Switch } from "~/components/ui/switch"
 
 import { t } from "~/utils/i18n";
 
@@ -40,7 +36,7 @@ interface IProps {
 export const MobileToolbar = ({ currentZoom, setZoom }: IProps) => {
     const borderColor = useColorModeValue("gray.200", "gray.900");
     const [searchParams] = useSearchParams();
-    const { isOpen, onToggle, onClose } = useDisclosure();
+    const [ open, setOpen ] = useState(false);
 
     const btnRef = useRef<HTMLButtonElement | null>(null);
 
@@ -63,32 +59,31 @@ export const MobileToolbar = ({ currentZoom, setZoom }: IProps) => {
             <IconButton
                 aria-label="Open menu"
                 ref={btnRef}
-                icon={
-                    isOpen ? (
+                onClick={() => setOpen(true)}
+            >{
+                    open ? (
                         <Icon boxSize="1.75em" as={PiXBold} />
                     ) : (
                         <Icon boxSize="1.75em" as={PiListBold} />
                     )
                 }
-                onClick={onToggle}
-            />
-            <Drawer
+            </IconButton>
+            <DrawerRoot
                 size={"sm"}
-                isOpen={isOpen}
-                placement="left"
-                onClose={onClose}
-                finalFocusRef={btnRef}
+                open={open}
+                placement="start"
+                onOpenChange={(e) => setOpen(e.open)}
             >
-                <DrawerOverlay />
+                <DrawerBackdrop />
                 <DrawerContent>
-                    <DrawerCloseButton />
+                    <CloseButton />
                     <DrawerHeader>Settings</DrawerHeader>
 
                     <DrawerBody>
-                        <FormControl display="flex" alignItems="center" pb={3}>
-                            <FormLabel htmlFor="email-alerts" mb="0">
+                        <HStack display="flex" alignItems="center" pb={3}>
+                            <Text mb="0">
                                 Zoom
-                            </FormLabel>
+                            </Text>
                             <Spacer />
                             <ZoomButtons
                                 boxSize="2.25em"
@@ -96,50 +91,50 @@ export const MobileToolbar = ({ currentZoom, setZoom }: IProps) => {
                                 setZoom={setZoom}
                                 size="lg"
                             />
-                        </FormControl>
+                        </HStack>
 
-                        <FormControl display="flex" alignItems="center" pb={3}>
-                            <FormLabel htmlFor="email-alerts" mb="0">
+                        <HStack display="flex" alignItems="center" pb={3}>
+                            <Text mb="0">
                                 Border
-                            </FormLabel>
+                            </Text>
                             <Spacer />
                             <BorderButtons boxSize="2.25em" size="lg" />
-                        </FormControl>
+                        </HStack>
 
-                        <FormControl display="flex" alignItems="center" pb={3}>
-                            <FormLabel htmlFor="email-alerts" mb="0">
+                        <HStack display="flex" alignItems="center" pb={3}>
+                            <Text mb="0">
                                 Background
-                            </FormLabel>
+                            </Text>
                             <Spacer />
                             <BackgroundButtons boxSize="2.25em" size="lg" />
-                        </FormControl>
+                        </HStack>
 
-                        <FormControl display="flex" alignItems="center" py={4}>
-                            <FormLabel htmlFor="email-alerts" mb="0">
+                        <HStack display="flex" alignItems="center" py={4}>
+                            <Text mb="0">
                                 Debugging?
-                            </FormLabel>
+                            </Text>
                             <Spacer />
                             <Switch
                                 as={RemixLink}
-                                isChecked={isDebug}
-                                to={`?${searchParams.toString()}`}
+                                checked={isDebug}
+                                onCheckedChange={() => `?${searchParams.toString()}`}
                             />
-                        </FormControl>
+                        </HStack>
                     </DrawerBody>
 
                     <DrawerFooter>
-                        <Button variant="outline" mr={3} onClick={onClose}>
+                        <Button variant="outline" mr={3} onClick={() => setOpen(false)}>
                             Close
                         </Button>
                     </DrawerFooter>
                 </DrawerContent>
-            </Drawer>{" "}
+            </DrawerRoot>{" "}
             <Spacer />
-            <Flex as={RemixLink} to="/">
+            <RemixLink to="/">
                 <Text fontSize="xl" fontWeight="bold" ps={3} pt={1}>
                     SVG View
                 </Text>
-            </Flex>
+            </RemixLink>
             <Spacer />
             <ExitButton
                 text={backText}

@@ -7,9 +7,9 @@ import {
     Spinner,
     Text,
     useBreakpointValue,
-    useColorModeValue,
 } from "@chakra-ui/react";
 import { useNavigate, useSearchParams } from "@remix-run/react";
+import { useColorModeValue } from "~/components/ui/color-mode";
 
 import { t } from "~/utils/i18n";
 import { safeParseFloat } from "~/utils/safeParseFloat";
@@ -178,7 +178,7 @@ export default function ViewPage() {
     }, [bg, border, currentZoom, navigate, searchParams]);
 
     return (
-        <VStack w="100%" h="100vh" spacing="0" style={{ overflow: "hidden" }}>
+        <VStack w="100%" h="100vh" gap="0" style={{ overflow: "hidden" }}>
             {toolbar}
             <Flex
                 position={"relative"}

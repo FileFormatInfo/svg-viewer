@@ -4,10 +4,10 @@ import {
     Heading,
     Input,
     Text,
-    useColorModeValue,
     VStack,
 } from "@chakra-ui/react";
 import { MetaFunction, Link as RemixLink, useNavigate } from "@remix-run/react";
+import { useColorModeValue } from "~/components/ui/color-mode";
 
 import { t } from "~/utils/i18n";
 import { FullPage } from "~/components/FullPage";

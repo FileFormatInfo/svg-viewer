@@ -7,8 +7,13 @@ import {
     ScrollRestoration,
     useRouteError,
 } from "@remix-run/react";
-import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
-import { theme } from "~/theme";
+import { Provider } from "~/components/ui/provider"
+import { ChakraProvider } from "@chakra-ui/react"
+import { ColorModeProvider } from "~/components/ui/color-mode"
+//import { ColorModeScript } from "@chakra-ui/react";
+//                <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+
+import { themeSystem } from "~/theme";
 
 function MyLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -26,7 +31,6 @@ function MyLayout({ children }: { children: React.ReactNode }) {
                 </noscript>
                 <Meta />
                 <Links />
-                <ColorModeScript initialColorMode={theme.config.initialColorMode} />
             </head>
             <body>
                 {children}
@@ -36,13 +40,14 @@ function MyLayout({ children }: { children: React.ReactNode }) {
         </html>
     );
 }
-//                    {`@media (scripting: enabled) { .noscriptonly: { display: none !important; } }`}
 
 export default function App() {
     return (
         <MyLayout>
-            <ChakraProvider theme={theme}>
+            <ChakraProvider value={themeSystem}>
+                <ColorModeProvider enableSystem={true} defaultTheme="light">
                 <Outlet />
+                </ColorModeProvider>
             </ChakraProvider>
         </MyLayout>
     )

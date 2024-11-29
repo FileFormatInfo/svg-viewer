@@ -6,7 +6,7 @@ import {
 } from "react-icons/pi";
 import { useSearchParams } from "@remix-run/react";
 
-import { ButtonGroup } from "@chakra-ui/react";
+import { Group } from "@chakra-ui/react";
 
 
 import { ToolbarButton } from "~/components/ToolbarButton";
@@ -14,7 +14,7 @@ import { IconType } from "react-icons";
 
 interface IProps {
     boxSize: string;
-    size: string;
+    size: 'xs' | 'sm' | 'md' | 'lg';
 }
 
 type BorderDefinition = {
@@ -35,7 +35,7 @@ const BorderButtons = ({ size, boxSize }: IProps) => {
     const currentBorder = searchParams.get("border") || "dash";
 
     return (
-        <ButtonGroup isAttached>
+        <Group attached>
             {borders.map((border) => (
                 <ToolbarButton
                     ariaLabel={border.label}
@@ -47,7 +47,7 @@ const BorderButtons = ({ size, boxSize }: IProps) => {
                     size={size}
                     value={border.value}
                 />))}
-        </ButtonGroup>
+        </Group>
     );
 };
 
