@@ -7,7 +7,7 @@ import {
     ScrollRestoration,
     useRouteError,
 } from "@remix-run/react";
-import { Provider } from "~/components/ui/provider"
+//import { Provider } from "~/components/ui/provider"
 import { ChakraProvider } from "@chakra-ui/react"
 import { ColorModeProvider } from "~/components/ui/color-mode"
 //import { ColorModeScript } from "@chakra-ui/react";

@@ -13,20 +13,20 @@ interface IProps {
 function ExitButton({
     text,
     link,
-    boxSize,
-    size,
 }: IProps) {
 
     return (
         <IconButton
-            as={RemixLink}
             aria-label={text}
-            icon={<Icon boxSize={boxSize} as={PiArrowSquareOutBold} />}
-            size={size}
             title={text}
-            to={link}
-            variant="ghost"
-        />
+            variant="outline"
+        >
+            <RemixLink to={link}>
+                <Icon fontSize="3xl">
+                    <PiArrowSquareOutBold />
+                </Icon>
+            </RemixLink>
+        </IconButton>
     );
 }
 

@@ -90,11 +90,11 @@ export default function ViewPage() {
     const isDebug = (searchParams.get("debug") || "0") === "1";
 
     const toolbar = useBreakpointValue({
-        base: <MobileToolbar currentZoom={currentZoom} />,
+        sm: <MobileToolbar currentZoom={currentZoom} />,
         lg: <DesktopToolbar currentZoom={currentZoom} />,
     }, {
         fallback: 'lg',
-    }) || <DesktopToolbar currentZoom={currentZoom} />;
+    }) || <></>; //<DesktopToolbar currentZoom={currentZoom} />;
 
     const onImageLoad = useCallback(() => {
         console.log(

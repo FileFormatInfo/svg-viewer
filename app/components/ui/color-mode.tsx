@@ -27,6 +27,7 @@ export function useColorMode() {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function useColorModeValue<T>(light: T, dark: T) {
   //const { colorMode } = useColorMode()
   //return colorMode === "light" ? light : dark

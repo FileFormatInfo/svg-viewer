@@ -1,6 +1,7 @@
 import { IconType } from "react-icons";
 import { Icon, IconButton } from "@chakra-ui/react";
 import { Link as RemixLink, useSearchParams } from "@remix-run/react";
+import { useColorModeValue } from "./ui/color-mode";
 
 //import { useColorModeValue } from "~/components/ui/color-mode";
 
@@ -20,13 +21,16 @@ function ToolbarButton({
     param,
     value,
     icon,
-//    isActive,
+    isActive,
 //    size,
 }: IProps) {
 
     const [searchParams] = useSearchParams();
     searchParams.set(param, value);
 
+    const activeColor = useColorModeValue("#a1a1a1", "#d4d4d4");
+    const bgColor = isActive ? activeColor : undefined;    //LATER: ;
+    //HACK: Chakra v3 doesn't support size when setting bgColor on IconButton!?!?
 
     const TheIcon = icon;
 
@@ -38,7 +42,7 @@ function ToolbarButton({
         >
             <RemixLink to={`?${searchParams.toString()}`}>
                 <Icon fontSize="3xl">
-                    <TheIcon />
+                    <TheIcon color={bgColor} />
                 </Icon>
             </RemixLink>
         </IconButton>

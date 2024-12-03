@@ -3,23 +3,26 @@ import { PiListBold, PiXBold } from "react-icons/pi";
 
 import {
     Button,
-    DrawerRoot,
-    DrawerBody,
-    DrawerBackdrop,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerContent,
     Flex,
     HStack,
     Icon,
     IconButton,
     Spacer,
     Text,
+    useBreakpointValue,
 } from "@chakra-ui/react";
 import { Link as RemixLink, useSearchParams } from "@remix-run/react";
 import { useColorModeValue } from "~/components/ui/color-mode";
 import { CloseButton } from "~/components/ui/close-button"
 import { Switch } from "~/components/ui/switch"
+import {
+    DrawerRoot,
+    DrawerBody,
+    DrawerBackdrop,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerContent,
+} from '~/components/ui/drawer';
 
 import { t } from "~/utils/i18n";
 
@@ -36,7 +39,7 @@ interface IProps {
 export const MobileToolbar = ({ currentZoom, setZoom }: IProps) => {
     const borderColor = useColorModeValue("gray.200", "gray.900");
     const [searchParams] = useSearchParams();
-    const [ open, setOpen ] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const btnRef = useRef<HTMLButtonElement | null>(null);
 
@@ -45,29 +48,43 @@ export const MobileToolbar = ({ currentZoom, setZoom }: IProps) => {
     const backUrl = searchParams.get("backUrl") || "/";
     const backText = searchParams.get("backText") || t("Exit");
     return (
-        <Flex
-            w="100%"
-            minW="100%"
-            minH="60px"
-            py={2}
-            px={4}
-            borderBottom={1}
-            direction="row"
-            borderStyle="solid"
-            borderColor={borderColor}
-        >
-            <IconButton
-                aria-label="Open menu"
-                ref={btnRef}
-                onClick={() => setOpen(true)}
-            >{
-                    open ? (
-                        <Icon boxSize="1.75em" as={PiXBold} />
-                    ) : (
-                        <Icon boxSize="1.75em" as={PiListBold} />
-                    )
-                }
-            </IconButton>
+        <>
+            <Flex
+                w="100%"
+                minW="100%"
+                minH="60px"
+                py={2}
+                px={4}
+                borderBottom={1}
+                direction="row"
+                borderStyle="solid"
+                borderColor={borderColor}
+            >
+                <IconButton
+                    aria-label="Open menu"
+                    ref={btnRef}
+                    onClick={() => setOpen(true)}
+                    variant="outline"
+                >
+                    <Icon fontSize="3xl">
+                        {
+                            open ? (
+                                <PiXBold />
+                            ) : (
+                                <PiListBold />
+                            )
+                        }
+                    </Icon>
+                </IconButton>
+                <Spacer />
+                <RemixLink to="/">
+                    <Text fontSize="xl" fontWeight="bold" ps={3} pt={1}>
+                        SVG View
+                    </Text>
+                </RemixLink>
+                <Spacer />
+                <ExitButton link={backUrl} text={backText} />
+            </Flex>
             <DrawerRoot
                 size={"sm"}
                 open={open}
@@ -76,8 +93,13 @@ export const MobileToolbar = ({ currentZoom, setZoom }: IProps) => {
             >
                 <DrawerBackdrop />
                 <DrawerContent>
-                    <CloseButton />
-                    <DrawerHeader>Settings</DrawerHeader>
+                    <DrawerHeader>
+                        <HStack fontWeight="bold" >
+                            Settings
+                            <Spacer />
+                            <CloseButton onClick={() => setOpen(false)} />
+                        </HStack>
+                    </DrawerHeader>
 
                     <DrawerBody>
                         <HStack display="flex" alignItems="center" pb={3}>
@@ -121,7 +143,6 @@ export const MobileToolbar = ({ currentZoom, setZoom }: IProps) => {
                             />
                         </HStack>
                     </DrawerBody>
-
                     <DrawerFooter>
                         <Button variant="outline" mr={3} onClick={() => setOpen(false)}>
                             Close
@@ -129,19 +150,6 @@ export const MobileToolbar = ({ currentZoom, setZoom }: IProps) => {
                     </DrawerFooter>
                 </DrawerContent>
             </DrawerRoot>{" "}
-            <Spacer />
-            <RemixLink to="/">
-                <Text fontSize="xl" fontWeight="bold" ps={3} pt={1}>
-                    SVG View
-                </Text>
-            </RemixLink>
-            <Spacer />
-            <ExitButton
-                text={backText}
-                boxSize="1.75em"
-                link={backUrl}
-                size="md"
-            />
-        </Flex>
+        </>
     );
 };
