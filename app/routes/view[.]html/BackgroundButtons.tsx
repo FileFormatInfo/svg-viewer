@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Color, Color, Group, parseColor } from '@chakra-ui/react';
+import { Group, parseColor } from '@chakra-ui/react';
 import { ToolbarButton } from '~/components/ToolbarButton';
-    import {
-    ColorPickerRoot, ColorPickerControl, ColorPickerTrigger, ColorPickerContent, ColorPickerArea, ColorPickerSliders,
-    ColorPickerChannelSlider} from '~/components/ui/color-picker';
+import {
+    ColorPickerRoot,
+    ColorPickerControl,
+    ColorPickerTrigger,
+    ColorPickerContent,
+    ColorPickerArea,
+    ColorPickerChannelSlider
+} from '~/components/ui/color-picker';
 
 import {
     PiCheckerboardFill,
