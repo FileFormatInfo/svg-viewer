@@ -1,5 +1,5 @@
 #
-# robots.txt for view.svg.zone
+# robots.txt for svg-viewer.fileformat.info
 #
 
 User-Agent: *

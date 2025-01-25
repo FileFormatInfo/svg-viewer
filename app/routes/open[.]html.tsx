@@ -22,7 +22,7 @@ export const meta: MetaFunction = () => {
 
 export default function OpenPage() {
     const bg = useColorModeValue("white", "gray.700");
-    const defaultImage = "https://view.svg.zone/favicon.svg";
+    const defaultImage = "https://svg-viewer.fileformat.info/favicon.svg";
     const urlRef = useRef<HTMLInputElement | null>(null);
     const navigate = useNavigate();
 
