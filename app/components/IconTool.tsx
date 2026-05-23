@@ -1,4 +1,3 @@
-//import { Icon, IconProps } from "@chakra-ui/react";
 import { IconBase, IconBaseProps } from "react-icons";
 
 const IconTool = (props: IconBaseProps) => (

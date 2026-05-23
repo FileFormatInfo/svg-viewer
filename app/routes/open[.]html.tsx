@@ -1,13 +1,4 @@
-import {
-    Box,
-    Button,
-    Heading,
-    Input,
-    Text,
-    VStack,
-} from "@chakra-ui/react";
 import { MetaFunction, Link as RemixLink, useNavigate } from "@remix-run/react";
-import { useColorModeValue } from "~/components/ui/color-mode";
 
 import { t } from "~/utils/i18n";
 import { FullPage } from "~/components/FullPage";
@@ -21,7 +12,6 @@ export const meta: MetaFunction = () => {
 };
 
 export default function OpenPage() {
-    const bg = useColorModeValue("white", "gray.700");
     const defaultImage = "https://svg-viewer.fileformat.info/favicon.svg";
     const urlRef = useRef<HTMLInputElement | null>(null);
     const navigate = useNavigate();
@@ -35,39 +25,27 @@ export default function OpenPage() {
 
     return (
         <FullPage>
-            <VStack align="stretch" gap={8} w="100%" maxW="lg">
-                <VStack textAlign="center">
-                    <Heading fontSize={{ base: "2xl", md: "4xl" }}>
+            <div className="flex w-full max-w-lg flex-col gap-8">
+                <div className="text-center">
+                    <h1 className="text-3xl font-bold md:text-5xl">
                         {t("Select an SVG image")}
-                    </Heading>
-                    <Text fontSize={{ base: "md", md: "lg" }}>{t("to preview")}</Text>
-                </VStack>
-                <Box
-                    rounded="lg"
-                    bg={bg}
-                    boxShadow="lg"
-                    p={{ base: 6, md: 8 }}
-                >
-                    <VStack asChild gap={4}>
+                    </h1>
+                    <p className="text-base md:text-lg">{t("to preview")}</p>
+                </div>
+                <div className="card bg-base-100 shadow-xl">
+                    <div className="card-body">
                         <form action={`/view.html`} method="get" onSubmit={doSubmit} >
-                        <Input id="url" defaultValue={defaultImage} name="url" ref={urlRef} />
-                        <Button type="submit" colorScheme="blue" w="100%">
+                        <input id="url" defaultValue={defaultImage} name="url" ref={urlRef} className="input input-bordered w-full" />
+                        <button type="submit" className="btn btn-primary mt-4 w-full">
                             {t("Open")}
-                        </Button>
-                        <Button
-                            asChild
-                            colorScheme="blue"
-                            variant="outline"
-                            w="100%"
-                        >
-                                <RemixLink to="/">
+                        </button>
+                        <RemixLink to="/" className="btn btn-outline mt-3 w-full no-underline">
                             {t("Cancel")}
-                            </RemixLink>
-                        </Button>
+                        </RemixLink>
                         </form>
-                    </VStack>
-                </Box>
-            </VStack>
+                    </div>
+                </div>
+            </div>
         </FullPage>
     );
 }

@@ -1,7 +1,4 @@
-import type { ActionFunctionArgs } from "@remix-run/node";
 import { useNavigate, useSearchParams } from "@remix-run/react";
-import { Center, Flex, Spinner, Text, VStack } from "@chakra-ui/react";
-import { redirect } from "@remix-run/node";
 import { useEffect } from "react";
 
 import { t } from "~/utils/i18n";
@@ -56,23 +53,12 @@ type IProps = {
 
 function FullPageSpinner({ color, message }: IProps) {
     return (
-        <Flex w="100vw" h="100vh">
-            <Center flex={1} bg={color}>
-                <VStack>
-                    <Spinner size="xl" />
-                    <Text>{message}</Text>
-                </VStack>
-            </Center>
-        </Flex>
+        <div className="flex h-screen w-screen">
+            <div className="flex flex-1 flex-col items-center justify-center" style={{ backgroundColor: color }}>
+                <span className="loading loading-spinner loading-lg" />
+                <p>{message}</p>
+            </div>
+        </div>
     );
 }
 
-export async function action({
-    request,
-}: ActionFunctionArgs) {
-
-    const formData = await request.formData();
-    const url = await getRandomImage(formData.get("src") as string|null, formData.get("zoom") as string|null);
-
-    return redirect(url);
-}

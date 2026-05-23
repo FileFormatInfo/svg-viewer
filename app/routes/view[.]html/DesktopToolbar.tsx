@@ -1,15 +1,7 @@
 import React from "react";
 import { PiBug } from "react-icons/pi";
 
-import {
-    Group,
-    Flex,
-    Spacer,
-    Text,
-} from "@chakra-ui/react";
 import { Link as RemixLink, useSearchParams } from "@remix-run/react";
-import { useColorModeValue } from "~/components/ui/color-mode";
-
 
 import { LogoIcon } from "~/components/LogoIcon";
 import { ToggleModeButton } from "~/components/ToggleModeButton";
@@ -26,7 +18,6 @@ interface IProps {
 }
 
 export const DesktopToolbar = ({ currentZoom }: IProps) => {
-    const borderColor = useColorModeValue("gray.200", "gray.900");
     const [searchParams] = useSearchParams();
     const backUrl = searchParams.get("backUrl") || "/";
     const backText = searchParams.get("backText") || "Exit";
@@ -35,33 +26,23 @@ export const DesktopToolbar = ({ currentZoom }: IProps) => {
     const isDebug = (urlDebug || "0") === "1";
 
     return (
-        <Flex
-            w="100%"
-            minW="100%"
-            minH="60px"
-            px={4}
-            alignItems={"center"}
-            borderBottom={1}
-            direction="row"
-            borderStyle="solid"
-            borderColor={borderColor}
-        >
+        <div className="hidden min-h-14 w-full items-center gap-4 border-b border-base-300 bg-base-100 px-4 lg:flex">
                 <RemixLink to="/">
-            <Flex alignItems="center">
-                <LogoIcon boxSize={10} />
-                <Text fontSize="xl" fontWeight="bold" ps={3}>
+            <div className="flex items-center">
+                <LogoIcon boxSize={40} />
+                <span className="pl-3 text-xl font-bold">
                     SVG View
-                </Text>
-                </Flex>
+                </span>
+                </div>
                 </RemixLink>
-            <Spacer />
+            <div className="flex-1" />
             <ZoomButtons currentZoom={currentZoom} boxSize="1.75em" size="md" />
-            <Spacer />
+            <div className="flex-1" />
             <BorderButtons boxSize="1.75em" size="md" />
-            <Spacer />
+            <div className="flex-1" />
             <BackgroundButtons boxSize="1.75em" size="md" />
-            <Spacer />
-            <Group gap="0.25">
+            <div className="flex-1" />
+            <div className="join gap-1">
                 {urlDebug && <ToolbarButton
                     ariaLabel={"Show debug info"}
                     boxSize="1.75em"
@@ -78,8 +59,8 @@ export const DesktopToolbar = ({ currentZoom }: IProps) => {
                     link={backUrl}
                     size="md"
                 />
-            </Group>
-            <ToggleModeButton ms={2} />
-        </Flex>
+            </div>
+            <ToggleModeButton className="ml-2" />
+        </div>
     );
 };

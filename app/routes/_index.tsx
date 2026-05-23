@@ -2,15 +2,6 @@ import type { MetaFunction } from "@remix-run/react";
 import { isRouteErrorResponse, Link as RemixLink, useNavigate, useRouteError } from "@remix-run/react";
 import { LinksFunction } from "@remix-run/node";
 import React from "react";
-import {
-    Box,
-    Button,
-    HStack,
-    Text,
-    VStack,
-} from "@chakra-ui/react";
-
-import { useColorModeValue } from "~/components/ui/color-mode";
 
 import { FullPage } from "~/components/FullPage";
 import { t } from "~/utils/i18n";
@@ -30,13 +21,7 @@ export const links: LinksFunction = () => {
 
 export default function HomePage() {
     const navigate = useNavigate();
-    const bg = useColorModeValue("white", "gray.700");
     const fileInput = React.useRef<HTMLInputElement>(null);
-
-    const randomSubmit = (e: React.FormEvent<HTMLFormElement>, hostname: string, zoom: string) => {
-        e.preventDefault();
-        navigate(`/random.html?src=${hostname}&zoom=${zoom}`);
-    }
 
     const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -53,60 +38,52 @@ export default function HomePage() {
 
     return (
         <FullPage>
-            <Box
-                rounded="lg"
-                bg={bg}
-                boxShadow="lg"
-                p={{ base: 6, md: 8 }}
-            >
-                <VStack align="left" gap={4}>
+            <div className="card w-full max-w-2xl bg-base-100 shadow-xl">
+                <div className="card-body gap-4">
 
-                    <HStack>
-                        <Button asChild variant="subtle">
-                            <RemixLink to={`/open.html`}>
-                                {t("Open URL")}
-                            </RemixLink>
-                        </Button>
-                        <Text>{t("view an SVG image from another website")}</Text>
-                    </HStack>
+                    <div className="flex items-center gap-3">
+                        <RemixLink to={`/open.html`} className="btn btn-neutral no-underline">
+                            {t("Open URL")}
+                        </RemixLink>
+                        <p>{t("view an SVG image from another website")}</p>
+                    </div>
 
-                    <HStack as="form" className="scriptonly">
+                    <div className="flex items-center gap-3 scriptonly">
                         <input accept="image/svg+xml" onChange={onFileChange} type="file" style={{ "display": "none" }} ref={fileInput} />
-                        <Button onClick={() => fileInput.current?.click()} variant="subtle">
+                        <button type="button" onClick={() => fileInput.current?.click()} className="btn btn-neutral">
                             {t("Open File")}
-                        </Button>
-                        <Text>{t("view an SVG image from your computer (JS)")}</Text>
-                    </HStack>
+                        </button>
+                        <p>{t("view an SVG image from your computer (JS)")}</p>
+                    </div>
 
-                    <form action={`/localpost`} encType="multipart/form-data" method="post" onSubmit={() => { console.log("how is this happening w/noscript???"); }} className="noscriptonly">
-                        <HStack>
-                            <input accept="image/svg+xml" name="imgfile" type="file" />
-                            <Button type="submit" variant="subtle">Open</Button>
-                        </HStack>
-                    </form>
+                    <div className="noscriptonly">
+                        <p>{t("Open File requires JavaScript in static mode")}</p>
+                    </div>
 
-                    <form action="/random.html" method="post" onSubmit={(e) => randomSubmit(e, 'logosear.ch', 'max')}>
-                        <HStack>
-                            <Button type="submit" variant="subtle">
+                    <form action="/random.html" method="get">
+                        <div className="flex items-center gap-3">
+                            <input type="hidden" name="src" value="logosear.ch" />
+                            <input type="hidden" name="zoom" value="max" />
+                            <button type="submit" className="btn btn-neutral">
                                 {t("Random Logo")}
-                            </Button>
-                            <Text>{t("view a random logo from LogoSear.ch")}</Text>
-                        </HStack>
+                            </button>
+                            <p>{t("view a random logo from LogoSear.ch")}</p>
+                        </div>
                     </form>
 
-                    <form action="/random.html" method="post" onSubmit={(e) => randomSubmit(e, 'iconsear.ch', 'max')}>
-                        <HStack>
+                    <form action="/random.html" method="get">
+                        <div className="flex items-center gap-3">
                             <input type="hidden" name="src" value="iconsear.ch" />
                             <input type="hidden" name="zoom" value="icons" />
-                            <Button type="submit" variant="subtle">
+                            <button type="submit" className="btn btn-neutral">
                                 {t("Random Icon")}
-                            </Button>
-                            <Text>{t("view a random logo from IconSear.ch")}</Text>
-                        </HStack>
+                            </button>
+                            <p>{t("view a random logo from IconSear.ch")}</p>
+                        </div>
                     </form>
 
-                </VStack>
-            </Box>
+                </div>
+            </div>
         </FullPage>
     )
 }
@@ -123,27 +100,27 @@ export function ErrorBoundary() {
     const error = useRouteError();
     if (isRouteErrorResponse(error)) {
         return (
-            <VStack>
+            <div className="flex flex-col items-center gap-2">
                 <img
                     alt="Error icon"
                     src="/images/error.svg"
                     style={{ width: "5rem", height: "5rem" }}
                 />
-                <Text>{error.status} {error.statusText}</Text>
-                <Text>{error.data}</Text>
-            </VStack>
+                <p>{error.status} {error.statusText}</p>
+                <p>{error.data}</p>
+            </div>
         );
     } else if (error instanceof Error) {
         return (
-            <VStack>
+            <div className="flex flex-col items-center gap-2">
                 <img
                     alt="Error icon"
                     src="/images/error.svg"
                     style={{ width: "5rem", height: "5rem" }}
                 />
-                <Text>{error.message}</Text>
+                <p>{error.message}</p>
                 <pre style={{ "display": "none" }}>{error.stack}</pre>
-            </VStack>
+            </div>
         );
     } else {
         return <h1>Unknown Error</h1>;

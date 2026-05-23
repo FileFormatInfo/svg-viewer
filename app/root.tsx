@@ -7,13 +7,11 @@ import {
     ScrollRestoration,
     useRouteError,
 } from "@remix-run/react";
-//import { Provider } from "~/components/ui/provider"
-import { ChakraProvider } from "@chakra-ui/react"
+import type { LinksFunction } from "@remix-run/node";
 import { ColorModeProvider } from "~/components/ui/color-mode"
-//import { ColorModeScript } from "@chakra-ui/react";
-//                <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+import appStylesHref from "~/app.css?url";
 
-import { themeSystem } from "~/theme";
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: appStylesHref }];
 
 function MyLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -32,7 +30,7 @@ function MyLayout({ children }: { children: React.ReactNode }) {
                 <Meta />
                 <Links />
             </head>
-            <body>
+            <body className="min-h-screen bg-base-200 text-base-content">
                 {children}
                 <ScrollRestoration />
                 <Scripts />
@@ -41,14 +39,41 @@ function MyLayout({ children }: { children: React.ReactNode }) {
     );
 }
 
+export function HydrateFallback() {
+    return (
+        <MyLayout>
+            <main
+                style={{
+                    minHeight: "100vh",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: "url(/images/backgrounds/memphis-mini.png)",
+                    fontFamily: "system-ui, sans-serif",
+                }}
+            >
+                <div
+                    style={{
+                        background: "white",
+                        borderRadius: "0.75rem",
+                        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.12)",
+                        padding: "1rem 1.25rem",
+                        color: "#1a202c",
+                    }}
+                >
+                    Loading SVG View...
+                </div>
+            </main>
+        </MyLayout>
+    );
+}
+
 export default function App() {
     return (
         <MyLayout>
-            <ChakraProvider value={themeSystem}>
                 <ColorModeProvider enableSystem={false} defaultTheme="light">
                 <Outlet />
                 </ColorModeProvider>
-            </ChakraProvider>
         </MyLayout>
     )
 }

@@ -1,50 +1,21 @@
-import {
-    Box,
-    Flex,
-    Text,
-    HStack,
-    Spacer,
-} from "@chakra-ui/react";
 import { Link as RemixLink } from "@remix-run/react";
-import { useColorModeValue } from "~/components/ui/color-mode";
-
 
 import { ToggleModeButton } from "./ToggleModeButton";
 import { LogoIcon } from "./LogoIcon";
 
 export const Navbar = () => {
-    const bg = useColorModeValue("white", "gray.800");
-    const borderColor = useColorModeValue("gray.200", "gray.900");
-
     return (
-        <Box w="100%" position="fixed" zIndex="10">
-            <Flex
-                w="100%"
-                minH="60px"
-                py={2}
-                px={4}
-                borderBottom={1}
-                borderStyle="solid"
-                borderColor={borderColor}
-                align="center"
-                bg={bg}
-            >
-                <Flex flex="1">
-                    <HStack gap={4} asChild>
-                        <RemixLink to="/">
-                            <LogoIcon boxSize={10} />
-                            <Text fontSize="xl" fontWeight="bold" ps={3} pt={1}>
-                                SVG View
-                            </Text>
-                        </RemixLink>
-                    </HStack>
-                    <Spacer />
-                    <HStack direction={"row"} gap={4}>
-                        <ToggleModeButton />
-                    </HStack>
-                </Flex>
-            </Flex>
-        </Box>
+        <header className="navbar sticky top-0 z-10 min-h-14 border-b border-base-300 bg-base-100 px-4 py-2">
+            <div className="navbar-start">
+                <RemixLink to="/" className="flex items-center gap-3 no-underline">
+                    <LogoIcon boxSize={40} />
+                    <span className="text-xl font-bold">SVG View</span>
+                </RemixLink>
+            </div>
+            <div className="navbar-end">
+                <ToggleModeButton />
+            </div>
+        </header>
     );
 };
 

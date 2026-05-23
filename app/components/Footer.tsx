@@ -1,12 +1,3 @@
-import {
-    Box,
-    Flex,
-    Link,
-    Stack,
-    Text,
-} from "@chakra-ui/react";
-import { useColorModeValue } from "~/components/ui/color-mode";
-
 const links = [
     {
         label: "SVG Zone",
@@ -31,31 +22,22 @@ const links = [
 ];
 
 export const Footer = () => {
-    const bg = useColorModeValue("gray.50", "gray.900");
-
     return (
-        <Stack
-            width="100%"
-            justifyContent="center"
-            bg={bg}
-            py={3}
-            direction="row"
-            spacing={4}
-        >
+        <footer className="w-full border-t border-base-300 bg-base-100 px-3 py-3">
+            <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-4">
             {links.map((link) => (
-                <Link key={link.href} href={link.href} style={{ opacity: "0.75" }}>
-                    <Flex align="center">
-                        <Box boxSize={6} mr={1}>
+                <a key={link.href} href={link.href} className="no-underline opacity-75 transition-opacity hover:opacity-100">
+                    <span className="flex items-center">
                             <img
                                 src={link.icon}
                                 alt={link.label}
                                 style={{ height: "1.75em", width: "1.75em" }}
                             />
-                        </Box>
-                        <Text display={{ base: 'none', md: 'block' }}>{link.label}</Text>
-                    </Flex>
-                </Link>
+                        <span className="ml-1 hidden md:inline">{link.label}</span>
+                    </span>
+                </a>
             ))}
-        </Stack>
+            </div>
+        </footer>
     );
 };

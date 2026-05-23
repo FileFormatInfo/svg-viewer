@@ -1,12 +1,10 @@
-import { Icon, IconButton } from "@chakra-ui/react";
-
 import { Link as RemixLink } from "@remix-run/react";
 import { PiArrowSquareOutBold } from "react-icons/pi";
 
 interface IProps {
-    boxSize: string;
+    boxSize?: string;
     link: string;
-    size: string;
+    size?: string;
     text: string;
 }
 
@@ -16,17 +14,14 @@ function ExitButton({
 }: IProps) {
 
     return (
-        <IconButton
+        <RemixLink
+            to={link}
             aria-label={text}
             title={text}
-            variant="outline"
+            className="btn btn-outline btn-square"
         >
-            <RemixLink to={link}>
-                <Icon fontSize="3xl">
-                    <PiArrowSquareOutBold />
-                </Icon>
-            </RemixLink>
-        </IconButton>
+            <PiArrowSquareOutBold className="text-xl" />
+        </RemixLink>
     );
 }
 

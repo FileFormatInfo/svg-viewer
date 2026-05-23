@@ -1,7 +1,5 @@
 "use client"
 
-import type { IconButtonProps } from "@chakra-ui/react"
-import { ClientOnly, IconButton, Skeleton } from "@chakra-ui/react"
 import { ThemeProvider, useTheme } from "next-themes"
 import type { ThemeProviderProps } from "next-themes"
 import * as React from "react"
@@ -11,27 +9,27 @@ export interface ColorModeProviderProps extends ThemeProviderProps {}
 
 export function ColorModeProvider(props: ColorModeProviderProps) {
   return (
-    <ThemeProvider attribute="class" disableTransitionOnChange {...props} />
+    <ThemeProvider attribute="data-theme" disableTransitionOnChange themes={["light", "dark"]} {...props} />
   )
 }
 
 export function useColorMode() {
   const { resolvedTheme, setTheme } = useTheme()
+  const colorMode = resolvedTheme === "dark" ? "dark" : "light"
   const toggleColorMode = () => {
-    setTheme(resolvedTheme === "light" ? "dark" : "light")
+    setTheme(colorMode === "light" ? "dark" : "light")
   }
+
   return {
-    colorMode: resolvedTheme,
+    colorMode,
     setColorMode: setTheme,
     toggleColorMode,
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function useColorModeValue<T>(light: T, dark: T) {
-  //const { colorMode } = useColorMode()
-  //return colorMode === "light" ? light : dark
-  return light;
+  const { resolvedTheme } = useTheme()
+  return resolvedTheme === "dark" ? dark : light
 }
 
 export function ColorModeIcon() {
@@ -39,7 +37,7 @@ export function ColorModeIcon() {
   return colorMode === "light" ? <LuSun /> : <LuMoon />
 }
 
-interface ColorModeButtonProps extends Omit<IconButtonProps, "aria-label"> {}
+type ColorModeButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "aria-label">
 
 export const ColorModeButton = React.forwardRef<
   HTMLButtonElement,
@@ -47,23 +45,15 @@ export const ColorModeButton = React.forwardRef<
 >(function ColorModeButton(props, ref) {
   const { toggleColorMode } = useColorMode()
   return (
-    <ClientOnly fallback={<Skeleton boxSize="8" />}>
-      <IconButton
-        onClick={toggleColorMode}
-        variant="ghost"
-        aria-label="Toggle color mode"
-        size="sm"
-        ref={ref}
-        {...props}
-        css={{
-          _icon: {
-            width: "5",
-            height: "5",
-          },
-        }}
-      >
-        <ColorModeIcon />
-      </IconButton>
-    </ClientOnly>
+    <button
+      type="button"
+      onClick={toggleColorMode}
+      aria-label="Toggle color mode"
+      className="btn btn-ghost btn-sm"
+      ref={ref}
+      {...props}
+    >
+      <ColorModeIcon />
+    </button>
   )
 })

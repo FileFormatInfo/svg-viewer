@@ -1,15 +1,6 @@
-import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Group, parseColor } from '@chakra-ui/react';
+import { useMemo } from 'react';
+import { useSearchParams } from '@remix-run/react';
 import { ToolbarButton } from '~/components/ToolbarButton';
-import {
-    ColorPickerRoot,
-    ColorPickerControl,
-    ColorPickerTrigger,
-    ColorPickerContent,
-    ColorPickerArea,
-    ColorPickerChannelSlider
-} from '~/components/ui/color-picker';
 
 import {
     PiCheckerboardFill,
@@ -48,11 +39,17 @@ const BackgroundButtons = ({ size, boxSize }: IProps) => {
     const currentBg = searchParams.get("bg") || "memphis-mini";
     const isDark = useColorModeValue(true, false);
     const isCustom = !backgrounds.some((bg) => bg.value === currentBg);
-    const defaultCustom = isCustom ? currentBg : "#0000ff";
-    const [colorValue, setColorValue] = useState(parseColor(defaultCustom));
+    const defaultCustom = isCustom && /^#[0-9A-Fa-f]{6}$/.test(currentBg) ? currentBg : "#0000ff";
+    const customColor = useMemo(() => defaultCustom, [defaultCustom]);
+
+    const onCustomColorChange = (value: string) => {
+        const nextSearchParams = new URLSearchParams(searchParams);
+        nextSearchParams.set("bg", value);
+        setSearchParams(nextSearchParams);
+    };
 
     return (
-        <Group attached>
+        <div className="join">
             {backgrounds.map((background) => (
                 <ToolbarButton
                     ariaLabel={background.label}
@@ -65,29 +62,16 @@ const BackgroundButtons = ({ size, boxSize }: IProps) => {
                     value={background.value}
                 />
             ))}
-            <ColorPickerRoot
-                className="scriptonly"
-                defaultValue={parseColor(defaultCustom)}
-                maxW="200px"
-                onExitComplete={() => { console.log(`exit ${JSON.stringify(colorValue)}`); }}
-                onOpenChange={(e) => { console.log(`open change: ${JSON.stringify(e)}`, this); }}
-                onValueChange={(e) => {
-                    setColorValue(e.value);
-                    console.log(`event: ${JSON.stringify(e)}`);
-                    console.log(`color value: ${e.value.toString('hex')}`);
-                    searchParams.set("bg", e.value.toString('hex'));
-                    setSearchParams(searchParams);
-                }}
-            >
-                <ColorPickerControl>
-                    <ColorPickerTrigger />
-                </ColorPickerControl>
-                <ColorPickerContent>
-                    <ColorPickerArea />
-                    <ColorPickerChannelSlider channel="hue" />
-                </ColorPickerContent>
-            </ColorPickerRoot>
-        </Group>
+            <label className="join-item btn btn-outline btn-square p-1 scriptonly" title="Custom background color">
+                <input
+                    type="color"
+                    value={customColor}
+                    onChange={(e) => onCustomColorChange(e.target.value)}
+                    className="h-6 w-6 cursor-pointer border-0 bg-transparent p-0"
+                    aria-label="Custom background color"
+                />
+            </label>
+        </div>
     );
 };
 

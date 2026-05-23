@@ -7,8 +7,6 @@ import {
 } from "react-icons/pi";
 import { useSearchParams } from "@remix-run/react";
 
-import { Group } from "@chakra-ui/react";
-
 import { ToolbarButton } from "~/components/ToolbarButton";
 import { IconTool } from "~/components/IconTool";
 import { calcZoomIn, calcZoomOut } from "./calcZoom";
@@ -24,7 +22,7 @@ export const ZoomButtons = ({ currentZoom, size, boxSize }: IProps) => {
     const [searchParams] = useSearchParams();
 
     return (
-        <Group attached>
+        <div className="join">
             <ToolbarButton
                 ariaLabel="Zoom out"
                 boxSize={boxSize}
@@ -70,6 +68,6 @@ export const ZoomButtons = ({ currentZoom, size, boxSize }: IProps) => {
                 size={size}
                 icon={PiArrowsOutCardinalBold}
             />
-        </Group>
+        </div>
     );
 };
