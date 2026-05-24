@@ -1,5 +1,5 @@
 import { IconType } from "react-icons";
-import { Link as RemixLink, useSearchParams } from "@remix-run/react";
+import { Link as RemixLink, useSearchParams } from "react-router";
 import { useColorModeValue } from "./ui/color-mode";
 
 //import { useColorModeValue } from "~/components/ui/color-mode";

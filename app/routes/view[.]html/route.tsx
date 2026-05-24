@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import React, { useCallback, useEffect, useRef } from "react";
 
-import { useNavigate, useSearchParams } from "@remix-run/react";
+import { useNavigate, useSearchParams } from "react-router";
 
 import { t } from "~/utils/i18n";
 import { safeParseFloat } from "~/utils/safeParseFloat";

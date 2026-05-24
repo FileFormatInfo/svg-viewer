@@ -4,7 +4,7 @@ import {
     PiSquareBold,
     PiSquareLight,
 } from "react-icons/pi";
-import { useSearchParams } from "@remix-run/react";
+import { useSearchParams } from "react-router";
 
 import { ToolbarButton } from "~/components/ToolbarButton";
 import { IconType } from "react-icons";

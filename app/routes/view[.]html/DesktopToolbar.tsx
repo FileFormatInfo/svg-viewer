@@ -1,7 +1,7 @@
 import React from "react";
 import { PiBug } from "react-icons/pi";
 
-import { Link as RemixLink, useSearchParams } from "@remix-run/react";
+import { Link as RemixLink, useSearchParams } from "react-router";
 
 import { LogoIcon } from "~/components/LogoIcon";
 import { ToggleModeButton } from "~/components/ToggleModeButton";

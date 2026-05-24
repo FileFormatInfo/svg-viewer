@@ -1,4 +1,4 @@
-import { MetaFunction, Link as RemixLink, useNavigate } from "@remix-run/react";
+import { MetaFunction, Link as RemixLink, useNavigate } from "react-router";
 
 import { t } from "~/utils/i18n";
 import { FullPage } from "~/components/FullPage";

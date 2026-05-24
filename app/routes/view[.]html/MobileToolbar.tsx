@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { PiBug, PiListBold, PiXBold } from "react-icons/pi";
-import { Link as RemixLink, useSearchParams } from "@remix-run/react";
+import { Link as RemixLink, useSearchParams } from "react-router";
 
 import { LogoIcon } from "~/components/LogoIcon";
 import { ToggleModeButton } from "~/components/ToggleModeButton";

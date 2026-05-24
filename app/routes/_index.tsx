@@ -1,6 +1,6 @@
-import type { MetaFunction } from "@remix-run/react";
-import { isRouteErrorResponse, Link as RemixLink, useNavigate, useRouteError } from "@remix-run/react";
-import { LinksFunction } from "@remix-run/node";
+import type { MetaFunction } from "react-router";
+import { isRouteErrorResponse, Link as RemixLink, useNavigate, useRouteError } from "react-router";
+import type { LinksFunction } from "react-router";
 import React from "react";
 
 import { FullPage } from "~/components/FullPage";

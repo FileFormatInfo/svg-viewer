@@ -1,13 +1,13 @@
 import {
     isRouteErrorResponse,
+    type LinksFunction,
     Links,
     Meta,
     Outlet,
     Scripts,
     ScrollRestoration,
     useRouteError,
-} from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
+} from "react-router";
 import { ColorModeProvider } from "~/components/ui/color-mode"
 import appStylesHref from "~/app.css?url";
 
