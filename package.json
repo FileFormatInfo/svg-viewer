@@ -7,12 +7,11 @@
     "build": "react-router build",
     "dev": "vite",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
-    "start": "vite preview",
+    "start": "vite preview --host 0.0.0.0 --port 4173",
     "typecheck": "tsc"
   },
   "dependencies": {
     "@react-router/dev": "^7.15.1",
-    "@react-router/express": "^7.15.1",
     "@react-router/fs-routes": "^7.15.1",
     "@react-router/node": "^7.15.1",
     "intl-messageformat": "^10.5.14",
