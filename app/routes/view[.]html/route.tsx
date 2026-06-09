@@ -46,19 +46,13 @@ export default function ViewPage() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const imageCss: Record<string, string> = {};
-  const noscriptImageCss: Record<string, string> = {};
-  let noscriptHeight: string | undefined;
 
   const urlZoom = searchParams.get("zoom") || "1";
   let currentZoom = safeParseFloat(urlZoom, 1);
   if (urlZoom === "max") {
     currentZoom = calcMaxZoom(naturalWidth, naturalHeight, containerWidth, containerHeight);
-    noscriptImageCss.objectFit = "cover";
-    noscriptHeight = "99%";
   } else if (urlZoom === "icons") {
     // do nothing
-  } else {
-    noscriptImageCss.transform = `scale(${currentZoom})`;
   }
 
   imageCss.width = `${currentZoom * naturalWidth}px`;
@@ -93,7 +87,6 @@ export default function ViewPage() {
     borderCss = "none";
   }
   imageCss.outline = borderCss;
-  noscriptImageCss.outline = borderCss;
 
   const isDebug = (searchParams.get("debug") || "0") === "1";
 
@@ -252,13 +245,6 @@ export default function ViewPage() {
             />
           )
         )}
-        <noscript style={{ height: noscriptHeight, display: "flex" }}>
-          {urlZoom === "icons" ? (
-            <IconList display="flex" imageCss={noscriptImageCss} url={url} />
-          ) : (
-            <img alt={url} src={url} style={{ ...noscriptImageCss }} />
-          )}
-        </noscript>
         {isDebug ? (
           <>
             <div style={{ position: "absolute", top: "0pt", left: "8px" }}>

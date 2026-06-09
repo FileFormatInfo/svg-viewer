@@ -56,10 +56,6 @@ export default function HomePage() {
                         <p>{t("view an SVG image from your computer (JS)")}</p>
                     </div>
 
-                    <div className="noscriptonly">
-                        <p>{t("Open File requires JavaScript in static mode")}</p>
-                    </div>
-
                     <form action="/random.html" method="get">
                         <div className="flex items-center gap-3">
                             <input type="hidden" name="src" value="logosear.ch" />
