@@ -237,6 +237,7 @@ export default function ViewPage() {
           ) : (
             <img
               alt={url}
+              crossOrigin="anonymous"
               src={url}
               style={{
                 objectFit: "cover",

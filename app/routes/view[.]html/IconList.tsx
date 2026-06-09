@@ -13,6 +13,7 @@ function IconCard({ imageCss, size, url }: ICardProps) {
     <div className="flex flex-col items-center lg:items-end">
       <img
         alt={`${size} for ${url}`}
+        crossOrigin="anonymous"
         src={url}
         style={{ ...imageCss, width: `${size}pt`, height: `${size}pt` }}
       />

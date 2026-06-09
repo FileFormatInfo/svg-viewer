@@ -13,9 +13,20 @@ export function ColorModeProvider(props: ColorModeProviderProps) {
   )
 }
 
+function useHasMounted() {
+  const [hasMounted, setHasMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setHasMounted(true)
+  }, [])
+
+  return hasMounted
+}
+
 export function useColorMode() {
+  const hasMounted = useHasMounted()
   const { resolvedTheme, setTheme } = useTheme()
-  const colorMode = resolvedTheme === "dark" ? "dark" : "light"
+  const colorMode = hasMounted && resolvedTheme === "dark" ? "dark" : "light"
   const toggleColorMode = () => {
     setTheme(colorMode === "light" ? "dark" : "light")
   }
@@ -28,8 +39,9 @@ export function useColorMode() {
 }
 
 export function useColorModeValue<T>(light: T, dark: T) {
+  const hasMounted = useHasMounted()
   const { resolvedTheme } = useTheme()
-  return resolvedTheme === "dark" ? dark : light
+  return hasMounted && resolvedTheme === "dark" ? dark : light
 }
 
 export function ColorModeIcon() {
