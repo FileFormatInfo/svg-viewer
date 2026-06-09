@@ -12,6 +12,21 @@ import { calcMaxZoom, calcZoomIn, calcZoomOut } from "./calcZoom";
 import { IconList } from "./IconList";
 import { keyHandler } from "./KeyHandler";
 import { useColorModeValue } from "~/components/ui/color-mode";
+import { safeParseInt } from "~/utils/safeParseInt";
+
+function logImageElement(img: HTMLImageElement | null) {
+  if (img == null) {
+    console.log("Image ref is null");
+    return;
+  }
+
+  console.log(`img.naturalHeight=${img.naturalHeight}`);
+  console.log(`img.naturalWidth=${img.naturalWidth}`);
+  console.log(`img.complete=${img.complete}`);
+  console.log(`img.crossOrigin=${img.crossOrigin}`);
+  console.log(`img.currentSrc=${img.currentSrc}`);
+  console.log(`img.src=${img.src}`);
+}
 
 export default function ViewPage() {
   const [searchParams] = useSearchParams();
@@ -58,7 +73,6 @@ export default function ViewPage() {
     background.backgroundColor = bg;
     borderColor = getContrastYIQ(bg.slice(1));
   } else if (/^[-a-z]+$/.test(bg)) {
-    console.log(`background: ${bg}`);
     background.backgroundImage = `url(/images/backgrounds/${bg}.png)`;
     background.backgroundColor = defaultBorderBackgroundColor;
     borderColor = defaultBorderColor;
@@ -84,17 +98,30 @@ export default function ViewPage() {
   const isDebug = (searchParams.get("debug") || "0") === "1";
 
   const onImageLoad = useCallback(() => {
-    console.log(
-      `onload: ${imageRef.current?.naturalWidth}, ${imageRef.current?.naturalHeight}`
-    );
+    console.log("via onImageLoad");
+    logImageElement(imageRef.current);
+
     setLoading(false);
     setNaturalWidth(imageRef.current?.naturalWidth || 1);
     setNaturalHeight(imageRef.current?.naturalHeight || 1);
     setImageDisplay("flex");
   }, []);
 
-  const onImageError = useCallback(() => {
-    console.log("onerror");
+  const onSizeZero = useCallback(() => {
+    console.log("via onSizeZero");
+    logImageElement(imageRef.current);
+
+    setNaturalWidth( safeParseInt(searchParams.get("width") || "64", 64) );
+    setNaturalHeight( safeParseInt(searchParams.get("height") || "64", 64) );
+
+    setLoading(false);
+    setImageDisplay("flex");
+  }, []);
+
+  const onImageError = useCallback((err:any) => {
+    console.log("via onImageError", err);
+    logImageElement(imageRef.current);
+
     setLoading(false);
     setLoadErr({});
   }, []);
@@ -108,15 +135,15 @@ export default function ViewPage() {
   }, []);
 
   useEffect(() => {
+    console.log("via useEffect");
     if (imageRef.current?.complete) {
       if (imageRef.current?.naturalWidth === 0) {
-        onImageError();
+        onSizeZero();
       } else {
         onImageLoad();
       }
-      console.log("via useEffect");
     }
-  }, [onImageError, onImageLoad]);
+  }, [onImageError, onImageLoad, onSizeZero]);
 
   useEffect(() => {
     function handleResize() {
@@ -174,10 +201,10 @@ export default function ViewPage() {
       >
         <img
           alt={`${url} (preload/debug)`}
-          onError={() => {
-            onImageError();
-            console.log("via onError");
+          onError={(evt) => {
+            onImageError(evt);
           }}
+          crossOrigin="anonymous"
           onLoad={() => {
             onImageLoad();
             console.log("via onLoad");
