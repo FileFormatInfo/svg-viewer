@@ -8,7 +8,7 @@ import { t } from "~/utils/i18n";
 
 export const meta: MetaFunction = () => {
     return [
-        { title: "SVG View" },
+        { title: "SVG Viewer" },
         { name: "description", content: "View your SVG images in a variety of sizes and backgrounds" },
     ];
 };

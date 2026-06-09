@@ -43,7 +43,7 @@ export const MobileToolbar = ({ currentZoom, setZoom }: IProps) => {
 
         <RemixLink to="/" className="flex flex-1 items-center gap-2 no-underline">
           <LogoIcon boxSize={32} />
-          <span className="text-lg font-bold">SVG View</span>
+          <span className="text-lg font-bold">SVG Viewer</span>
         </RemixLink>
 
         <ExitButton link={backUrl} text={backText} />

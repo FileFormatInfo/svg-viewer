@@ -11,6 +11,7 @@ import { MobileToolbar } from "./MobileToolbar";
 import { calcMaxZoom, calcZoomIn, calcZoomOut } from "./calcZoom";
 import { IconList } from "./IconList";
 import { keyHandler } from "./KeyHandler";
+import { useColorModeValue } from "~/components/ui/color-mode";
 
 export default function ViewPage() {
   const [searchParams] = useSearchParams();
@@ -48,15 +49,16 @@ export default function ViewPage() {
   imageCss.width = `${currentZoom * naturalWidth}px`;
   imageCss.height = `${currentZoom * naturalHeight}px`;
 
-  const bg = searchParams.get("bg") || "memphis-mini";
-  const defaultBorderBackgroundColor = "#fff";
-  const defaultBorderColor = "#000";
+  let bg = searchParams.get("bg") || "memphis-mini";
+  const defaultBorderBackgroundColor = useColorModeValue("#fff", "#111");
+  const defaultBorderColor = useColorModeValue("#000", "#fff");
   const background: Record<string, string> = {};
   let borderColor: string;
   if (/^#[0-9A-Fa-f]{6}$/.test(bg)) {
     background.backgroundColor = bg;
     borderColor = getContrastYIQ(bg.slice(1));
   } else if (/^[-a-z]+$/.test(bg)) {
+    console.log(`background: ${bg}`);
     background.backgroundImage = `url(/images/backgrounds/${bg}.png)`;
     background.backgroundColor = defaultBorderBackgroundColor;
     borderColor = defaultBorderColor;

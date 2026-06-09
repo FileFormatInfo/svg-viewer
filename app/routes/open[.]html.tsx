@@ -6,7 +6,7 @@ import { useRef } from "react";
 
 export const meta: MetaFunction = () => {
     return [
-        { title: "Open URL - SVG View" },
+        { title: "Open URL - SVG Viewer" },
         { name: "description", content: "Select an SVG image URL to view" },
     ];
 };

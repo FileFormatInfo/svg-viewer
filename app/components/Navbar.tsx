@@ -9,7 +9,7 @@ export const Navbar = () => {
             <div className="navbar-start">
                 <RemixLink to="/" className="flex items-center gap-3 no-underline">
                     <LogoIcon boxSize={40} />
-                    <span className="text-xl font-bold">SVG View</span>
+                    <span className="text-xl font-bold">SVG Viewer</span>
                 </RemixLink>
             </div>
             <div className="navbar-end">

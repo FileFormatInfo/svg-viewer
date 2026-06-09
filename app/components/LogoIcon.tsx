@@ -8,7 +8,7 @@ const LogoIcon = ({ boxSize = 40, className }: LogoIconProps) => {
     return (
         <img
             src="/favicon.svg"
-            alt="SVG View logo"
+            alt="SVG Viewer logo"
             className={className}
             style={{ width: size, height: size }}
         />

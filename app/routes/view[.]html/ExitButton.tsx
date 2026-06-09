@@ -18,7 +18,7 @@ function ExitButton({
             to={link}
             aria-label={text}
             title={text}
-            className="btn btn-outline btn-square"
+            className="btn btn-outline btn-square join-item"
         >
             <PiArrowSquareOutBold className="text-xl" />
         </RemixLink>

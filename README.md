@@ -1,8 +1,8 @@
-# SVG View [<img alt="Logo for SVG View" src="https://svg-viewer.fileformat.info/favicon.svg" height="96" align="right"/>](https://svg-viewer.fileformat.info/view.html?url=https%3A%2F%2Fsvg-viewer.fileformat.info%2Fimages%2Fbanner.svg&zoom=max)
+# SVG Viewer [<img alt="Logo for SVG View" src="https://svg-viewer.fileformat.info/favicon.svg" height="96" align="right"/>](https://svg-viewer.fileformat.info/view.html?url=https%3A%2F%2Fsvg-viewer.fileformat.info%2Fimages%2Fbanner.svg&zoom=max)
 
 [![deploy](https://github.com/FileFormatInfo/svg-viewer/actions/workflows/gcr-deploy.yaml/badge.svg)](https://github.com/FileFormatInfo/svg-viewer/actions/workflows/gcr-deploy.yaml)
 
-[demo](https://svg-viewer.fileformat.info/view.html?url=https%3A%2F%2Fgithub.com%2FFileFormatInfo%2Fsvg-viewer%2Factions%2Fworkflows%2Fgcr-deploy.yaml%2Fbadge.svg&zoom=max&backUrl=https%3A%2F%2Fgithub.com%2FFileFormatInfo%2Fsvg-viewer&backText=Return+to+Github)
+[demo](https://svg-viewer.fileformat.info/view.html?url=https%3A%2F%2Fsvg-viewer.fileformat.info%2Ffavicon.svg&zoom=max&backUrl=https%3A%2F%2Fgithub.com%2FFileFormatInfo%2Fsvg-viewer&backText=Return+to+Github)
 
 ## Integration
 

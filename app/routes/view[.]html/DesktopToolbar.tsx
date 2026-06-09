@@ -31,7 +31,7 @@ export const DesktopToolbar = ({ currentZoom }: IProps) => {
             <div className="flex items-center">
                 <LogoIcon boxSize={40} />
                 <span className="pl-3 text-xl font-bold">
-                    SVG View
+                    SVG Viewer
                 </span>
                 </div>
                 </RemixLink>

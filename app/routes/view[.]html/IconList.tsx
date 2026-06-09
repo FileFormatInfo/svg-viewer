@@ -42,7 +42,7 @@ function IconList({ display, imageCss, url }: IProps) {
 
   return (
     <div
-      className="absolute top-1 flex flex-col gap-4 lg:static lg:flex-row lg:gap-12"
+      className="flex flex-col gap-4 lg:static lg:flex-row lg:gap-12 items-center"
       style={{ display }}
     >
       {sizes.map((size) => (

@@ -61,7 +61,7 @@ export function HydrateFallback() {
                         color: "#1a202c",
                     }}
                 >
-                    Loading SVG View...
+                    Loading SVG Viewer...
                 </div>
             </main>
         </MyLayout>

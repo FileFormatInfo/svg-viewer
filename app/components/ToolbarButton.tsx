@@ -29,7 +29,7 @@ function ToolbarButton({
     const nextSearchParams = new URLSearchParams(searchParams);
     nextSearchParams.set(param, value);
 
-    const activeColor = useColorModeValue("#a1a1a1", "#d4d4d4");
+    const activeColor = useColorModeValue("#d4d4d4", "#818181");
     const bgColor = isActive ? activeColor : undefined;
 
     const sizeClass = {
@@ -44,12 +44,12 @@ function ToolbarButton({
     return (
         <RemixLink
             to={`?${nextSearchParams.toString()}`}
-            className={`btn btn-outline btn-square ${sizeClass} ${className || ""}`.trim()}
+            className={`btn btn-outline btn-square hover:border-black join-item ${sizeClass} ${className || ""}`.trim()}
             aria-label={ariaLabel}
             title={ariaLabel}
             style={isActive ? { backgroundColor: bgColor } : undefined}
         >
-            <TheIcon className="text-xl" color={bgColor} />
+            <TheIcon className="text-xl" />
         </RemixLink>
     );
 }
