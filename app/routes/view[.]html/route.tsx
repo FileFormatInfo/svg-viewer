@@ -127,7 +127,6 @@ export default function ViewPage() {
     }
   }, []);
 
-/*
   useEffect(() => {
     console.log("via useEffect");
     if (imageRef.current?.complete) {
@@ -138,7 +137,7 @@ export default function ViewPage() {
       }
     }
   }, [onImageError, onImageLoad, onSizeZero]);
-*/
+
   useEffect(() => {
     function handleResize() {
       console.log(`resize: ${window?.innerWidth}x${window?.innerHeight}`);
