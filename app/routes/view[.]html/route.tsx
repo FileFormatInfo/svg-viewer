@@ -204,7 +204,6 @@ export default function ViewPage() {
           onError={(evt) => {
             onImageError(evt);
           }}
-          crossOrigin="anonymous"
           onLoad={() => {
             onImageLoad();
             console.log("via onLoad");
@@ -237,7 +236,6 @@ export default function ViewPage() {
           ) : (
             <img
               alt={url}
-              crossOrigin="anonymous"
               src={url}
               style={{
                 objectFit: "cover",
@@ -258,28 +256,28 @@ export default function ViewPage() {
         </noscript>
         {isDebug ? (
           <>
-            <p style={{ position: "absolute", top: "0pt", left: "8px" }}>
+            <div style={{ position: "absolute", top: "0pt", left: "8px" }}>
               Window.inner: {globalThis.innerWidth}x{globalThis.innerHeight}
-            </p>
-            <p style={{ position: "absolute", top: "14pt", left: "8px" }}>
+            </div>
+            <div style={{ position: "absolute", top: "14pt", left: "8px" }}>
               Image natural size: {imageRef.current?.naturalWidth}x
               {imageRef.current?.naturalHeight}
-            </p>
-            <p style={{ position: "absolute", top: "28pt", left: "8px" }}>
+            </div>
+            <div style={{ position: "absolute", top: "28pt", left: "8px" }}>
               Image display size: {imageCss["width"]}x{imageCss["height"]}
-            </p>
-            <p style={{ position: "absolute", top: "42pt", left: "8px" }}>
+            </div>
+            <div style={{ position: "absolute", top: "42pt", left: "8px" }}>
               Zoom: cur={currentZoom}, url={urlZoom}, max=
               {calcMaxZoom(naturalWidth, naturalHeight, containerWidth, containerHeight)})
-            </p>
-            <p style={{ position: "absolute", top: "56pt", left: "8px" }}>
+            </div>
+            <div style={{ position: "absolute", top: "56pt", left: "8px" }}>
               Container boundingClientRect: {containerRef.current?.getBoundingClientRect().width}x
               {containerRef.current?.getBoundingClientRect().height}
-            </p>
-            <p style={{ position: "absolute", top: "70pt", left: "8px" }}>
+            </div>
+            <div style={{ position: "absolute", top: "70pt", left: "8px" }}>
               Container client: {containerRef.current?.clientWidth}x
               {containerRef.current?.clientHeight}
-            </p>
+            </div>
           </>
         ) : null}
       </div>
