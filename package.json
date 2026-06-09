@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
-    "dev": "vite",
+    "dev": "vite --port 4000",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
-    "start": "vite preview --host 0.0.0.0 --port 4173",
+    "start": "vite preview --host 0.0.0.0 --port 4000",
     "typecheck": "tsc"
   },
   "dependencies": {
