@@ -134,6 +134,7 @@ export default function ViewPage() {
     }
   }, []);
 
+/*
   useEffect(() => {
     console.log("via useEffect");
     if (imageRef.current?.complete) {
@@ -144,7 +145,7 @@ export default function ViewPage() {
       }
     }
   }, [onImageError, onImageLoad, onSizeZero]);
-
+*/
   useEffect(() => {
     function handleResize() {
       console.log(`resize: ${window?.innerWidth}x${window?.innerHeight}`);
@@ -205,8 +206,12 @@ export default function ViewPage() {
             onImageError(evt);
           }}
           onLoad={() => {
-            onImageLoad();
             console.log("via onLoad");
+            if (imageRef.current?.naturalWidth === 0) {
+              onSizeZero();
+            } else {
+              onImageLoad();
+            }
           }}
           ref={imageRef}
           src={url}
