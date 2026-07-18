@@ -16,12 +16,6 @@ if ! command -v jq &> /dev/null; then
 	exit 1
 fi
 
-# check that sponge is installed
-if ! command -v sponge &> /dev/null; then
-	echo "ERROR: sponge is not installed. Please install sponge (from moreutils) to continue."
-	exit 1
-fi
-
 STATUS_FILE="${BASE_DIR}/build/client/status.json"
 
 LASTMOD=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
@@ -30,12 +24,12 @@ COMMIT=$(git -C "${BASE_DIR}" rev-parse --short HEAD)
 
 echo "INFO: updating status file ${STATUS_FILE}"
 
-jq \
+echo '{"success":true,"message":"OK"}' | jq \
 	--arg lastmod "${LASTMOD}" \
 	--arg tech "${TECH}" \
 	--arg commit "${COMMIT}" \
 	--compact-output \
 	'.lastmod = $lastmod | .tech = $tech | .commit = $commit' \
-	"${STATUS_FILE}" | sponge "${STATUS_FILE}"
+	> "${STATUS_FILE}"
 
 echo "INFO: completed at $(date -u +"%Y-%m-%dT%H:%M:%SZ")"

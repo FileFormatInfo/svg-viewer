@@ -1,4 +1,3 @@
-import { Link as RemixLink } from "react-router";
 import { PiArrowSquareOutBold } from "react-icons/pi";
 
 interface IProps {
@@ -13,15 +12,17 @@ function ExitButton({
     link,
 }: IProps) {
 
+    console.log(`ExitButton: link=${link}, text=${text}`);
+
     return (
-        <RemixLink
-            to={link}
+        <a
+            href={link}
             aria-label={text}
             title={text}
             className="btn btn-outline btn-square join-item"
         >
             <PiArrowSquareOutBold className="text-xl" />
-        </RemixLink>
+        </a>
     );
 }
 

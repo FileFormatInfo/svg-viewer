@@ -25,6 +25,8 @@ export const DesktopToolbar = ({ currentZoom }: IProps) => {
     const urlDebug = searchParams.get("debug")
     const isDebug = (urlDebug || "0") === "1";
 
+    console.log(`DesktopToolbar: link=${backUrl}, text=${backText}`);
+
     return (
         <div className="hidden min-h-14 w-full items-center gap-4 border-b border-base-300 bg-base-100 px-4 lg:flex">
                 <RemixLink to="/">
