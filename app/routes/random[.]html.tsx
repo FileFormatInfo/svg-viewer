@@ -16,7 +16,6 @@ async function getRandomImage(hostname: string|null, zoom: string|null): Promise
     zoom = zoom || "max";
 
     try {
-        //await new Promise(r => setTimeout(r, 2000))
         const resp = await fetch(`https://${hostname}/api/random.json?max=1`);
         const data = await resp.json();
 

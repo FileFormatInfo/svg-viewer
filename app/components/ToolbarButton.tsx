@@ -49,7 +49,7 @@ function ToolbarButton({
             title={ariaLabel}
             style={isActive ? { backgroundColor: bgColor } : undefined}
         >
-            <TheIcon className="text-xl" />
+            <TheIcon size={24} />
         </RemixLink>
     );
 }

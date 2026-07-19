@@ -30,7 +30,7 @@ export const MobileToolbar = ({ currentZoom, setZoom }: IProps) => {
 
   return (
     <>
-      <div className="flex min-h-14 w-full items-center gap-2 border-b border-base-300 bg-base-100 px-3 py-2 lg:hidden">
+      <div className="mobile-toolbar flex min-h-14 w-full items-center gap-2 border-b border-base-300 bg-base-100 px-3 py-2">
         <button
           type="button"
           onClick={() => setOpen((prev) => !prev)}
@@ -50,7 +50,7 @@ export const MobileToolbar = ({ currentZoom, setZoom }: IProps) => {
       </div>
 
       {open ? (
-        <div className="space-y-3 border-b border-base-300 bg-base-100 px-3 py-3 lg:hidden">
+        <div className="mobile-toolbar-panel space-y-3 border-b border-base-300 bg-base-100 px-3 py-3">
           <div className="flex items-center justify-between gap-2">
             <span className="text-sm font-semibold">Zoom</span>
             <ZoomButtons boxSize="2.25em" currentZoom={currentZoom} setZoom={setZoom} size="sm" />

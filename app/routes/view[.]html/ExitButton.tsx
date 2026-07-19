@@ -16,12 +16,14 @@ function ExitButton({
 
     return (
         <a
-            href={link}
+            href={link.trim()}
             aria-label={text}
             title={text}
+            target="_top"
+            rel="noreferrer"
             className="btn btn-outline btn-square join-item"
         >
-            <PiArrowSquareOutBold className="text-xl" />
+            <PiArrowSquareOutBold size={24} />
         </a>
     );
 }

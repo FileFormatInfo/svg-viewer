@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 @plugin "daisyui" {
   themes: light --default, dark;
 }
@@ -18,5 +16,29 @@
 
   a {
     @apply link link-hover;
+  }
+}
+
+.desktop-toolbar {
+  display: none;
+}
+
+.mobile-toolbar,
+.mobile-toolbar-panel {
+  display: flex;
+}
+
+.mobile-toolbar-panel {
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .desktop-toolbar {
+    display: flex;
+  }
+
+  .mobile-toolbar,
+  .mobile-toolbar-panel {
+    display: none;
   }
 }

@@ -28,13 +28,13 @@ export const DesktopToolbar = ({ currentZoom }: IProps) => {
     console.log(`DesktopToolbar: link=${backUrl}, text=${backText}`);
 
     return (
-        <div className="hidden min-h-14 w-full items-center gap-4 border-b border-base-300 bg-base-100 px-4 lg:flex">
+        <div className="desktop-toolbar min-h-14 w-full items-center gap-4 border-b border-base-300 bg-base-100 px-4">
                 <RemixLink to="/">
             <div className="flex items-center">
                 <LogoIcon boxSize={40} />
-                <span className="pl-3 text-xl font-bold">
+                <div className="ps-2 text-xl font-bold">
                     SVG Viewer
-                </span>
+                </div>
                 </div>
                 </RemixLink>
             <div className="flex-1" />
